@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  
+  /* PT Halla Mohana & TMT Group Executive Corporate Colors */
+  --color-brand-primary: #7A152E;
+  --color-brand-primary-hover: #630E22;
+  --color-brand-primary-light: #FBF2F4;
+  --color-brand-primary-subtle: #F2DCE1;
+  
+  --color-brand-secondary: #2D5A43;
+  --color-brand-secondary-hover: #224533;
+  --color-brand-secondary-light: #F1F7F4;
+  --color-brand-secondary-subtle: #E1EFE7;
+  
+  --color-brand-warm: #A68253;
+  --color-brand-warm-hover: #8F6E41;
+  --color-brand-warm-light: #FAF6F0;
+  
+  --color-brand-slate: #111622;
+  --color-brand-charcoal: #1E2433;
+  --color-brand-surface: #F9FAFB;
+  --color-brand-muted: #6B7280;
+}
+
+:root {
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: #FFFFFF;
+  color: #1E2433;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Print/Typography styles */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+.prose table th,
+.prose table td {
+  border: 1px solid #E2E8F0;
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+.prose table th {
+  background-color: #F8FAFC;
+  font-weight: 600;
+}
