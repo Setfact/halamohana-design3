@@ -97,7 +97,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
               }}
               className="inline-flex items-center gap-2.5 rounded-md bg-[#8B1E24] hover:bg-[#72181D] active:bg-[#5C1317] text-white px-6 py-3.5 text-xs font-semibold tracking-wider transition-colors cursor-pointer"
             >
-              <span>{currentBanner.ctaText || 'Jelajahi Portofolio'}</span>
+              <span>Explore Projects</span>
               <ArrowRight className="h-4 w-4" />
             </a>
 

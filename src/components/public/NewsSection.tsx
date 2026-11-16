@@ -1,19 +1,55 @@
 import React, { useState } from 'react';
 import { useCMSData } from '@/context/CMSDataContext';
-import { Calendar, ArrowUpRight } from 'lucide-react';
+import { Calendar, ArrowRight } from 'lucide-react';
 import { NewsDetailModal } from './NewsDetailModal';
 import type { NewsItem } from '@/types';
 
-export const NewsSection: React.FC = () => {
+interface NewsSectionProps {
+  onNavigate?: (path: string) => void;
+}
+
+export const NewsSection: React.FC<NewsSectionProps> = ({ onNavigate }) => {
   const { newsList } = useCMSData();
   const visibleNews = newsList.filter((n) => n.visibility);
+  const latestNews = visibleNews.slice(0, 3);
 
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
   if (visibleNews.length === 0) return null;
 
+  const handleItemClick = (e: React.MouseEvent<HTMLElement>, item: NewsItem) => {
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate(`/news/${item.url}`);
+    } else {
+      setSelectedNews(item);
+    }
+  };
+
+  const handleViewAll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate('/news');
+    }
+  };
+
+  // Helper date formatter
+  const formatDate = (dateStr: string): string => {
+    try {
+      const d = new Date(dateStr);
+      if (isNaN(d.getTime())) return dateStr;
+      const months = [
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember',
+      ];
+      return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;
+    } catch {
+      return dateStr;
+    }
+  };
+
   return (
-    <section id="news" className="py-20 sm:py-28 bg-[#F7F7F5] border-b border-[#E5E5E5] scroll-mt-20 text-left">
+    <section id="news" className="py-20 sm:py-28 bg-[#FFFFFF] border-b border-[#E5E5E5] scroll-mt-20 text-left">
       <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-[#E5E5E5]">
@@ -25,17 +61,28 @@ export const NewsSection: React.FC = () => {
               Siaran Pers &amp; Berita Terbaru
             </h2>
             <p className="text-base text-[#52525B] leading-relaxed pt-1">
-              Ikuti perkembangan terkini mengenai ekspansi proyek properti, agenda operasional, serta inisiatif korporat PT Halla Mohana.
+              Ikuti perkembangan terkini seputar ekspansi properti, komitmen keberlanjutan ESG, serta inisiatif korporat PT Halla Mohana.
             </p>
+          </div>
+
+          <div className="shrink-0">
+            <a
+              href="/news"
+              onClick={handleViewAll}
+              className="inline-flex items-center gap-2 text-xs font-semibold text-[#8B1E24] hover:text-[#72181D] transition-colors group cursor-pointer"
+            >
+              <span>Lihat Seluruh Publikasi</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </a>
           </div>
         </div>
 
         {/* 3-Column Editorial News Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {visibleNews.map((item) => (
+          {latestNews.map((item) => (
             <article
               key={item.id}
-              onClick={() => setSelectedNews(item)}
+              onClick={(e) => handleItemClick(e, item)}
               className="group cursor-pointer flex flex-col justify-between rounded-lg border border-[#E5E5E5] bg-white overflow-hidden shadow-2xs hover:border-[#8B1E24] transition-colors"
             >
               <div>
@@ -57,7 +104,7 @@ export const NewsSection: React.FC = () => {
                 <div className="p-6 space-y-3">
                   <div className="flex items-center gap-2 text-xs text-[#52525B] font-medium">
                     <Calendar className="h-3.5 w-3.5 text-[#8B1E24]" />
-                    <span>{item.date}</span>
+                    <span>{formatDate(item.date)}</span>
                     <span>•</span>
                     <span className="uppercase tracking-wider text-[10px] text-neutral-400">Siaran Resmi</span>
                   </div>
@@ -76,7 +123,7 @@ export const NewsSection: React.FC = () => {
               {/* Footer Link */}
               <div className="p-6 pt-3 mt-1 border-t border-[#E5E5E5] flex items-center justify-between">
                 <span className="text-xs font-semibold text-[#8B1E24] group-hover:underline inline-flex items-center gap-1.5">
-                  Baca Selengkapnya <ArrowUpRight className="h-3.5 w-3.5" />
+                  Baca Selengkapnya <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
                 </span>
                 <span className="text-[11px] font-mono text-neutral-400">/{item.url}</span>
               </div>
@@ -85,11 +132,13 @@ export const NewsSection: React.FC = () => {
         </div>
       </div>
 
-      {/* Detail Modal */}
-      <NewsDetailModal
-        news={selectedNews}
-        onClose={() => setSelectedNews(null)}
-      />
+      {/* Fallback Detail Modal if no onNavigate */}
+      {!onNavigate && (
+        <NewsDetailModal
+          news={selectedNews}
+          onClose={() => setSelectedNews(null)}
+        />
+      )}
     </section>
   );
 };

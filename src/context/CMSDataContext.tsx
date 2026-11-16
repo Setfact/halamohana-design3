@@ -157,12 +157,12 @@ const initialBanners: BannerItem[] = [
   {
     id: 'bnr-1',
     no: 1,
-    title: 'FOX Harris Hotel Pekanbaru - Urban Lifestyle Oasis',
-    subtitle: 'Hotel berkonsep modern midscale dengan iconic rooftop sky pool tertinggi dan fasilitas MICE premium di jantung kota Pekanbaru.',
-    shortTitle: 'FOX Harris Hotel',
-    ctaText: 'Discover FOX Hotel',
+    title: 'Kawasan Terpadu Jl. Riau No. 147 Pekanbaru',
+    subtitle: 'Pengembangan kawasan komersial terintegrasi yang menyatukan perhotelan bintang 4 dengan pusat perbelanjaan gaya hidup modern.',
+    shortTitle: 'Kawasan Terpadu',
+    ctaText: 'Explore Projects',
     ctaUrl: '/projects',
-    imageUrl: '/images/hotel/hero-fox-hotel-wide.jpg',
+    imageUrl: '/images/mall/px-facade-integrated.jpg',
     visibility: true,
     order: 1,
     created_time: '2025-01-10',
@@ -171,12 +171,12 @@ const initialBanners: BannerItem[] = [
   {
     id: 'bnr-2',
     no: 2,
-    title: 'Pekanbaru Xchange (PX) - Premier Lifestyle & Entertainment Mall',
-    subtitle: 'Menghadirkan pengalaman belanja, hiburan Cinema XXI, dan ruang terbuka alfresco dining terkini yang terintegrasi langsung dengan perhotelan modern.',
-    shortTitle: 'Pekanbaru Xchange',
-    ctaText: 'Visit PX Mall',
+    title: 'FOX Harris Hotel Pekanbaru',
+    subtitle: 'Hotel bintang 4 berkonsep modern dengan 225 kamar dan indoor rooftop sky pool tertinggi di Pekanbaru.',
+    shortTitle: 'FOX Harris Hotel',
+    ctaText: 'Explore Projects',
     ctaUrl: '/projects',
-    imageUrl: '/images/mall/hero-px-mall.jpg',
+    imageUrl: '/images/hotel/hero-fox-hotel-wide.jpg',
     visibility: true,
     order: 2,
     created_time: '2025-01-15',
@@ -185,12 +185,12 @@ const initialBanners: BannerItem[] = [
   {
     id: 'bnr-3',
     no: 3,
-    title: 'Kawasan Terpadu Jl. Riau No. 147 Pekanbaru',
-    subtitle: 'Kawasan mixed-use terpadu PT Halla Mohana yang menyatukan hotel bintang 4 dengan pusat perbelanjaan dan hiburan gaya hidup dalam satu ekosistem sinergis.',
-    shortTitle: 'Kawasan Terpadu',
+    title: 'Pekanbaru Xchange (PX)',
+    subtitle: 'Pusat perbelanjaan dan rekreasi modern terintegrasi dengan Cinema XXI, koridor alfresco dining, dan ruang komunitas.',
+    shortTitle: 'Pekanbaru Xchange',
     ctaText: 'Explore Projects',
     ctaUrl: '/projects',
-    imageUrl: '/images/mall/px-facade-integrated.jpg',
+    imageUrl: '/images/mall/hero-px-mall.jpg',
     visibility: true,
     order: 3,
     created_time: '2025-02-01',
@@ -1008,9 +1008,13 @@ export const CMSDataProvider: React.FC<{ children: React.ReactNode }> = ({ child
       return { ...p, navigation: nav };
     });
   });
-  const [banners, setBanners] = useState<BannerItem[]>(() =>
-    getStoredItem('banners', initialBanners)
-  );
+  const [banners, setBanners] = useState<BannerItem[]>(() => {
+    const stored = getStoredItem('banners', initialBanners);
+    if (!stored || stored.length < 3 || stored[0]?.title?.includes('Urban Lifestyle Oasis')) {
+      return initialBanners;
+    }
+    return stored;
+  });
   const [projects, setProjects] = useState<ProjectItem[]>(() => {
     const list = getStoredItem('projects', initialProjects);
     return list

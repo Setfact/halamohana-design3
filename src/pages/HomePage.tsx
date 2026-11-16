@@ -2,9 +2,8 @@ import React from 'react';
 import { HeroSlider } from '@/components/public/HeroSlider';
 import { OverviewSection } from '@/components/public/OverviewSection';
 import { ProjectsSection } from '@/components/public/ProjectsSection';
-import { GovernanceSection } from '@/components/public/GovernanceSection';
 import { NewsSection } from '@/components/public/NewsSection';
-import { ArrowRight, MapPin, Phone, Mail } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface HomePageProps {
   onNavigate: (path: string) => void;
@@ -12,23 +11,20 @@ interface HomePageProps {
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
-    <div className="bg-white">
-      {/* 1. Hero Showcase Slider with Property Quick Switcher */}
+    <div className="bg-white text-left selection:bg-[#8B1E24] selection:text-white">
+      {/* 1. Hero Visual Slider (Kawasan Terpadu, FOX Harris Hotel, PX Mall) */}
       <HeroSlider onNavigate={onNavigate} />
 
-      {/* 2. Overview & Ekosistem Grup (Company Profile & Strategic Pillars) */}
-      <OverviewSection />
+      {/* 2. Section About Us / Profil Singkat (Ringkas, Elegan, 1 Paragraf & Visi Quote) */}
+      <OverviewSection onNavigate={onNavigate} />
 
-      {/* 3. Flagship Projects Showcase + 4-Column Corporate Achievement Metrics */}
-      <ProjectsSection />
+      {/* 3. Section Featured Properties / Portofolio Utama (2 Kartu Visual Berdampingan) */}
+      <ProjectsSection onNavigate={onNavigate} />
 
-      {/* 4. Board of Governance (Dewan Direksi & Komisaris) + Horizontal GCG Banner */}
-      <GovernanceSection />
+      {/* 4. Latest News & Press Releases (3 Kartu Ringkas Editorial) */}
+      <NewsSection onNavigate={onNavigate} />
 
-      {/* 5. Latest Corporate News & Press Releases (16:9 Thumbnail, 3-Columns) */}
-      <NewsSection />
-
-      {/* 6. Direct Concierge & Inquiry CTA Band (Jakarta Head Office & Pekanbaru Site Office) */}
+      {/* 5. Direct Concierge & Inquiry CTA Band (Jakarta Head Office & Pekanbaru Site Office) */}
       <section className="bg-[#0F1117] text-white py-20 sm:py-24 border-t border-stone-800 text-left">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
@@ -40,7 +36,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 Tertarik Bermitra atau Menyewa Ruang Komersial?
               </h3>
               <p className="text-stone-300 text-sm sm:text-base leading-relaxed font-normal pt-1">
-                Hubungi tim representatif PT Halla Mohana di Jakarta atau Pekanbaru untuk informasi kemitraan tenant ritel, reservasi MICE Ballroom, dan kerjasama korporat terpadu.
+                Hubungi tim representatif PT Halla Mohana di Jakarta atau Pekanbaru untuk informasi kemitraan tenant ritel mall, reservasi MICE Grand Ballroom, dan kerjasama korporat terpadu.
               </p>
             </div>
 
