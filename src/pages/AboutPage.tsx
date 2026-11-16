@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { PageHeader } from '@/components/ui/PageHeader';
-import { VerticalCutReveal } from '@/components/ui/vertical-cut-reveal';
 import { motion } from 'framer-motion';
 import {
   Building2,
@@ -9,7 +7,16 @@ import {
   ArrowRight,
   Target,
   Sparkles,
-  ShieldCheck
+  ShieldCheck,
+  ChevronRight,
+  ChevronDown,
+  Award,
+  Heart,
+  Zap,
+  TrendingUp,
+  Eye,
+  Scale,
+  FileCheck
 } from 'lucide-react';
 
 interface AboutPageProps {
@@ -35,7 +42,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
   // Scroll-Spy detection with passive listener
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY + 180; // offset for sticky main header + sub-navbar
+      const scrollPosition = window.scrollY + 200; // offset for sticky header + sub-navbar
       for (let i = navSections.length - 1; i >= 0; i--) {
         const el = document.getElementById(navSections[i].id);
         if (el) {
@@ -68,18 +75,22 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     {
       title: 'Integrity',
       desc: 'Menjunjung tinggi kejujuran, etika bisnis, dan ketepatan janji dalam setiap aspek operasional dan hubungan kemitraan.',
+      icon: <ShieldCheck className="h-5 w-5 text-[#8B1E24]" />,
     },
     {
       title: 'Continuous Development',
       desc: 'Senantiasa belajar dan berinovasi untuk meningkatkan mutu fasilitas properti dan kompetensi sumber daya manusia.',
+      icon: <TrendingUp className="h-5 w-5 text-[#8B1E24]" />,
     },
     {
       title: 'Excellence',
       desc: 'Memberikan standar layanan hospitality bintang empat dan pengelolaan ritel terbaik bagi seluruh pemangku kepentingan.',
+      icon: <Award className="h-5 w-5 text-[#8B1E24]" />,
     },
     {
       title: 'Compassion',
       desc: 'Peduli terhadap keselamatan kerja (K3), kesejahteraan insan korporat, masyarakat, serta kelestarian lingkungan.',
+      icon: <Heart className="h-5 w-5 text-[#8B1E24]" />,
     },
   ];
 
@@ -88,22 +99,26 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     {
       trait: 'Competent',
       desc: 'Memiliki keahlian teknis dan kapabilitas manajerial yang unggul di industri hospitality dan properti komersial.',
+      icon: <CheckCircle2 className="h-5 w-5 text-[#8B1E24]" />,
     },
     {
       trait: 'Open-minded',
       desc: 'Mampu menerima gagasan inovatif, adaptif terhadap perkembangan, dan menghargai keberagaman perspektif.',
+      icon: <Compass className="h-5 w-5 text-[#8B1E24]" />,
     },
     {
       trait: 'Reliable',
       desc: 'Konsisten dalam tindakan, berintegritas tinggi, serta dapat dipercaya memenuhi seluruh komitmen.',
+      icon: <ShieldCheck className="h-5 w-5 text-[#8B1E24]" />,
     },
     {
       trait: 'Courageous',
       desc: 'Berani mengambil inisiatif terukur, bertanggung jawab atas keputusan, dan gigih menghadapi tantangan industri.',
+      icon: <Zap className="h-5 w-5 text-[#8B1E24]" />,
     },
   ];
 
-  // 4 Poin Misi Resmi (Bahasa Indonesia Formal Tanpa Teks Bertumpuk)
+  // 4 Poin Misi Resmi
   const officialMissions = [
     'Menciptakan peluang kerja yang bermakna dan menantang bagi sebanyak mungkin masyarakat Indonesia.',
     'Memastikan pertumbuhan yang berkelanjutan dan menguntungkan guna memaksimalkan nilai pemegang saham.',
@@ -116,35 +131,93 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     {
       title: 'Transparansi',
       desc: 'Keterbukaan dalam menyajikan informasi material yang akurat, jelas, dan tepat waktu bagi pemegang saham dan pemangku kepentingan.',
+      icon: <Eye className="h-4 w-4 text-[#8B1E24]" />,
     },
     {
       title: 'Akuntabilitas',
       desc: 'Pengelolaan perusahaan secara terukur dengan kejelasan fungsi, pelaksanaan, dan pertanggungjawaban organ korporat.',
+      icon: <FileCheck className="h-4 w-4 text-[#8B1E24]" />,
     },
     {
       title: 'Responsibilitas',
       desc: 'Kepatuhan terhadap hukum, regulasi ketenagakerjaan, sertifikasi K3, serta tanggung jawab sosial dan lingkungan.',
+      icon: <ShieldCheck className="h-4 w-4 text-[#8B1E24]" />,
     },
     {
       title: 'Independensi',
       desc: 'Pengambilan keputusan secara objektif dan profesional tanpa benturan kepentingan serta bebas dari tekanan pihak manapun.',
+      icon: <Scale className="h-4 w-4 text-[#8B1E24]" />,
     },
   ];
 
   return (
-    <div className="bg-white">
-      {/* 1. Dedicated Page Header */}
-      <PageHeader
-        title="Corporate Info"
-        description="Profil resmi, visi, misi, nilai luhur kepemimpinan, dan tata kelola PT Halla Mohana dalam ekosistem MahaDasha dan Tiara Marga Trakindo (TMT Group)."
-        breadcrumbs={[
-          { label: 'Beranda', href: '/' },
-          { label: 'Corporate Info' },
-        ]}
-        onNavigate={onNavigate}
-      />
+    <div className="bg-white min-h-screen">
+      {/* 1. Luxury Corporate Hero Banner (Kembalikan Kedalaman Visual Mewah) */}
+      <div className="relative bg-[#0F1117] text-white py-16 sm:py-24 overflow-hidden border-b border-stone-800">
+        {/* Architectural Photo Background with Deep Charcoal-Maroon Gradient */}
+        <div className="absolute inset-0">
+          <img
+            src="/images/hotel/hero-corporate-wide.jpg"
+            alt="PT Halla Mohana Corporate Architecture"
+            className="w-full h-full object-cover object-center opacity-35"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0F1117]/95 via-[#161217]/90 to-[#2A0E13]/85" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0F1117] via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff0d_1px,transparent_1px)] [background-size:28px_28px] pointer-events-none" />
+        </div>
 
-      {/* Modern Sticky Sub-Navbar ala Vercel / 21st.dev (Scroll-Spy & Horizontal Swipeable) */}
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 space-y-5">
+          {/* Breadcrumb Trail */}
+          <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-stone-400 font-medium">
+            <a
+              href="/"
+              onClick={(e) => {
+                e.preventDefault();
+                onNavigate('/');
+              }}
+              className="hover:text-white transition-colors cursor-pointer"
+            >
+              Beranda
+            </a>
+            <ChevronRight className="h-3.5 w-3.5 text-stone-600 shrink-0" />
+            <span className="text-[#A68253] font-semibold">Corporate Info</span>
+          </nav>
+
+          {/* Eyebrow Pill */}
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-md px-3.5 py-1 text-xs font-semibold text-stone-200 border border-white/15">
+            <Sparkles className="h-3.5 w-3.5 text-[#A68253]" />
+            <span className="tracking-widest uppercase text-[11px]">Profil Korporat & Struktur Ekosistem Grup</span>
+          </div>
+
+          {/* Title & Description */}
+          <div className="max-w-3xl space-y-2.5">
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-tight">
+              Corporate Info
+            </h1>
+            <p className="text-sm sm:text-base text-stone-300 leading-relaxed font-normal max-w-2xl">
+              Profil resmi, visi strategis, nilai luhur kepemimpinan, dan tata kelola PT Halla Mohana dalam ekosistem Tiara Marga Trakindo (TMT Group).
+            </p>
+          </div>
+
+          {/* Quick Metrics Strip */}
+          <div className="pt-2 flex flex-wrap items-center gap-2.5 sm:gap-4 text-xs text-stone-300">
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-stone-900/80 px-3 py-1.5 border border-stone-700/60">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#8B1E24]" />
+              <span>Didirikan 2013</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-stone-900/80 px-3 py-1.5 border border-stone-700/60">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#8B1E24]" />
+              <span>Hospitality & Commercial Lifestyle Mall</span>
+            </span>
+            <span className="inline-flex items-center gap-1.5 rounded-lg bg-stone-900/80 px-3 py-1.5 border border-stone-700/60">
+              <span className="h-1.5 w-1.5 rounded-full bg-[#8B1E24]" />
+              <span>Member of MahaDasha (TMT Group)</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      {/* Sticky Sub-Navbar ala Vercel (Scroll-Spy & Horizontal Swipeable) */}
       <div className="sticky top-[68px] sm:top-[74px] z-30 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-2xs">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <nav
@@ -172,182 +245,102 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
       </div>
 
-      {/* 2. Section: Halla Mohana Overview (AboutSection3 Layout & VerticalCutReveal) */}
+      {/* 2. Section: Halla Mohana Overview (#FFFFFF, Bebas Bug SVG Hitam & Teks Ganda) */}
       <section
         id="overview"
-        className="py-16 sm:py-24 bg-white border-b border-stone-200 scroll-mt-[140px]"
+        className="py-16 sm:py-24 bg-white border-b border-stone-200/90 scroll-mt-[140px]"
         style={{ scrollMarginTop: '140px' }}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-10">
-          {/* Top Overlay Header (di atas lekukan SVG) */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            {/* Kiri: Aksen bintang/mark marun (#8B1E24) + label uppercase CORPORATE OVERVIEW */}
-            <div className="flex items-center gap-2.5">
-              <span className="flex items-center justify-center w-7 h-7 rounded-full bg-[#8B1E24]/10 text-[#8B1E24]">
-                <Sparkles className="h-4 w-4 fill-current text-[#8B1E24]" />
-              </span>
-              <span className="text-xs font-black uppercase tracking-[0.25em] text-[#8B1E24]">
-                Corporate Overview
-              </span>
-            </div>
+        <div className="mx-auto max-w-7xl px-4 sm:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            {/* Kolom Kiri: 7 Kolom pada LG (Foto Terpadu + Floating Stats Glass Card) */}
+            <div className="lg:col-span-7 relative">
+              <div className="relative rounded-2xl shadow-xl overflow-hidden border border-stone-200 bg-stone-900 group">
+                <div className="aspect-[16/10] w-full overflow-hidden">
+                  <img
+                    src="/images/hotel/overview-facade-landscape.jpg"
+                    alt="Kawasan Terpadu PT Halla Mohana - FOX Harris Hotel & Pekanbaru Xchange"
+                    className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+                {/* Gradient Overlay Lembut */}
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/20 to-transparent pointer-events-none" />
 
-            {/* Kanan: Badge afiliasi korporat bersih (Member of MahaDasha • TMT Group) dengan ikon gedung/korporat */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-[#F8F9FA] px-3.5 py-1.5 text-xs font-semibold text-stone-700 shadow-2xs">
-              <Building2 className="h-3.5 w-3.5 text-[#8B1E24]" />
-              <span>Member of MahaDasha • TMT Group</span>
-            </div>
-          </div>
+                {/* Badge Lokasi Kawasan Terpadu */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-stone-950/80 backdrop-blur-md px-3.5 py-1 text-[11px] font-semibold text-white border border-white/20">
+                    <Building2 className="h-3.5 w-3.5 text-[#8B1E24]" />
+                    <span>Kawasan Terpadu Jl. Riau No. 147, Pekanbaru</span>
+                  </span>
+                </div>
 
-          {/* Architectural Clipped Image (#clip-inverted) */}
-          <div className="relative w-full overflow-hidden rounded-3xl bg-stone-900 shadow-xl group">
-            {/* Hidden SVG with #clip-inverted */}
-            <svg className="w-0 h-0 absolute -top-[9999px] -left-[9999px] pointer-events-none" aria-hidden="true">
-              <defs>
-                <clipPath id="clip-inverted" clipPathUnits="objectBoundingBox">
-                  <path d="M 0,0.04 C 0,0.018 0.025,0 0.055,0 H 0.61 C 0.64,0 0.665,0.018 0.665,0.04 V 0.12 C 0.665,0.145 0.69,0.165 0.72,0.165 H 0.945 C 0.975,0.165 1,0.185 1,0.21 V 0.96 C 1,0.982 0.975,1 0.945,1 H 0.055 C 0.025,1 0,0.982 0,0.96 Z" />
-                </clipPath>
-              </defs>
-            </svg>
-
-            <div
-              className="relative w-full aspect-[21/9] sm:aspect-[24/9] md:aspect-[2.4/1] min-h-[300px] sm:min-h-[360px] md:min-h-[420px] overflow-hidden"
-              style={{ clipPath: 'url(#clip-inverted)' }}
-            >
-              <img
-                src="/images/hotel/overview-facade-landscape.jpg"
-                alt="Kawasan Terpadu PT Halla Mohana - FOX Harris Hotel & Pekanbaru Xchange"
-                className="w-full h-full object-cover object-center transition-transform duration-1000 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/25 to-transparent pointer-events-none" />
-
-              <div className="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 text-white space-y-1.5 max-w-xl">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-black/40 backdrop-blur-md px-3 py-1 text-[11px] font-semibold text-white/90 border border-white/15">
-                  <Building2 className="h-3.5 w-3.5 text-[#8B1E24]" />
-                  <span>Kawasan Terpadu Jl. Riau No. 147, Pekanbaru</span>
-                </span>
-                <h3 className="text-lg sm:text-2xl font-bold tracking-tight text-white drop-shadow-sm">
-                  FOX Harris Hotel & Pekanbaru Xchange (PX)
-                </h3>
-                <p className="text-xs sm:text-sm text-stone-200 font-normal leading-relaxed">
-                  Integrasi hotel bintang 4 dengan lifestyle mall modern dalam satu kawasan komersial terpadu seluas 1,5 hektar.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Stats Strip */}
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="rounded-2xl border border-stone-200 bg-[#F8F9FA] p-6 sm:p-8 flex flex-col lg:flex-row lg:items-center justify-between gap-6"
-          >
-            {/* Sisi Kiri: 2013 (Tahun Didirikan) | 225 Kamar (Hotel Bintang 4) */}
-            <div className="flex flex-wrap items-center gap-8 sm:gap-12 divide-x divide-stone-200">
-              <div className="pr-4">
-                <span className="block text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">2013</span>
-                <span className="block text-xs uppercase font-semibold text-stone-500 tracking-wider mt-0.5">Tahun Didirikan</span>
-              </div>
-              <div className="pl-8 sm:pl-12">
-                <span className="block text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">225 Kamar</span>
-                <span className="block text-xs uppercase font-semibold text-stone-500 tracking-wider mt-0.5">Hotel Bintang 4 & Suite</span>
+                {/* Floating Glass Stats Card di Sudut Bawah Foto */}
+                <div className="p-4 sm:p-5">
+                  <div className="rounded-xl border border-white/40 bg-white/95 backdrop-blur-md p-4 sm:p-5 shadow-xl">
+                    <div className="grid grid-cols-3 divide-x divide-stone-200 text-center">
+                      <div className="px-2">
+                        <span className="block text-xl sm:text-2xl font-black text-stone-900">2013</span>
+                        <span className="block text-[10px] sm:text-xs uppercase font-semibold text-stone-500 mt-0.5">Tahun Berdiri</span>
+                      </div>
+                      <div className="px-2">
+                        <span className="block text-xl sm:text-2xl font-black text-[#8B1E24]">225 Kamar</span>
+                        <span className="block text-[10px] sm:text-xs uppercase font-semibold text-stone-500 mt-0.5">Hotel Bintang 4</span>
+                      </div>
+                      <div className="px-2">
+                        <span className="block text-xl sm:text-2xl font-black text-stone-900">2 Aset</span>
+                        <span className="block text-[10px] sm:text-xs uppercase font-semibold text-stone-500 mt-0.5">Kawasan Terpadu</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
 
-            {/* Sisi Kanan: Angka marun besar (#8B1E24): 2 ASET TERPADU dan 100% Sinergi MahaDasha & TMT Group */}
-            <div className="flex flex-wrap items-center gap-8 sm:gap-12 lg:border-l lg:border-stone-200 lg:pl-12">
-              <div>
-                <span className="block text-2xl sm:text-3xl font-black text-[#8B1E24] tracking-tight">2</span>
-                <span className="block text-xs uppercase font-bold text-stone-800 tracking-wider mt-0.5">ASET TERPADU</span>
+            {/* Kolom Kanan: 5 Kolom pada LG (Satu Judul Utama Bersih & Narasi Resmi) */}
+            <div className="lg:col-span-5 space-y-5">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#8B1E24]/10 px-3 py-1 text-xs font-bold text-[#8B1E24]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[#8B1E24]" />
+                <span>CORPORATE OVERVIEW • MEMBER OF TMT GROUP</span>
               </div>
-              <div>
-                <span className="block text-2xl sm:text-3xl font-black text-[#8B1E24] tracking-tight">100%</span>
-                <span className="block text-xs uppercase font-bold text-stone-800 tracking-wider mt-0.5">Sinergi MahaDasha & TMT Group</span>
-              </div>
-            </div>
-          </motion.div>
 
-          {/* 3-Column Editorial Content Bottom */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 pt-4 items-start">
-            {/* Kolom Kiri (md:col-span-2) */}
-            <div className="md:col-span-2 space-y-6">
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight">
-                <VerticalCutReveal
-                  splitBy="words"
-                  staggerDuration={0.05}
-                  delay={0.15}
-                  transition={{ type: 'spring', stiffness: 180, damping: 24 }}
-                >
-                  Menghadirkan Standar Baru Hospitalitas & Gaya Hidup Urban.
-                </VerticalCutReveal>
+                Menghadirkan Standar Baru Hospitalitas & Gaya Hidup Urban
               </h2>
 
-              <div className="grid md:grid-cols-2 gap-8 text-stone-600 text-sm sm:text-base leading-relaxed font-normal">
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                  Didirikan pada tahun 2013, <strong>PT Halla Mohana</strong> bernaung di bawah <strong>PT Mahadana Dasha Utama (MahaDasha)</strong> sebagai unit bisnis properti sekaligus pilar diversifikasi strategis konglomerasi terkemuka <strong>PT Tiara Marga Trakindo (TMT Group)</strong> di sektor properti komersial.
-                </motion.p>
-                <motion.p
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: 0.25 }}
-                >
-                  Fokus pengembangan perseroan terwujud dalam pengelolaan kawasan terpadu di koridor strategis <strong>Jalan Riau No. 147, Pekanbaru</strong> yang memadukan hotel bintang 4 modern <strong>FOX Harris Hotel Pekanbaru</strong> (225 kamar) dengan pusat perbelanjaan dan hiburan gaya hidup <strong>Pekanbaru Xchange (PX)</strong>.
-                </motion.p>
-              </div>
-            </div>
-
-            {/* Kolom Kanan (md:col-span-1 text-right) */}
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="space-y-5 flex flex-col md:items-end md:text-right md:border-l md:border-stone-200 md:pl-8"
-            >
-              <div className="space-y-1.5">
-                <h3 className="text-xl font-black tracking-tight text-[#8B1E24]">
-                  PT HALLA MOHANA
-                </h3>
-                <p className="text-xs font-bold text-stone-500 uppercase tracking-wider">
-                  Hospitality & Commercial Property Development
+              <div className="space-y-4 text-stone-600 text-sm sm:text-base leading-relaxed font-normal">
+                <p>
+                  Didirikan pada tahun 2013, <strong>PT Halla Mohana</strong> adalah perusahaan pengembang dan pengelola properti yang berfokus pada sektor perhotelan (<em>hospitality</em>) dan pusat perbelanjaan gaya hidup (<em>commercial lifestyle mall</em>). Perusahaan bernaung di bawah <strong>PT Mahadana Dasha Utama (MahaDasha)</strong> sebagai bagian dari diversifikasi konglomerasi terkemuka <strong>PT Tiara Marga Trakindo (TMT Group)</strong>.
                 </p>
-                <p className="text-xs text-stone-600 leading-relaxed pt-1">
-                  Pilar properti MahaDasha Group yang berkomitmen pada inovasi tata ruang perkotaan, keselamatan kerja prima, dan kepuasan pelanggan berkelanjutan.
+                <p>
+                  Portofolio unggulan perseroan berada di koridor strategis <strong>Jalan Riau No. 147, Senapelan, Pekanbaru</strong> dalam sebuah kawasan terpadu (<em>mixed-use commercial complex</em>) seluas 1,5 hektar yang memadukan hotel bintang 4 modern <strong>FOX Harris Hotel Pekanbaru</strong> (225 kamar & suite) dengan pusat perbelanjaan gaya hidup <strong>Pekanbaru Xchange (PX)</strong>.
                 </p>
               </div>
 
-              <div className="pt-2">
+              <div className="pt-2 flex flex-wrap items-center gap-4">
                 <a
                   href="/projects"
                   onClick={(e) => {
                     e.preventDefault();
                     onNavigate('/projects');
                   }}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#171717] hover:bg-[#8B1E24] text-white px-6 py-3.5 text-xs font-bold tracking-wider transition-all duration-300 shadow-md hover:shadow-lg cursor-pointer group"
+                  className="inline-flex items-center gap-2 rounded-full bg-[#8B1E24] hover:bg-[#72181D] text-white px-6 py-3.5 text-xs font-bold tracking-wider transition-all duration-300 shadow-sm hover:shadow-md cursor-pointer group"
                 >
-                  <span>EKSPLORASI PROYEK KAMI</span>
+                  <span>Eksplorasi Proyek Kami</span>
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 3. Section: Vision & Mission */}
+      {/* 3. Section: Vision & Mission (#F4F5F7, Dimensi Elegan Berlatar Gelap & Kartu Putih) */}
       <section
         id="vision-mission"
-        className="py-16 sm:py-24 bg-[#F8F9FA] border-b border-stone-200 scroll-mt-[140px]"
+        className="py-16 sm:py-24 bg-[#F4F5F7] border-b border-stone-200/90 scroll-mt-[140px]"
         style={{ scrollMarginTop: '140px' }}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-10">
           <div className="max-w-3xl space-y-2">
             <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">
               Vision & Mission
@@ -357,21 +350,23 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          {/* Visi Card (Clean & Elegant) */}
-          <div className="rounded-2xl border border-stone-200 bg-white p-8 sm:p-10 shadow-xs space-y-3 border-l-4 border-l-[#8B1E24]">
-            <div className="flex items-center gap-2 text-[#8B1E24]">
-              <Target className="h-4 w-4" />
-              <span className="text-xs font-bold uppercase tracking-wider">
-                Visi Perusahaan
-              </span>
+          {/* Visi Card Berlatar Gelap Elegan (#18181B dengan aksen marun/emas) */}
+          <div className="rounded-2xl bg-[#18181B] p-8 sm:p-10 text-white shadow-lg border-l-4 border-l-[#8B1E24] relative overflow-hidden">
+            <div className="absolute right-0 top-0 translate-x-10 -translate-y-10 w-56 h-56 rounded-full bg-[#8B1E24]/15 blur-2xl pointer-events-none" />
+            <div className="relative z-10 space-y-3">
+              <div className="flex items-center gap-2">
+                <Target className="h-4 w-4 text-[#A68253]" />
+                <span className="text-xs font-bold uppercase tracking-widest text-[#A68253]">
+                  Visi Perusahaan • Strategic Direction
+                </span>
+              </div>
+              <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white leading-snug tracking-tight">
+                "Menghadirkan produk dan layanan inovatif di bisnis perhotelan untuk menciptakan imbal hasil positif bagi pemegang saham."
+              </h3>
             </div>
-
-            <h3 className="text-xl sm:text-2xl font-bold text-stone-900 leading-snug">
-              "Menghadirkan produk dan layanan inovatif di bisnis perhotelan untuk menciptakan imbal hasil positif bagi pemegang saham."
-            </h3>
           </div>
 
-          {/* Misi 2x2 Grid (Tanpa Badge MISI #01 atau Teks Bilingual Bertumpuk) */}
+          {/* Misi 2x2 Grid Kartu Putih Bersih Berbayang Halus */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-stone-900">
               <Compass className="h-4 w-4 text-[#8B1E24]" />
@@ -380,11 +375,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </h3>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {officialMissions.map((missionText, idx) => (
                 <div
                   key={idx}
-                  className="rounded-xl border border-stone-200 bg-white p-5 sm:p-6 border-l-2 border-l-[#8B1E24] shadow-xs"
+                  className="rounded-xl border border-stone-200/90 bg-white p-6 shadow-xs hover:shadow-md hover:border-[#8B1E24]/40 transition-all border-l-4 border-l-[#8B1E24]"
                 >
                   <p className="text-sm sm:text-base text-stone-800 leading-relaxed font-medium">
                     {missionText}
@@ -396,10 +391,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4. Section: Core Values & Leadership Traits with Segmented Pill Tabs */}
+      {/* 4. Section: Core Values & Leadership Traits (#FFFFFF, Segmented Control & Hover Lift) */}
       <section
         id="core-values"
-        className="py-16 sm:py-24 bg-white border-b border-stone-200 scroll-mt-[140px]"
+        className="py-16 sm:py-24 bg-white border-b border-stone-200/90 scroll-mt-[140px]"
         style={{ scrollMarginTop: '140px' }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-10">
@@ -413,7 +408,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </p>
             </div>
 
-            {/* Segmented Pill Tabs Control (Vercel / 21st.dev Style) */}
+            {/* Segmented Pill Tabs Control */}
             <div className="inline-flex items-center p-1 rounded-full bg-stone-100 border border-stone-200 shrink-0">
               <button
                 type="button"
@@ -440,7 +435,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Conditional Display Based on Segmented Control */}
+          {/* Kartu Budaya Berbayang Halus dengan Ikon Badge Marun */}
           {activeCultureTab === 'values' ? (
             <div className="space-y-3 animate-in fade-in duration-300">
               <span className="text-xs font-bold uppercase tracking-wider text-stone-500 block">
@@ -450,8 +445,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 {coreValues.map((v) => (
                   <div
                     key={v.title}
-                    className="rounded-xl border border-stone-200 bg-[#F8F9FA] p-5 space-y-2 hover:border-[#8B1E24]/30 hover:bg-white hover:shadow-xs transition-all"
+                    className="rounded-2xl border border-stone-200 bg-white p-6 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all space-y-3"
                   >
+                    <div className="w-10 h-10 rounded-xl bg-[#8B1E24]/10 flex items-center justify-center">
+                      {v.icon}
+                    </div>
                     <h3 className="text-base font-bold text-stone-900">
                       {v.title}
                     </h3>
@@ -471,8 +469,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 {leadershipTraits.map((t) => (
                   <div
                     key={t.trait}
-                    className="rounded-xl border border-stone-200 bg-[#F8F9FA] p-5 space-y-2 hover:border-[#8B1E24]/30 hover:bg-white hover:shadow-xs transition-all"
+                    className="rounded-2xl border border-stone-200 bg-white p-6 shadow-xs hover:shadow-md hover:-translate-y-1 transition-all space-y-3"
                   >
+                    <div className="w-10 h-10 rounded-xl bg-[#8B1E24]/10 flex items-center justify-center">
+                      {t.icon}
+                    </div>
                     <h3 className="text-base font-bold text-stone-900">
                       {t.trait}
                     </h3>
@@ -487,143 +488,304 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 5. Section: Company Structure (Bagan Hirarki Visual Clean Tree Connector) */}
+      {/* 5. Section: Company Structure (#F4F5F7, Rebuilt Sesuai Bagan Resmi TMT Group) */}
       <section
         id="company-structure"
-        className="py-16 sm:py-24 bg-[#F8F9FA] border-b border-stone-200 scroll-mt-[140px]"
+        className="py-16 sm:py-24 bg-[#F4F5F7] border-b border-stone-200/90 scroll-mt-[140px]"
         style={{ scrollMarginTop: '140px' }}
       >
-        <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
-          <div className="max-w-3xl space-y-2">
-            <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">
-              Company Structure
-            </h2>
-            <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
-              Bagan struktur kepemilikan dan tata kelola korporasi PT Halla Mohana dalam naungan ekosistem grup usaha.
-            </p>
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div className="max-w-3xl space-y-2">
+              <span className="text-[11px] font-bold tracking-widest uppercase text-[#8B1E24] block">
+                Sinergi Kepemilikan & Portofolio
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">
+                Company Structure
+              </h2>
+              <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+                Struktur korporasi resmi Tiara Marga Trakindo (TMT Group) yang menaungi 8 entitas anak perusahaan, dengan PT Halla Mohana sebagai pilar hospitality dan commercial property.
+              </p>
+            </div>
+
+            {/* Mobile Scroll Hint Badge */}
+            <div className="lg:hidden">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-semibold text-stone-500 border border-stone-200 shadow-2xs">
+                <span>Geser ke samping untuk bagan lengkap</span>
+                <ArrowRight className="h-3 w-3 text-[#8B1E24]" />
+              </span>
+            </div>
           </div>
 
-          {/* Clean Tree Connector Bagan Organisasi */}
-          <div className="max-w-3xl mx-auto py-2">
-            {/* Level: TMT Group */}
-            <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-xs text-center max-w-lg mx-auto space-y-1">
-              <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">
-                Induk Grup Usaha
-              </span>
-              <h3 className="text-xl font-bold text-stone-900">
-                PT Tiara Marga Trakindo (TMT Group)
-              </h3>
-              <p className="text-xs text-stone-600 pt-0.5 leading-relaxed">
-                Konglomerasi nasional terkemuka yang menaungi diversifikasi strategis lintas industri.
-              </p>
-            </div>
-
-            {/* Vertical Connector Line 1 */}
-            <div className="flex flex-col items-center">
-              <div className="w-0.5 h-8 bg-stone-300" />
-              <div className="w-2.5 h-2.5 rotate-45 border-b-2 border-r-2 border-stone-400 -mt-1" />
-            </div>
-
-            {/* Level: MahaDasha */}
-            <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-xs text-center max-w-lg mx-auto space-y-1">
-              <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">
-                Perusahaan Induk Langsung
-              </span>
-              <h3 className="text-xl font-bold text-stone-900">
-                PT Mahadana Dasha Utama (MahaDasha)
-              </h3>
-              <p className="text-xs text-stone-600 pt-0.5 leading-relaxed">
-                Pengelola portofolio bisnis dan investasi strategis non-alat berat dalam ekosistem TMT Group.
-              </p>
-            </div>
-
-            {/* Vertical Connector Line 2 */}
-            <div className="flex flex-col items-center">
-              <div className="w-0.5 h-8 bg-stone-300" />
-              <div className="w-2.5 h-2.5 rotate-45 border-b-2 border-r-2 border-stone-400 -mt-1" />
-            </div>
-
-            {/* Level: PT Halla Mohana */}
-            <div className="rounded-2xl border-2 border-[#8B1E24]/30 bg-white p-6 shadow-xs text-center max-w-lg mx-auto space-y-1">
-              <span className="text-[11px] font-bold text-[#8B1E24] uppercase tracking-wider block">
-                Pengembang & Pengelola Properti Komersial
-              </span>
-              <h3 className="text-2xl font-bold text-stone-900">
-                PT Halla Mohana
-              </h3>
-              <p className="text-xs text-stone-600 pt-0.5 leading-relaxed">
-                Didirikan pada tahun 2013, berfokus pada pengembangan dan pengelolaan aset perhotelan bintang 4 serta pusat perbelanjaan gaya hidup.
-              </p>
-            </div>
-
-            {/* Symmetrical Fork Connector (Bercabang Dua ke Unit Properti Pekanbaru) */}
-            <div className="relative pt-2">
-              <div className="w-0.5 h-6 bg-stone-300 mx-auto" />
-              <div className="max-w-xl mx-auto h-0.5 bg-stone-300 relative">
-                <div className="absolute left-0 top-0 w-0.5 h-6 bg-stone-300" />
-                <div className="absolute left-[-4px] top-5 w-2.5 h-2.5 rotate-45 border-b-2 border-r-2 border-stone-400" />
-                <div className="absolute right-0 top-0 w-0.5 h-6 bg-stone-300" />
-                <div className="absolute right-[-4px] top-5 w-2.5 h-2.5 rotate-45 border-b-2 border-r-2 border-stone-400" />
-              </div>
-            </div>
-
-            {/* 2 Symmetrical Property Units */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 max-w-2xl mx-auto">
-              <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-xs text-center space-y-1.5 hover:border-[#8B1E24]/40 transition-colors">
-                <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">
-                  Hospitality Unit (Pekanbaru)
-                </span>
-                <h4 className="text-lg font-bold text-stone-900">
-                  FOX Harris Hotel Pekanbaru
-                </h4>
-                <p className="text-xs text-stone-600 leading-relaxed">
-                  Hotel bintang 4 berkapasitas 225 kamar & suite, Grand Ballroom MICE, Restoran WTF, gym, spa, dan indoor rooftop sky pool tertinggi di Pekanbaru.
-                </p>
+          {/* Interactive Tree Diagram Container dengan Horizontal Scroll di Layar Kecil */}
+          <div className="overflow-x-auto pb-6 scrollbar-thin">
+            <div className="min-w-[960px] max-w-6xl mx-auto space-y-6 pt-2">
+              {/* Top Node: TIARA MARGA TRAKINDO (TMT Group) */}
+              <div className="flex justify-center">
+                <div className="rounded-2xl border border-stone-700 bg-[#18181B] text-white p-6 shadow-xl text-center w-[460px] relative">
+                  <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3 py-0.5 text-[10px] font-bold uppercase tracking-widest text-[#A68253] mb-2 border border-white/10">
+                    Induk Grup Usaha • Group Holding
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white">
+                    TIARA MARGA TRAKINDO (TMT Group)
+                  </h3>
+                  <p className="text-xs text-stone-300 pt-1 leading-relaxed">
+                    Konglomerasi nasional terkemuka yang menaungi 8 entitas anak perusahaan lintas sektor industri.
+                  </p>
+                </div>
               </div>
 
-              <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-xs text-center space-y-1.5 hover:border-[#8B1E24]/40 transition-colors">
-                <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">
-                  Commercial Retail Unit (Pekanbaru)
-                </span>
-                <h4 className="text-lg font-bold text-stone-900">
-                  Pekanbaru Xchange (PX)
-                </h4>
-                <p className="text-xs text-stone-600 leading-relaxed">
-                  Pusat perbelanjaan gaya hidup terintegrasi dengan bioskop Cinema XXI, koridor kuliner Alfresco Dining di Ground Floor, dan area event komunitas.
-                </p>
+              {/* Batang Pohon Konektor Vertikal dari TMT ke Garis Distribusi */}
+              <div className="flex flex-col items-center">
+                <div className="w-0.5 h-8 bg-stone-300" />
+                <div className="w-2.5 h-2.5 rotate-45 border-b-2 border-r-2 border-stone-400 -mt-1" />
+              </div>
+
+              {/* Garis Distribusi Horizontal Utama untuk Baris 1 (5 Entitas Utama) */}
+              <div className="relative px-6">
+                <div className="h-0.5 bg-stone-300 w-full" />
+                
+                {/* 5 Titik Turun ke Baris 1 */}
+                <div className="grid grid-cols-5 gap-4">
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <div key={i} className="flex flex-col items-center">
+                      <div className="w-0.5 h-6 bg-stone-300" />
+                      <div className="w-2 h-2 rotate-45 border-b border-r border-stone-400 -mt-1" />
+                    </div>
+                  ))}
+                </div>
+
+                {/* Baris 1: 5 Entitas Utama Sejajar */}
+                <div className="grid grid-cols-5 gap-4 pt-1">
+                  {/* 1. PT Trakindo Utama */}
+                  <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm text-center border-t-4 border-t-amber-500 hover:shadow-md transition-shadow">
+                    <span className="text-[10px] font-bold text-amber-700 uppercase tracking-wider block">
+                      Heavy Equipment
+                    </span>
+                    <h4 className="text-xs sm:text-sm font-bold text-stone-900 mt-1 leading-snug">
+                      PT Trakindo Utama
+                    </h4>
+                    <p className="text-[11px] text-stone-500 leading-relaxed mt-1">
+                      Solusi alat berat dan mesin industri Caterpillar terdepan di Indonesia.
+                    </p>
+                  </div>
+
+                  {/* 2. PT Mahadana Dasha Utama */}
+                  <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm text-center border-t-4 border-t-blue-900 hover:shadow-md transition-shadow">
+                    <span className="text-[10px] font-bold text-blue-900 uppercase tracking-wider block">
+                      Sub-Holding
+                    </span>
+                    <h4 className="text-xs sm:text-sm font-bold text-stone-900 mt-1 leading-snug">
+                      PT Mahadana Dasha Utama (MahaDasha)
+                    </h4>
+                    <p className="text-[11px] text-stone-500 leading-relaxed mt-1">
+                      Pengelola portofolio diversifikasi usaha dan investasi terintegrasi.
+                    </p>
+                  </div>
+
+                  {/* 3. PT ABM Investama Tbk. */}
+                  <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm text-center border-t-4 border-t-emerald-700 hover:shadow-md transition-shadow">
+                    <span className="text-[10px] font-bold text-emerald-700 uppercase tracking-wider block">
+                      Energy Solutions
+                    </span>
+                    <h4 className="text-xs sm:text-sm font-bold text-stone-900 mt-1 leading-snug">
+                      PT ABM Investama Tbk.
+                    </h4>
+                    <p className="text-[11px] text-stone-500 leading-relaxed mt-1">
+                      Solusi energi dan pertambangan terintegrasi dari hulu hingga hilir.
+                    </p>
+                  </div>
+
+                  {/* 4. PT Chandra Sakti Utama Leasing */}
+                  <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm text-center border-t-4 border-t-sky-600 hover:shadow-md transition-shadow">
+                    <span className="text-[10px] font-bold text-sky-700 uppercase tracking-wider block">
+                      Financial Services
+                    </span>
+                    <h4 className="text-xs sm:text-sm font-bold text-stone-900 mt-1 leading-snug">
+                      PT Chandra Sakti Utama Leasing
+                    </h4>
+                    <p className="text-[11px] text-stone-500 leading-relaxed mt-1">
+                      Layanan pembiayaan sewa guna usaha komersial (CSULfinance).
+                    </p>
+                  </div>
+
+                  {/* 5. PT Radana Bhaskara Finance Tbk. */}
+                  <div className="rounded-xl border border-stone-200 bg-white p-4 shadow-sm text-center border-t-4 border-t-rose-600 hover:shadow-md transition-shadow">
+                    <span className="text-[10px] font-bold text-rose-700 uppercase tracking-wider block">
+                      Multifinance
+                    </span>
+                    <h4 className="text-xs sm:text-sm font-bold text-stone-900 mt-1 leading-snug">
+                      PT Radana Bhaskara Finance Tbk.
+                    </h4>
+                    <p className="text-[11px] text-stone-500 leading-relaxed mt-1">
+                      Solusi pembiayaan multiguna dan modal kerja (Radana Finance).
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Garis Distribusi Cabang Bawah (3 Entitas: PT Halla Mohana, PT Pastika Nirmala, PT Karya Kharisma Mandiri) */}
+              <div className="pt-6">
+                {/* Connector dari garis induk TMT ke cabang 3 entitas bawah */}
+                <div className="flex justify-center">
+                  <div className="w-0.5 h-6 bg-stone-300" />
+                </div>
+                <div className="relative max-w-4xl mx-auto px-6">
+                  <div className="h-0.5 bg-stone-300 w-full" />
+                  
+                  {/* 3 Titik Turun */}
+                  <div className="grid grid-cols-3 gap-6">
+                    {[0, 1, 2].map((i) => (
+                      <div key={i} className="flex flex-col items-center">
+                        <div className="w-0.5 h-6 bg-stone-300" />
+                        <div className="w-2 h-2 rotate-45 border-b border-r border-stone-400 -mt-1" />
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Baris 2: 3 Entitas Sejajar */}
+                  <div className="grid grid-cols-3 gap-6 pt-1">
+                    {/* 1. PT Halla Mohana (Highlight Utama Korporat) */}
+                    <div className="rounded-2xl border-2 border-[#8B1E24] bg-white p-5 shadow-lg relative ring-4 ring-[#8B1E24]/10 hover:shadow-xl transition-all">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="inline-flex items-center gap-1 rounded-full bg-[#8B1E24] text-white px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider">
+                          Highlight Utama
+                        </span>
+                        <span className="text-[10px] font-bold uppercase text-[#8B1E24] tracking-wider">
+                          Hospitality & Retail
+                        </span>
+                      </div>
+
+                      <h4 className="text-base font-extrabold text-stone-900 leading-snug">
+                        PT Halla Mohana
+                      </h4>
+                      <p className="text-xs text-stone-600 leading-relaxed mt-1">
+                        Didirikan tahun 2013, berfokus pada pembangunan dan pengelolaan hotel bintang 4 serta lifestyle mall.
+                      </p>
+
+                      {/* Logo Resmi hm Halla Mohana */}
+                      <div className="mt-4 pt-3 border-t border-stone-200/80 flex items-center justify-center">
+                        <img
+                          src="/images/logo/logo.png"
+                          alt="Logo PT Halla Mohana"
+                          className="h-8 w-auto object-contain"
+                        />
+                      </div>
+                    </div>
+
+                    {/* 2. PT Pastika Nirmala */}
+                    <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm text-center border-t-4 border-t-teal-600 hover:shadow-md transition-shadow">
+                      <span className="text-[10px] font-bold text-teal-700 uppercase tracking-wider block">
+                        Healthcare & Facilities
+                      </span>
+                      <h4 className="text-sm font-bold text-stone-900 mt-1 leading-snug">
+                        PT Pastika Nirmala
+                      </h4>
+                      <p className="text-xs text-stone-500 leading-relaxed mt-1">
+                        Penyedia layanan kesehatan modern dan pengelolaan fasilitas rumah sakit terpercaya.
+                      </p>
+                    </div>
+
+                    {/* 3. PT Karya Kharisma Mandiri */}
+                    <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-sm text-center border-t-4 border-t-indigo-600 hover:shadow-md transition-shadow">
+                      <span className="text-[10px] font-bold text-indigo-700 uppercase tracking-wider block">
+                        Human Capital Services
+                      </span>
+                      <h4 className="text-sm font-bold text-stone-900 mt-1 leading-snug">
+                        PT Karya Kharisma Mandiri
+                      </h4>
+                      <p className="text-xs text-stone-500 leading-relaxed mt-1">
+                        Layanan pengelolaan talenta, rekrutmen profesional, dan alih daya sumber daya manusia.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Sub-Branch dari PT Halla Mohana ke 2 Unit Properti Operasional Pekanbaru */}
+                <div className="pt-6 max-w-4xl mx-auto">
+                  {/* Garis turun khusus dari kolom PT Halla Mohana (kolom kiri) */}
+                  <div className="grid grid-cols-3 gap-6">
+                    <div className="flex flex-col items-center">
+                      <div className="w-0.5 h-6 bg-[#8B1E24]" />
+                      <div className="w-2.5 h-2.5 rotate-45 border-b-2 border-r-2 border-[#8B1E24] -mt-1" />
+                    </div>
+                    <div />
+                    <div />
+                  </div>
+
+                  {/* Fork Garis ke 2 Properti */}
+                  <div className="relative w-full">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                      {/* Unit 1: FOX Harris Hotel Pekanbaru */}
+                      <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-xs hover:border-[#8B1E24] hover:shadow-md transition-all space-y-1.5 border-l-4 border-l-[#8B1E24]">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#8B1E24]">
+                            Hospitality Unit
+                          </span>
+                          <span className="text-[10px] font-semibold text-stone-500">Jl. Riau No. 147</span>
+                        </div>
+                        <h5 className="text-sm font-bold text-stone-900">
+                          FOX Harris Hotel Pekanbaru
+                        </h5>
+                        <p className="text-xs text-stone-600 leading-relaxed">
+                          Hotel bintang 4 berkapasitas 225 kamar & suite modern, Grand Ballroom, WTF Restaurant, dan indoor rooftop sky pool tertinggi di Pekanbaru.
+                        </p>
+                      </div>
+
+                      {/* Unit 2: Pekanbaru Xchange (PX) */}
+                      <div className="rounded-xl border border-stone-200 bg-white p-5 shadow-xs hover:border-[#8B1E24] hover:shadow-md transition-all space-y-1.5 border-l-4 border-l-[#8B1E24]">
+                        <div className="flex items-center justify-between">
+                          <span className="text-[10px] font-bold uppercase tracking-wider text-[#8B1E24]">
+                            Commercial Retail Unit
+                          </span>
+                          <span className="text-[10px] font-semibold text-stone-500">Jl. Riau No. 147</span>
+                        </div>
+                        <h5 className="text-sm font-bold text-stone-900">
+                          Pekanbaru Xchange (PX)
+                        </h5>
+                        <p className="text-xs text-stone-600 leading-relaxed">
+                          Pusat perbelanjaan gaya hidup modern terintegrasi dengan bioskop Cinema XXI, koridor kuliner Alfresco Dining, dan panggung pertunjukan komunitas.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 6. Section: Code of Business Conduct & Ethics */}
+      {/* 6. Section: Code of Business Conduct & Ethics (#FFFFFF, Dimensi Tata Kelola 2 Kolom) */}
       <section
         id="code-of-conduct"
-        className="py-16 sm:py-24 bg-white border-b border-stone-200 scroll-mt-[140px]"
+        className="py-16 sm:py-24 bg-white border-b border-stone-200/90 scroll-mt-[140px]"
         style={{ scrollMarginTop: '140px' }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            {/* Left Column: Governance Narrative */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+            {/* Kolom Kiri: 5 Kolom pada LG (Narasi Komitmen GCG & Kepatuhan) */}
             <div className="lg:col-span-5 space-y-5">
               <div className="space-y-2">
+                <span className="text-[11px] font-bold tracking-widest uppercase text-[#8B1E24] block">
+                  Good Corporate Governance (GCG)
+                </span>
                 <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight leading-tight">
                   Code of Business Conduct & Ethics
                 </h2>
                 <p className="text-stone-600 text-sm sm:text-base leading-relaxed font-normal">
-                  PT Halla Mohana senantiasa mematuhi standar etika bisnis, kepatuhan hukum, dan tata kelola perusahaan yang baik (Good Corporate Governance / GCG) yang ditetapkan oleh MahaDasha dan Tiara Marga Trakindo (TMT Group).
+                  PT Halla Mohana senantiasa mematuhi standar etika bisnis, kepatuhan hukum, dan tata kelola perusahaan yang baik yang ditetapkan oleh MahaDasha dan Tiara Marga Trakindo (TMT Group).
                 </p>
               </div>
 
               <div className="space-y-3 pt-2">
-                <div className="flex items-start gap-3">
+                <div className="rounded-xl border border-stone-200 bg-[#F4F5F7] p-4 flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#8B1E24] shrink-0 mt-0.5" />
                   <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
                     <strong>Kepatuhan Regulasi & K3:</strong> Mengutamakan standar keselamatan gedung, sertifikasi K3, efisiensi energi ramah lingkungan, dan transparansi laporan operasional.
                   </p>
                 </div>
-                <div className="flex items-start gap-3">
+                <div className="rounded-xl border border-stone-200 bg-[#F4F5F7] p-4 flex items-start gap-3">
                   <CheckCircle2 className="h-5 w-5 text-[#8B1E24] shrink-0 mt-0.5" />
                   <p className="text-xs sm:text-sm text-stone-700 leading-relaxed">
                     <strong>Perlindungan Pemangku Kepentingan:</strong> Menjunjung tinggi perlakuan adil kepada para mitra bisnis, penyewa (tenants), tamu hotel, dan masyarakat sekitar.
@@ -632,21 +794,31 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Right Column: 4 Clean Editorial Governance Principles */}
-            <div className="lg:col-span-7 space-y-3">
-              {governancePrinciples.map((item) => (
-                <div
-                  key={item.title}
-                  className="rounded-xl border border-stone-200 bg-[#F8F9FA] p-5 border-l-2 border-l-[#8B1E24] space-y-1"
-                >
-                  <h3 className="text-sm font-bold text-stone-900">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              ))}
+            {/* Kolom Kanan: 7 Kolom pada LG (4 Pilar Tata Kelola dalam Kartu Putih Berbayang) */}
+            <div className="lg:col-span-7 space-y-4">
+              <span className="text-xs font-bold uppercase tracking-wider text-stone-500 block">
+                Empat Pilar Pokok Tata Kelola Perusahaan
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {governancePrinciples.map((item) => (
+                  <div
+                    key={item.title}
+                    className="rounded-xl border border-stone-200 bg-white p-5 shadow-xs hover:shadow-md hover:border-[#8B1E24]/30 transition-all border-l-4 border-l-[#8B1E24] space-y-2"
+                  >
+                    <div className="flex items-center gap-2">
+                      <div className="w-7 h-7 rounded-lg bg-[#8B1E24]/10 flex items-center justify-center">
+                        {item.icon}
+                      </div>
+                      <h3 className="text-sm sm:text-base font-bold text-stone-900">
+                        {item.title}
+                      </h3>
+                    </div>
+                    <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
