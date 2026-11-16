@@ -1,12 +1,51 @@
 import React, { useState } from 'react';
 import { useCMSData } from '@/context/CMSDataContext';
-import { Building2, ShoppingBag, Layers, ArrowUpRight } from 'lucide-react';
+import { Building2, ShoppingBag, Layers, ArrowUpRight, Compass } from 'lucide-react';
+
+interface ArchitecturalPerspective {
+  id: 'integrated' | 'hotel' | 'mall';
+  label: string;
+  badge: string;
+  title: string;
+  subtitle: string;
+  imageUrl: string;
+}
 
 export const OverviewSection: React.FC = () => {
   const { corporateInfo } = useCMSData();
   const visibleInfo = corporateInfo.filter((ci) => ci.visibility);
 
   const [activeTab, setActiveTab] = useState(0);
+  const [activePerspective, setActivePerspective] = useState<'integrated' | 'hotel' | 'mall'>('integrated');
+
+  const perspectives: ArchitecturalPerspective[] = [
+    {
+      id: 'integrated',
+      label: 'Kawasan Terpadu',
+      badge: 'Integrated Mixed-Use Complex (Jl. Riau 147)',
+      title: 'FOX Harris Hotel Pekanbaru & Pekanbaru Xchange (PX)',
+      subtitle: 'Kawasan komersial terintegrasi di koridor strategis Jl. Riau No. 147 Pekanbaru yang memadukan hotel bintang 4 dengan lifestyle mall modern.',
+      imageUrl: '/images/hotel/overview-facade-landscape.jpg',
+    },
+    {
+      id: 'hotel',
+      label: 'Menara FOX Hotel',
+      badge: 'Hospitality Tower • 12 Lantai • 225 Kamar',
+      title: 'FOX Harris Hotel Pekanbaru — Urban Oasis',
+      subtitle: 'Menara akomodasi bintang 4 dinamis dengan indoor rooftop sky pool tertinggi di Pekanbaru, Restoran WTF, spa, gym, dan Grand Ballroom.',
+      imageUrl: '/images/hotel/showcase-hotel-facade.jpg',
+    },
+    {
+      id: 'mall',
+      label: 'Podium PX Mall',
+      badge: 'Lifestyle Podium • Cinema XXI • Alfresco Dining',
+      title: 'Pekanbaru Xchange (PX) — Lifestyle & Entertainment',
+      subtitle: 'Podium ritel modern dengan fasad geometris ikonik, bioskop Cinema XXI, koridor kuliner alfresco, serta plaza event komunitas.',
+      imageUrl: '/images/mall/hero-px-mall.jpg',
+    },
+  ];
+
+  const currentPerspective = perspectives.find((p) => p.id === activePerspective) || perspectives[0];
 
   const pillars = [
     {
@@ -48,31 +87,55 @@ export const OverviewSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Asymmetrical Architectural Showcase (Image + Quote Layer) */}
+        {/* Asymmetrical Architectural Showcase (Image + Perspective Switcher + Quote Layer) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          <div className="lg:col-span-7 relative">
+          <div className="lg:col-span-7 space-y-4">
+            {/* Perspective Switcher Tabs */}
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-[11px] uppercase tracking-wider text-stone-400 font-bold mr-1">
+                Eksplorasi Sudut Pandang:
+              </span>
+              {perspectives.map((p) => {
+                const isActive = p.id === activePerspective;
+                return (
+                  <button
+                    key={p.id}
+                    type="button"
+                    onClick={() => setActivePerspective(p.id)}
+                    className={`rounded-full px-4 py-1.5 text-xs font-bold transition-all cursor-pointer ${
+                      isActive
+                        ? 'bg-[#8B1E24] text-white shadow-xs'
+                        : 'bg-stone-100 text-stone-600 hover:bg-stone-200 hover:text-stone-900'
+                    }`}
+                  >
+                    {p.label}
+                  </button>
+                );
+              })}
+            </div>
+
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl shadow-lg bg-stone-900 group">
               <img
-                src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&auto=format&fit=crop&q=80"
-                alt="Halla Mohana Corporate Property"
+                src={currentPerspective.imageUrl}
+                alt={currentPerspective.title}
                 className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/20 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/20 to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 text-white space-y-1.5">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-stone-300">
-                  Properti Terpadu Pekanbaru
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-stone-300 bg-white/20 backdrop-blur-md px-2.5 py-0.5 rounded-full inline-block">
+                  {currentPerspective.badge}
                 </span>
                 <p className="text-lg sm:text-xl font-bold">
-                  FOX Harris Hotel Pekanbaru & Pekanbaru Xchange (PX)
+                  {currentPerspective.title}
                 </p>
-                <p className="text-xs text-stone-300">
-                  Kawasan komersial terintegrasi di koridor strategis Jl. Riau No. 147 Pekanbaru
+                <p className="text-xs text-stone-300 leading-relaxed max-w-xl">
+                  {currentPerspective.subtitle}
                 </p>
               </div>
             </div>
 
             {/* Clean Floating Quote Box */}
-            <div className="mt-4 sm:mt-0 sm:absolute sm:-bottom-8 sm:-right-6 sm:max-w-xs rounded-2xl border border-stone-200 bg-white/95 backdrop-blur-md p-6 shadow-xl space-y-2">
+            <div className="rounded-2xl border border-stone-200 bg-[#F8F9FA] p-5 space-y-2">
               <p className="text-xs sm:text-sm text-stone-800 font-semibold italic leading-relaxed">
                 "Keunggulan dalam pengelolaan aset properti komersial dan hospitalitas yang berkelanjutan untuk kemakmuran bersama."
               </p>

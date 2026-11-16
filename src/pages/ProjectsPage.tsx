@@ -13,8 +13,8 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
     <div className="bg-white">
       {/* 1. Dedicated Page Header */}
       <PageHeader
-        title="Portofolio Properti Komersial & Hospitality"
-        description="Jelajahi destinasi perhotelan prestisius, pusat perbelanjaan modern, dan ruang perkantoran komersial yang dikembangkan serta dikelola oleh PT Halla Mohana di seluruh Indonesia."
+        title="Portofolio Destinasi Komersial Terpadu"
+        description="Jelajahi destinasi perhotelan bintang 4 dan pusat perbelanjaan gaya hidup modern yang dikembangkan serta dikelola oleh PT Halla Mohana di kawasan mixed-use terpadu Jl. Riau No. 147 Pekanbaru, Riau."
         breadcrumbs={[
           { label: 'Beranda', href: '/' },
           { label: 'Portofolio Properti' },

@@ -133,19 +133,6 @@ function AppContent() {
     <div className="min-h-screen bg-white text-stone-800 font-sans selection:bg-[#7A152E] selection:text-white flex flex-col justify-between">
       <Toaster position="top-right" richColors />
 
-      {/* Discrete Developer Switcher Badge (Bottom Right) */}
-      <div className="fixed bottom-4 right-4 z-50">
-        <button
-          type="button"
-          onClick={() => navigate('/admin')}
-          className="flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/90 px-3.5 py-1.5 text-[11px] font-bold text-white shadow-2xl backdrop-blur-md hover:bg-black transition-all hover:scale-105 cursor-pointer"
-          title="Beralih ke Console CMS (/admin)"
-        >
-          <span className="h-2 w-2 rounded-full bg-[#7A152E] animate-pulse" />
-          <span>Console CMS (/admin)</span>
-        </button>
-      </div>
-
       <PublicNavbar currentPath={currentPath} onNavigate={navigate} />
 
       <main className="flex-1">

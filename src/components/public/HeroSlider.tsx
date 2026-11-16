@@ -36,7 +36,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
   const getDestinationLabel = (title: string, index: number) => {
     if (title.includes('FOX')) return 'FOX Harris Hotel';
     if (title.includes('Xchange') || title.includes('PX')) return 'Pekanbaru Xchange';
-    if (title.includes('TMT') || title.includes('Commercial')) return 'Gedung TMT Cilandak';
+    if (title.includes('Kawasan') || title.includes('Terpadu') || title.includes('Commercial')) return 'Kawasan Terpadu';
     return `Destinasi Unggulan ${index + 1}`;
   };
 

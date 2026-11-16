@@ -234,12 +234,12 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Right Showcase: Head Office & Integrated Complex Highlight */}
+            {/* Right Showcase: Integrated Complex Highlight */}
             <div className="lg:col-span-5 relative space-y-4">
               <div className="relative aspect-[4/5] overflow-hidden rounded-2xl shadow-xl bg-stone-900 group">
                 <img
-                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1000&auto=format&fit=crop&q=80"
-                  alt="Gedung TMT 1 Head Office"
+                  src="/images/hotel/overview-facade-landscape.jpg"
+                  alt="Kawasan Terpadu Jl. Riau No. 147 Pekanbaru"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-stone-950/90 via-stone-950/20 to-transparent" />
@@ -247,17 +247,17 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 <div className="absolute top-4 left-4 right-4">
                   <span className="inline-flex items-center gap-1.5 rounded-full bg-stone-950/80 backdrop-blur-md px-3 py-1 text-[11px] font-bold text-white border border-white/20">
                     <Building2 className="h-3.5 w-3.5 text-[#8B1E24]" />
-                    <span>Head Office (Jakarta Selatan)</span>
+                    <span>Kawasan Terpadu (Pekanbaru, Riau)</span>
                   </span>
                 </div>
 
                 <div className="absolute bottom-6 left-6 right-6 text-white space-y-1">
                   <span className="text-[10px] font-bold uppercase tracking-widest text-stone-300 block">
-                    Gedung TMT 1, Cilandak
+                    Jl. Riau No. 147, Senapelan
                   </span>
-                  <h3 className="text-lg font-bold">Pusat Koordinasi Korporat Halla Mohana</h3>
+                  <h3 className="text-lg font-bold">FOX Harris Hotel & Pekanbaru Xchange</h3>
                   <p className="text-xs text-stone-300 leading-relaxed">
-                    Bernaung di kompleks perkantoran pusat Tiara Marga Trakindo (TMT Group), Jakarta Selatan.
+                    Integrasi hotel bintang 4 dengan 225 kamar dan lifestyle mall modern dalam satu kawasan mixed-use terpadu.
                   </p>
                 </div>
               </div>

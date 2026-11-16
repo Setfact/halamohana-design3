@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCMSData } from '@/context/CMSDataContext';
-import { MapPin, ArrowUpRight, ChevronRight, Award, ShieldCheck, Clock, CheckCircle2, Phone } from 'lucide-react';
+import { MapPin, ArrowUpRight, ChevronRight, Award, ShieldCheck, Clock, CheckCircle2, Phone, Building2 } from 'lucide-react';
 import { ProjectDetailModal } from './ProjectDetailModal';
 import type { ProjectItem } from '@/types';
 
@@ -11,18 +11,24 @@ export const ProjectsSection: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [activeProjectId, setActiveProjectId] = useState<string>('');
+  const [activeImageIndex, setActiveImageIndex] = useState<number>(0);
 
+  // 2 Official Portfolios Categories: Only Commercial Projects in Pekanbaru
   const categories = [
-    { label: 'Semua Portofolio', value: 'All' },
-    { label: 'Hospitality (FOX Hotel)', value: 'Hospitality & Hotel' },
-    { label: 'Retail & Mall (PX)', value: 'Shopping Mall & Retail' },
-    { label: 'Kantor Pusat', value: 'Commercial Office' },
+    { label: 'Semua Proyek', value: 'All' },
+    { label: 'Hospitality (FOX Harris Hotel)', value: 'Hospitality & Hotel' },
+    { label: 'Lifestyle Mall (Pekanbaru Xchange)', value: 'Shopping Mall & Retail' },
   ];
+
+  // Exclude Head Office Gedung TMT 1 from portfolio projects
+  const mainCommercialProjects = visibleProjects.filter(
+    (p) => p.id !== 'prj-3' && p.category !== 'Commercial Office'
+  );
 
   const filteredProjects =
     activeCategory === 'All'
-      ? visibleProjects
-      : visibleProjects.filter((p) => p.category === activeCategory);
+      ? mainCommercialProjects
+      : mainCommercialProjects.filter((p) => p.category === activeCategory);
 
   // Synchronize active project when filter changes or on initial load
   useEffect(() => {
@@ -30,39 +36,56 @@ export const ProjectsSection: React.FC = () => {
       const exists = filteredProjects.find((p) => p.id === activeProjectId);
       if (!exists) {
         setActiveProjectId(filteredProjects[0].id);
+        setActiveImageIndex(0);
       }
     } else {
       setActiveProjectId('');
+      setActiveImageIndex(0);
     }
   }, [filteredProjects, activeProjectId]);
+
+  // Reset active image index when active project changes
+  useEffect(() => {
+    setActiveImageIndex(0);
+  }, [activeProjectId]);
 
   const activeProject =
     filteredProjects.find((p) => p.id === activeProjectId) || filteredProjects[0];
 
-  // 4-Column Key Metrics Corporate Achievement (100% Akurat sesuai data resmi)
+  const currentGalleryList =
+    activeProject?.gallery && activeProject.gallery.length > 0
+      ? activeProject.gallery
+      : activeProject
+      ? [activeProject.imageUrl]
+      : [];
+
+  const currentActiveImage =
+    currentGalleryList[activeImageIndex] || activeProject?.imageUrl || '';
+
+  // 4-Column Key Metrics Corporate Achievement (100% Faktual & Selaras)
   const corporateMetrics = [
     {
       value: '2013',
       label: 'Tahun Pendirian Resmi',
-      desc: 'Pengembang properti terpadu di bawah naungan MahaDasha & TMT Group',
+      desc: 'Pengembang properti di bawah MahaDasha & TMT Group',
       icon: <Clock className="h-4 w-4 text-[#8B1E24]" />,
     },
     {
-      value: '100.000+ m²',
-      label: 'Kawasan Komersial',
-      desc: 'Pengembangan kawasan mixed-use hotel & lifestyle mall terpadu',
+      value: '2 Aset Terpadu',
+      label: 'Mixed-Use Complex',
+      desc: 'Integrasi hotel bintang 4 & lifestyle mall di Pekanbaru',
       icon: <ShieldCheck className="h-4 w-4 text-[#8B1E24]" />,
     },
     {
       value: '225 Kamar',
       label: 'Akomodasi Bintang 4',
-      desc: 'Kamar & suite FOX Hotel dengan sky pool tertinggi di Pekanbaru',
+      desc: 'Dilengkapi indoor rooftop sky pool tertinggi di Pekanbaru',
       icon: <Award className="h-4 w-4 text-[#8B1E24]" />,
     },
     {
       value: '100%',
       label: 'Standar Mutu MahaDasha',
-      desc: 'Kepatuhan K3, audit berkala & sinergi ekosistem TMT Group',
+      desc: 'Kepatuhan K3, tata kelola GCG & sinergi TMT Group',
       icon: <CheckCircle2 className="h-4 w-4 text-[#8B1E24]" />,
     },
   ];
@@ -94,7 +117,7 @@ export const ProjectsSection: React.FC = () => {
                   key={cat.value}
                   type="button"
                   onClick={() => setActiveCategory(cat.value)}
-                  className={`rounded-full px-4 py-2 text-xs font-bold tracking-wide transition-all cursor-pointer ${
+                  className={`rounded-full px-5 py-2 text-xs font-bold tracking-wide transition-all cursor-pointer ${
                     isActive
                       ? 'bg-[#8B1E24] text-white shadow-sm'
                       : 'bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 hover:text-stone-900'
@@ -115,7 +138,7 @@ export const ProjectsSection: React.FC = () => {
               {/* Photo Frame */}
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-stone-900 shadow-md group">
                 <img
-                  src={activeProject.imageUrl}
+                  src={currentActiveImage}
                   alt={activeProject.title}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
@@ -137,6 +160,33 @@ export const ProjectsSection: React.FC = () => {
                   </p>
                 </div>
               </div>
+
+              {/* Multi-Photo Interactive Thumbnail Selector */}
+              {currentGalleryList.length > 1 && (
+                <div className="flex items-center gap-2.5 overflow-x-auto pb-1 scrollbar-none">
+                  {currentGalleryList.map((thumbUrl, idx) => {
+                    const isSelected = activeImageIndex === idx;
+                    return (
+                      <button
+                        key={idx}
+                        type="button"
+                        onClick={() => setActiveImageIndex(idx)}
+                        className={`relative h-14 w-20 sm:h-16 sm:w-24 shrink-0 overflow-hidden rounded-xl border-2 transition-all cursor-pointer ${
+                          isSelected
+                            ? 'border-[#8B1E24] shadow-md scale-102 ring-2 ring-[#8B1E24]/20'
+                            : 'border-transparent opacity-65 hover:opacity-100 hover:border-stone-300'
+                        }`}
+                      >
+                        <img
+                          src={thumbUrl}
+                          alt=""
+                          className="h-full w-full object-cover"
+                        />
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
 
               {/* Narrative & Blueprint Specifications Strip */}
               <div className="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 shadow-xs space-y-6">
@@ -173,9 +223,7 @@ export const ProjectsSection: React.FC = () => {
                 {/* Primary Action Button (Pills) */}
                 <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-stone-100">
                   <span className="text-xs text-stone-500 font-medium">
-                    {activeProject.id === 'prj-3'
-                      ? 'Kantor Pusat Korporat PT Halla Mohana'
-                      : 'Aset Komersial Dikelola oleh PT Halla Mohana'}
+                    Aset Komersial Dikelola oleh PT Halla Mohana
                   </span>
 
                   <div className="flex items-center gap-3">
@@ -205,8 +253,8 @@ export const ProjectsSection: React.FC = () => {
                 <span className="text-[11px] uppercase tracking-widest text-stone-600 font-bold">
                   Katalog Portofolio
                 </span>
-                <span className="text-[11px] text-stone-400 font-medium">
-                  {filteredProjects.length} Properti
+                <span className="text-[11px] text-[#8B1E24] font-bold bg-[#8B1E24]/10 px-2.5 py-0.5 rounded-full">
+                  {filteredProjects.length} Destinasi Utama
                 </span>
               </div>
 
@@ -277,7 +325,7 @@ export const ProjectsSection: React.FC = () => {
                   Kawasan Terpadu Jl. Riau Pekanbaru
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed">
-                  Menyatukan kenyamanan hotel bintang 4 berkapasitas 225 kamar dengan fasilitas hiburan Cinema XXI dan koridor alfresco dining Pekanbaru Xchange dalam satu kawasan strategis.
+                  Menyatukan kenyamanan hotel bintang 4 berkapasitas 225 kamar dengan fasilitas hiburan Cinema XXI dan koridor alfresco dining Pekanbaru Xchange dalam satu kawasan strategis terintegrasi.
                 </p>
               </div>
             </div>
@@ -292,12 +340,12 @@ export const ProjectsSection: React.FC = () => {
               onClick={() => setActiveCategory('All')}
               className="rounded-full bg-[#8B1E24] text-white px-5 py-2 text-xs font-bold"
             >
-              Tampilkan Semua Portofolio
+              Tampilkan Semua Proyek
             </button>
           </div>
         )}
 
-        {/* 4-Column Corporate Achievement Metrics Strip (Official 2013 + 225 Kamar) */}
+        {/* 4-Column Corporate Achievement Metrics Strip (100% Data Faktual Resmi) */}
         <div className="pt-4 border-t border-stone-200">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {corporateMetrics.map((metric, i) => (

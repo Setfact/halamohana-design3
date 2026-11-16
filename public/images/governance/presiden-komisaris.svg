@@ -1,0 +1,58 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141822" />
+      <stop offset="60%" stop-color="#1E2433" />
+      <stop offset="100%" stop-color="#111622" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#D4AF37" />
+      <stop offset="50%" stop-color="#A68253" />
+      <stop offset="100%" stop-color="#8F6E41" />
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="38%" r="45%">
+      <stop offset="0%" stop-color="#A68253" stop-opacity="0.35" />
+      <stop offset="100%" stop-color="#000000" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="600" height="800" fill="url(#bgGrad)" />
+  <circle cx="300" cy="300" r="280" fill="url(#glow)" />
+
+  <!-- Subtle Corporate Guilloche Geometry -->
+  <g stroke="rgba(255, 255, 255, 0.05)" stroke-width="1" fill="none">
+    <circle cx="300" cy="300" r="190" />
+    <circle cx="300" cy="300" r="215" stroke-dasharray="6,6" />
+    <circle cx="300" cy="300" r="240" />
+    <line x1="60" y1="300" x2="540" y2="300" stroke-dasharray="4,8" />
+    <line x1="300" y1="60" x2="300" y2="540" stroke-dasharray="4,8" />
+  </g>
+
+  <!-- Crest Outer Ring -->
+  <circle cx="300" cy="300" r="160" fill="#181D29" stroke="url(#goldGrad)" stroke-width="4" filter="drop-shadow(0 12px 24px rgba(0,0,0,0.6))" />
+  <circle cx="300" cy="300" r="148" fill="none" stroke="rgba(166, 130, 83, 0.4)" stroke-width="1.5" />
+
+  <!-- Monogram Initials -->
+  <text x="300" y="325" font-family="'Plus Jakarta Sans', -apple-system, sans-serif" font-size="88" font-weight="900" fill="url(#goldGrad)" text-anchor="middle" letter-spacing="4">
+    RS
+  </text>
+
+  <!-- Ribbon / Subtitle -->
+  <rect x="150" y="475" width="300" height="32" rx="16" fill="#A68253" opacity="0.9" />
+  <text x="300" y="496" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="800" fill="#FFFFFF" text-anchor="middle" letter-spacing="2">
+    PRESIDEN KOMISARIS
+  </text>
+
+  <!-- Full Name & Corporate Affiliation -->
+  <text x="300" y="560" font-family="'Plus Jakarta Sans', sans-serif" font-size="20" font-weight="800" fill="#FFFFFF" text-anchor="middle">
+    Dr. H. Raden Soebandrio, M.Sc.
+  </text>
+  <text x="300" y="590" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="500" fill="#94A3B8" text-anchor="middle" letter-spacing="1">
+    PT HALLA MOHANA • TMT GROUP
+  </text>
+
+  <!-- Bottom Crest Seal -->
+  <line x1="220" y1="630" x2="380" y2="630" stroke="rgba(166, 130, 83, 0.3)" stroke-width="1" />
+  <circle cx="300" cy="630" r="4" fill="#A68253" />
+</svg>
