@@ -92,6 +92,7 @@ export interface BannerItem {
   no: number;
   title: string;
   subtitle: string;
+  shortTitle?: string;
   ctaText: string;
   ctaUrl: string;
   imageUrl: string;

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCMSData } from '@/context/CMSDataContext';
-import { MapPin, ArrowUpRight, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { MapPin, ArrowUpRight, ChevronRight, Award, ShieldCheck, Clock, CheckCircle2 } from 'lucide-react';
 import { ProjectDetailModal } from './ProjectDetailModal';
 import type { ProjectItem } from '@/types';
 
@@ -13,7 +12,12 @@ export const ProjectsSection: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
   const [activeProjectId, setActiveProjectId] = useState<string>('');
 
-  const categories = ['All', 'Hospitality & Hotel', 'Shopping Mall & Retail', 'Commercial Office'];
+  const categories = [
+    { label: 'Semua', value: 'All' },
+    { label: 'Hospitality', value: 'Hospitality & Hotel' },
+    { label: 'Retail', value: 'Shopping Mall & Retail' },
+    { label: 'Commercial Office', value: 'Commercial Office' },
+  ];
 
   const filteredProjects =
     activeCategory === 'All'
@@ -35,52 +39,80 @@ export const ProjectsSection: React.FC = () => {
   const activeProject =
     filteredProjects.find((p) => p.id === activeProjectId) || filteredProjects[0];
 
+  // 4-Column Key Metrics Corporate Achievement
+  const corporateMetrics = [
+    {
+      value: '30+ Tahun',
+      label: 'Rekam Jejak Unggul',
+      desc: 'Pengembangan properti komersial sejak 1989',
+      icon: <Clock className="h-4 w-4 text-[#8B1E24]" />,
+    },
+    {
+      value: '100.000+ m²',
+      label: 'Ruang Dikelola',
+      desc: 'Aset perhotelan, ritel & perkantoran terpadu',
+      icon: <ShieldCheck className="h-4 w-4 text-[#8B1E24]" />,
+    },
+    {
+      value: '220+ Kamar',
+      label: 'Akomodasi Bintang 4',
+      desc: 'Kamar & suite modern di jantung Pekanbaru',
+      icon: <Award className="h-4 w-4 text-[#8B1E24]" />,
+    },
+    {
+      value: '100%',
+      label: 'Standar Mutu MahaDasha',
+      desc: 'Kepatuhan K3, ESG & sinergi TMT Group',
+      icon: <CheckCircle2 className="h-4 w-4 text-[#8B1E24]" />,
+    },
+  ];
+
   return (
-    <section id="projects" className="py-20 sm:py-28 bg-[#FBFBF9] border-b border-stone-200/80">
-      <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
-        {/* Section Header - Direct, Bold, Clean (No Kicker / No Pills) */}
+    <section id="projects" className="py-24 sm:py-32 bg-[#F8F9FA] border-b border-stone-200/80 scroll-mt-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-16">
+        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-stone-200">
           <div className="max-w-2xl space-y-3">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 tracking-tight">
+            <span className="text-[11px] font-bold tracking-widest uppercase text-[#8B1E24] block">
               Portofolio Properti Pilihan
+            </span>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 tracking-tight">
+              Aset Properti Komersial Unggulan
             </h2>
             <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
               Destinasi perhotelan prestisius dan pusat perbelanjaan gaya hidup modern terpadu yang dikembangkan serta dikelola oleh PT Halla Mohana.
             </p>
           </div>
 
-          {/* Clean Category Underline Tabs */}
-          <div className="flex flex-wrap items-center gap-3 sm:gap-6">
+          {/* Interactive Category Filter Pills */}
+          <div className="flex flex-wrap items-center gap-2">
             {categories.map((cat) => {
-              const isActive = activeCategory === cat;
+              const isActive = activeCategory === cat.value;
 
               return (
                 <button
-                  key={cat}
+                  key={cat.value}
                   type="button"
-                  onClick={() => setActiveCategory(cat)}
-                  className={`group relative pb-2 text-xs sm:text-sm font-bold tracking-wide transition-colors ${
+                  onClick={() => setActiveCategory(cat.value)}
+                  className={`rounded-full px-4 py-2 text-xs font-bold tracking-wide transition-all cursor-pointer ${
                     isActive
-                      ? 'text-[#7A152E]'
-                      : 'text-stone-500 hover:text-stone-900'
+                      ? 'bg-[#8B1E24] text-white shadow-sm'
+                      : 'bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 hover:text-stone-900'
                   }`}
                 >
-                  <span>{cat === 'All' ? 'Semua Portofolio' : cat}</span>
-                  {isActive && (
-                    <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#7A152E]" />
-                  )}
+                  {cat.label}
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* The Flagship Architectural Stage & Specs Rail (Direct & Free of Badges) */}
+        {/* Flagship Stage & Detail Display */}
         {activeProject ? (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left Column: Flagship Stage Viewport */}
             <div className="lg:col-span-7 xl:col-span-8 space-y-6">
-              {/* Photo Frame (Clean: No STAGE 01 badge) */}
+              {/* Photo Frame */}
               <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-stone-900 shadow-md group">
                 <img
                   src={activeProject.imageUrl}
@@ -88,19 +120,19 @@ export const ProjectsSection: React.FC = () => {
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
 
-                {/* Subtle Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/20 to-transparent" />
+                {/* Ambient Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-stone-950/15 to-transparent" />
 
-                {/* Overlaid Title & Location on Image Bottom */}
+                {/* Overlaid Title & Location */}
                 <div className="absolute bottom-6 left-6 right-6 text-white space-y-2 pointer-events-none">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#A68253] block">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-stone-300 block">
                     {activeProject.category}
                   </span>
                   <h3 className="text-2xl sm:text-3xl font-black tracking-tight text-white drop-shadow-md">
                     {activeProject.title}
                   </h3>
                   <p className="flex items-center gap-2 text-xs sm:text-sm text-stone-300 font-medium">
-                    <MapPin className="h-4 w-4 text-[#A68253] shrink-0" />
+                    <MapPin className="h-4 w-4 text-[#8B1E24] shrink-0" />
                     <span>{activeProject.location}</span>
                   </p>
                 </div>
@@ -109,7 +141,7 @@ export const ProjectsSection: React.FC = () => {
               {/* Narrative & Blueprint Specifications Strip */}
               <div className="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 shadow-xs space-y-6">
                 <div>
-                  <h4 className="text-xs font-bold uppercase tracking-wider text-[#7A152E] mb-2">
+                  <h4 className="text-[11px] font-bold uppercase tracking-widest text-[#8B1E24] mb-2">
                     Ringkasan Proyek & Konsep
                   </h4>
                   <p className="text-sm sm:text-base text-stone-700 leading-relaxed font-normal">
@@ -117,14 +149,14 @@ export const ProjectsSection: React.FC = () => {
                   </p>
                 </div>
 
-                {/* 4-Grid Blueprint Specifications Rail (Pure Text & Values) */}
+                {/* 4-Grid Blueprint Specifications Rail */}
                 {activeProject.specs && activeProject.specs.length > 0 && (
                   <div className="space-y-3 pt-2 border-t border-stone-100">
                     <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                       {activeProject.specs.slice(0, 4).map((spec, i) => (
                         <div
                           key={i}
-                          className="rounded-xl border border-stone-100 bg-[#F8F9FA] p-3.5 space-y-1 hover:border-[#A68253]/40 transition-colors"
+                          className="rounded-xl border border-stone-100 bg-[#F8F9FA] p-3.5 space-y-1 hover:border-[#8B1E24]/30 transition-colors"
                         >
                           <span className="text-[10px] font-semibold uppercase tracking-wider text-stone-500 block truncate">
                             {spec.label}
@@ -138,36 +170,37 @@ export const ProjectsSection: React.FC = () => {
                   </div>
                 )}
 
-                {/* Primary Action Button */}
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-stone-100">
+                {/* Primary Action Button (Pills) */}
+                <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-stone-100">
                   <span className="text-xs text-stone-500 font-medium">
                     Aset Dikelola oleh PT Halla Mohana
                   </span>
 
                   <div className="flex items-center gap-3">
-                    <Button
-                      variant="primary"
-                      size="sm"
-                      icon={<ArrowUpRight className="h-4 w-4" />}
-                      iconPosition="right"
+                    <button
+                      type="button"
                       onClick={() => setSelectedProject(activeProject)}
+                      className="inline-flex items-center gap-2 rounded-full bg-[#8B1E24] hover:bg-[#72181D] text-white px-5 py-2.5 text-xs font-bold tracking-wide shadow-xs transition-all cursor-pointer"
                     >
-                      Buka Spesifikasi Lengkap
-                    </Button>
-                    <a href="#contact">
-                      <Button variant="outline" size="sm">
-                        Inquiri Kerjasama
-                      </Button>
+                      <span>Buka Spesifikasi Lengkap</span>
+                      <ArrowUpRight className="h-3.5 w-3.5" />
+                    </button>
+
+                    <a
+                      href="#contact"
+                      className="inline-flex items-center gap-2 rounded-full border border-stone-300 bg-white hover:bg-stone-50 text-stone-700 px-5 py-2.5 text-xs font-semibold tracking-wide transition-all cursor-pointer"
+                    >
+                      <span>Inquiri Kerjasama</span>
                     </a>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Portfolio Selector Rail (Clean: No 01 badges) */}
+            {/* Right Column: Portfolio Selector Rail */}
             <div className="lg:col-span-5 xl:col-span-4 space-y-4">
               <div className="flex items-center justify-between px-1">
-                <span className="text-xs uppercase tracking-wider text-stone-700 font-bold">
+                <span className="text-[11px] uppercase tracking-widest text-stone-600 font-bold">
                   Katalog Portofolio
                 </span>
                 <span className="text-[11px] text-stone-400 font-medium">
@@ -186,11 +219,11 @@ export const ProjectsSection: React.FC = () => {
                       onClick={() => setActiveProjectId(project.id)}
                       className={`group cursor-pointer rounded-2xl p-3.5 transition-all flex items-center gap-4 border ${
                         isSelected
-                          ? 'border-[#7A152E] bg-white shadow-md ring-2 ring-[#7A152E]/10 translate-x-1'
-                          : 'border-stone-200 bg-white/70 hover:bg-white hover:border-stone-300 shadow-2xs hover:shadow-xs'
+                          ? 'border-[#8B1E24] bg-white shadow-md ring-2 ring-[#8B1E24]/10 translate-x-1'
+                          : 'border-stone-200 bg-white/70 hover:bg-white hover:border-stone-300 shadow-2xs'
                       }`}
                     >
-                      {/* Thumbnail (Clean: No badge) */}
+                      {/* Thumbnail */}
                       <div className="relative h-20 w-24 sm:h-22 sm:w-28 shrink-0 overflow-hidden rounded-xl bg-stone-100">
                         <img
                           src={project.imageUrl}
@@ -201,15 +234,15 @@ export const ProjectsSection: React.FC = () => {
 
                       {/* Info snippet */}
                       <div className="flex-1 min-w-0 space-y-1">
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#A68253] truncate block">
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-[#8B1E24] truncate block">
                           {project.category}
                         </span>
 
                         <h4
                           className={`text-sm font-bold truncate leading-snug ${
                             isSelected
-                              ? 'text-[#7A152E]'
-                              : 'text-stone-900 group-hover:text-[#7A152E]'
+                              ? 'text-[#8B1E24]'
+                              : 'text-stone-900 group-hover:text-[#8B1E24]'
                           }`}
                         >
                           {project.title}
@@ -223,9 +256,9 @@ export const ProjectsSection: React.FC = () => {
 
                       {/* Right Indicator Arrow */}
                       <div
-                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl transition-all ${
+                        className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-all ${
                           isSelected
-                            ? 'bg-[#7A152E] text-white'
+                            ? 'bg-[#8B1E24] text-white'
                             : 'bg-stone-100 text-stone-400 group-hover:bg-stone-200 group-hover:text-stone-900'
                         }`}
                       >
@@ -237,12 +270,12 @@ export const ProjectsSection: React.FC = () => {
               </div>
 
               {/* Ecosystem Footprint Card */}
-              <div className="rounded-2xl border border-stone-200 bg-white p-5 space-y-2">
+              <div className="rounded-2xl border border-stone-200 bg-white p-5 space-y-2 shadow-2xs">
                 <h4 className="text-xs font-bold text-stone-900">
                   Pengembangan Aset Berkelanjutan
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed">
-                  Setiap properti PT Halla Mohana dirancang dengan efisiensi energi tinggi, standar keselamatan internasional, dan integrasi fasilitas yang menunjang aktivitas bisnis serta rekreasi keluarga.
+                  Setiap properti PT Halla Mohana dirancang dengan efisiensi energi tinggi, standar keselamatan internasional, dan integrasi fasilitas yang menunjang mobilitas pebisnis serta rekreasi keluarga.
                 </p>
               </div>
             </div>
@@ -252,11 +285,48 @@ export const ProjectsSection: React.FC = () => {
             <p className="text-stone-500 text-sm">
               Tidak ada portofolio yang cocok dengan kategori ini.
             </p>
-            <Button variant="outline" size="sm" onClick={() => setActiveCategory('All')}>
+            <button
+              type="button"
+              onClick={() => setActiveCategory('All')}
+              className="rounded-full bg-[#8B1E24] text-white px-5 py-2 text-xs font-bold"
+            >
               Tampilkan Semua Portofolio
-            </Button>
+            </button>
           </div>
         )}
+
+        {/* 4-Column Corporate Achievement Metrics Strip */}
+        <div className="pt-4 border-t border-stone-200">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {corporateMetrics.map((metric, i) => (
+              <div
+                key={i}
+                className="rounded-2xl border border-stone-200/90 bg-white p-6 space-y-3 shadow-2xs hover:border-[#8B1E24] hover:shadow-md transition-all group"
+              >
+                <div className="flex items-center justify-between">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#8B1E24]/10">
+                    {metric.icon}
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400">
+                    METRIK #{i + 1}
+                  </span>
+                </div>
+
+                <div className="space-y-1">
+                  <h3 className="text-2xl sm:text-3xl font-black text-stone-900 group-hover:text-[#8B1E24] transition-colors tracking-tight">
+                    {metric.value}
+                  </h3>
+                  <p className="text-xs font-bold text-stone-800">
+                    {metric.label}
+                  </p>
+                  <p className="text-xs text-stone-500 leading-relaxed">
+                    {metric.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Detail Modal */}

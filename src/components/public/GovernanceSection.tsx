@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, ShieldCheck, Scale, Award, CheckCircle2 } from 'lucide-react';
 import { Modal } from '@/components/ui/Modal';
 
 interface LeaderItem {
@@ -66,29 +66,39 @@ export const GovernanceSection: React.FC = () => {
 
   const filteredLeaders = leaders.filter((l) => l.category === activeTab);
 
+  const gcgPillars = [
+    { title: 'Transparansi', desc: 'Keterbukaan informasi relevan bagi publik & investor.' },
+    { title: 'Akuntabilitas', desc: 'Pengelolaan operasional terukur & terstandarisasi.' },
+    { title: 'Responsibilitas', desc: 'Kepatuhan terhadap regulasi, K3 & kepedulian sosial.' },
+    { title: 'Independensi', desc: 'Pengambilan keputusan profesional bebas benturan kepentingan.' },
+  ];
+
   return (
-    <section id="governance" className="py-20 sm:py-28 bg-white border-b border-stone-200 scroll-mt-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
-        {/* Section Header - Direct, Clean (No Kicker) */}
+    <section id="governance" className="py-24 sm:py-32 bg-white border-b border-stone-200/80 scroll-mt-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-16">
+        {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-stone-200">
           <div className="max-w-2xl space-y-3">
+            <span className="text-[11px] font-bold tracking-widest uppercase text-[#8B1E24] block">
+              Kepemimpinan & Tata Kelola Korporat
+            </span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 tracking-tight">
               Dewan Komisaris & Direksi
             </h2>
             <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
-              Dipimpin oleh jajaran eksekutif berpengalaman dengan komitmen tata kelola korporat yang transparan, akuntabel, dan berintegritas tinggi.
+              Dipimpin oleh jajaran profesional berpengalaman dengan integritas tinggi dalam tata kelola komersial dan perhotelan nasional.
             </p>
           </div>
 
-          {/* Toggle Tab Direksi vs Komisaris */}
-          <div className="inline-flex rounded-xl bg-stone-100 p-1.5 border border-stone-200 shrink-0">
+          {/* Tab Switcher (Pill Style) */}
+          <div className="inline-flex rounded-full bg-stone-100 p-1.5 border border-stone-200 shrink-0">
             <button
               type="button"
               onClick={() => setActiveTab('directors')}
-              className={`rounded-lg px-4 py-2 text-xs sm:text-sm font-bold transition-all ${
+              className={`rounded-full px-5 py-2 text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'directors'
-                  ? 'bg-[#7A152E] text-white shadow-xs'
-                  : 'text-stone-600 hover:text-stone-900'
+                  ? 'bg-[#8B1E24] text-white shadow-xs'
+                  : 'text-stone-600 hover:text-stone-950'
               }`}
             >
               Dewan Direksi
@@ -96,10 +106,10 @@ export const GovernanceSection: React.FC = () => {
             <button
               type="button"
               onClick={() => setActiveTab('commissioners')}
-              className={`rounded-lg px-4 py-2 text-xs sm:text-sm font-bold transition-all ${
+              className={`rounded-full px-5 py-2 text-xs font-bold transition-all cursor-pointer ${
                 activeTab === 'commissioners'
-                  ? 'bg-[#7A152E] text-white shadow-xs'
-                  : 'text-stone-600 hover:text-stone-900'
+                  ? 'bg-[#8B1E24] text-white shadow-xs'
+                  : 'text-stone-600 hover:text-stone-950'
               }`}
             >
               Dewan Komisaris
@@ -107,41 +117,42 @@ export const GovernanceSection: React.FC = () => {
           </div>
         </div>
 
-        {/* Executive Portrait Grid (Clean: No Date Badges on Photos) */}
+        {/* 3-Column Executive Portrait Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredLeaders.map((leader) => (
             <div
               key={leader.id}
               onClick={() => setSelectedLeader(leader)}
-              className="group cursor-pointer rounded-2xl border border-stone-200 bg-[#FBFBF9] p-5 hover:bg-white hover:border-[#7A152E] hover:shadow-xl transition-all flex flex-col justify-between"
+              className="group cursor-pointer rounded-2xl border border-stone-200/90 bg-[#F8F9FA] p-6 hover:bg-white hover:border-[#8B1E24] hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
             >
               <div className="space-y-4">
-                {/* Photo with Tone-Map Filter */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-stone-100 shadow-2xs">
+                {/* 4:5 Portrait with Consistent Monochromatic / Grayscale Filter */}
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-xl bg-stone-900 shadow-xs">
                   <img
                     src={leader.photo}
                     alt={leader.name}
-                    className="h-full w-full object-cover grayscale contrast-110 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
+                    className="h-full w-full object-cover grayscale contrast-105 transition-all duration-700 group-hover:grayscale-0 group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity" />
                 </div>
 
                 {/* Profile Meta */}
-                <div className="space-y-1.5">
-                  <span className="text-xs font-semibold uppercase tracking-wider text-[#A68253] block truncate">
+                <div className="space-y-1.5 pt-1">
+                  <span className="text-[11px] font-bold uppercase tracking-widest text-[#8B1E24] block truncate">
                     {leader.role}
                   </span>
-                  <h3 className="text-lg font-bold text-stone-900 group-hover:text-[#7A152E] transition-colors leading-snug">
+                  <h3 className="text-lg font-bold text-stone-900 group-hover:text-[#8B1E24] transition-colors leading-snug">
                     {leader.name}
                   </h3>
-                  <p className="text-xs text-stone-500">{leader.tenure}</p>
-                  <p className="text-xs text-stone-600 line-clamp-3 leading-relaxed pt-1">
+                  <p className="text-xs text-stone-500 font-medium">{leader.tenure}</p>
+                  <p className="text-xs text-stone-600 line-clamp-3 leading-relaxed pt-1.5">
                     {leader.bio}
                   </p>
                 </div>
               </div>
 
               {/* View Dossier Action */}
-              <div className="pt-4 mt-4 border-t border-stone-200/80 flex items-center justify-between text-xs font-semibold text-[#7A152E]">
+              <div className="pt-4 mt-5 border-t border-stone-200/80 flex items-center justify-between text-xs font-semibold text-[#8B1E24]">
                 <span>Profil Eksekutif</span>
                 <ChevronRight className="h-4 w-4 transform transition-transform group-hover:translate-x-1" />
               </div>
@@ -149,19 +160,42 @@ export const GovernanceSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Corporate Integrity Formal Statement */}
-        <div className="rounded-2xl border border-stone-200 bg-[#FBFBF9] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6">
-          <div className="space-y-1">
-            <h4 className="text-sm font-bold text-stone-900">
-              Penerapan Good Corporate Governance (GCG)
-            </h4>
-            <p className="text-xs text-stone-600 leading-relaxed max-w-2xl">
-              PT Halla Mohana senantiasa mematuhi prinsip transparansi, akuntabilitas, independensi, dan tanggung jawab hukum sesuai ketetapan MahaDasha & Tiara Marga Trakindo (TMT Group).
-            </p>
-          </div>
+        {/* Banner GCG (Horizontal Card, Subtle 1px Border, Split Layout) */}
+        <div className="rounded-2xl border border-stone-200 bg-[#F8F9FA] p-8 sm:p-10 shadow-2xs">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            {/* Left Column: GCG Commitment Statement */}
+            <div className="lg:col-span-5 space-y-3 lg:border-r lg:border-stone-200 lg:pr-8">
+              <div className="inline-flex items-center gap-2 rounded-full bg-[#8B1E24]/10 px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#8B1E24]">
+                <ShieldCheck className="h-3.5 w-3.5" />
+                <span>Good Corporate Governance</span>
+              </div>
+              <h3 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight leading-snug">
+                Penerapan Tata Kelola Perusahaan yang Baik (GCG)
+              </h3>
+              <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
+                PT Halla Mohana secara konsisten mematuhi prinsip GCG yang ditetapkan oleh MahaDasha dan Tiara Marga Trakindo (TMT Group) untuk menjamin pertumbuhan bisnis yang berkelanjutan dan berintegritas.
+              </p>
+            </div>
 
-          <div className="text-xs text-stone-500 font-medium shrink-0 border-l sm:border-l-2 border-stone-300 pl-4">
-            <span>Standar Tata Kelola Terpadu TMT Group</span>
+            {/* Right Column: 4 GCG Pillars 2x2 Grid */}
+            <div className="lg:col-span-7">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {gcgPillars.map((pillar, i) => (
+                  <div
+                    key={i}
+                    className="rounded-xl border border-stone-200/80 bg-white p-4 space-y-1 hover:border-[#8B1E24]/30 transition-colors"
+                  >
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-stone-900">
+                      <CheckCircle2 className="h-3.5 w-3.5 text-[#8B1E24]" />
+                      <span>{pillar.title}</span>
+                    </div>
+                    <p className="text-[11px] text-stone-500 leading-relaxed">
+                      {pillar.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -182,19 +216,19 @@ export const GovernanceSection: React.FC = () => {
                 className="h-20 w-20 rounded-2xl object-cover shadow-md shrink-0"
               />
               <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-[#A68253]">
+                <span className="text-[11px] font-bold uppercase tracking-widest text-[#8B1E24]">
                   {selectedLeader.role}
                 </span>
                 <h3 className="text-lg font-bold text-stone-900">
                   {selectedLeader.name}
                 </h3>
-                <span className="text-xs text-stone-500">{selectedLeader.tenure}</span>
+                <span className="text-xs text-stone-500 font-medium">{selectedLeader.tenure}</span>
               </div>
             </div>
 
             <div className="rounded-xl border border-stone-200 bg-stone-50 p-4 space-y-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                Biografi & Pengalaman Profesional
+              <h4 className="text-[11px] font-bold uppercase tracking-widest text-stone-700">
+                Biografi & Rekam Jejak Profesional
               </h4>
               <p className="text-sm text-stone-600 leading-relaxed">
                 {selectedLeader.bio}

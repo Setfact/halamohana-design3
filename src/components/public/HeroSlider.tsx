@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCMSData } from '@/context/CMSDataContext';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { ChevronLeft, ChevronRight, ArrowRight, Building2, Sparkles } from 'lucide-react';
 
 interface HeroSliderProps {
   onNavigate?: (path: string) => void;
@@ -18,7 +17,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
     if (visibleBanners.length <= 1) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % visibleBanners.length);
-    }, 7000);
+    }, 7500);
     return () => clearInterval(interval);
   }, [visibleBanners.length]);
 
@@ -34,15 +33,16 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
     setCurrentIndex((prev) => (prev + 1) % visibleBanners.length);
   };
 
-  const slideShortTitles = [
-    'FOX Harris Hotel',
-    'Pekanbaru Xchange',
-    'Gedung TMT Cilandak',
-  ];
+  const getDestinationLabel = (title: string, index: number) => {
+    if (title.includes('FOX')) return 'FOX Harris Hotel';
+    if (title.includes('Xchange') || title.includes('PX')) return 'Pekanbaru Xchange';
+    if (title.includes('TMT') || title.includes('Commercial')) return 'Gedung TMT Cilandak';
+    return `Destinasi Unggulan ${index + 1}`;
+  };
 
   return (
-    <section id="home" className="relative min-h-[600px] sm:min-h-[680px] lg:min-h-[720px] w-full overflow-hidden bg-stone-950">
-      {/* Background Slides with Cinema Fade */}
+    <section id="home" className="relative min-h-[640px] sm:min-h-[700px] lg:min-h-[740px] w-full overflow-hidden bg-stone-950">
+      {/* Background Slides with Soft Vignette Overlay */}
       {visibleBanners.map((banner, idx) => (
         <div
           key={banner.id}
@@ -55,32 +55,38 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
             alt={banner.title}
             className="h-full w-full object-cover object-center transform scale-105 transition-transform duration-10000"
           />
-          {/* Subtle architectural vignette */}
-          <div className="absolute inset-0 bg-gradient-to-r from-stone-950/85 via-stone-950/55 to-stone-950/20" />
-          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-stone-950/30" />
+          {/* Subtle luxury overlay: gentle gradient for maximum readability */}
+          <div className="absolute inset-0 bg-gradient-to-r from-stone-950/85 via-stone-950/50 to-stone-950/20" />
+          <div className="absolute inset-0 bg-gradient-to-t from-stone-950/80 via-transparent to-stone-950/25" />
         </div>
       ))}
 
       {/* Main Content Stage */}
-      <div className="relative z-20 mx-auto flex min-h-[600px] sm:min-h-[680px] lg:min-h-[720px] max-w-7xl flex-col justify-between px-4 sm:px-8 py-12 sm:py-20 text-white">
-        {/* Subtle Corporate Lineage Header */}
-        <div className="text-xs text-stone-300 font-medium tracking-wide">
-          <span>PT Halla Mohana</span>
-          <span className="mx-2 text-stone-500">•</span>
-          <span>A Subsidiary of MahaDasha (PT Tiara Marga Trakindo)</span>
+      <div className="relative z-20 mx-auto flex min-h-[640px] sm:min-h-[700px] lg:min-h-[740px] max-w-7xl flex-col justify-between px-4 sm:px-8 py-12 sm:py-20 text-white">
+        {/* Affiliate Subtitle Lineage */}
+        <div className="flex items-center gap-2 pt-2">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-stone-900/60 backdrop-blur-md px-3.5 py-1 text-xs font-semibold text-stone-200">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#8B1E24]" />
+            <span>Member of MahaDasha (PT Tiara Marga Trakindo)</span>
+          </span>
         </div>
 
-        {/* Center Hero Editorial Content - Confident, Direct Typography */}
-        <div className="my-auto max-w-3xl space-y-5 pt-4 pb-4">
-          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.12] tracking-tight text-white drop-shadow-md">
-            {currentBanner.title}
-          </h1>
+        {/* Center Editorial Hero Content */}
+        <div className="my-auto max-w-3xl space-y-6 pt-6 pb-6">
+          <div className="space-y-2">
+            <span className="text-[11px] font-bold tracking-widest uppercase text-stone-300">
+              Luxury Hospitality & Commercial Real Estate
+            </span>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black leading-[1.12] tracking-tight text-white drop-shadow-md">
+              {currentBanner.title}
+            </h1>
+          </div>
 
           <p className="text-base sm:text-lg text-stone-200 leading-relaxed max-w-2xl font-normal drop-shadow-xs">
             {currentBanner.subtitle}
           </p>
 
-          {/* Action CTAs */}
+          {/* Action CTAs (Pill Buttons) */}
           <div className="pt-3 flex flex-wrap items-center gap-4">
             <a
               href="/projects"
@@ -90,17 +96,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
                   onNavigate('/projects');
                 }
               }}
+              className="inline-flex items-center gap-2.5 rounded-full bg-[#8B1E24] hover:bg-[#72181D] active:bg-[#5C1317] text-white px-7 py-3.5 text-sm font-bold tracking-wide shadow-xl hover:shadow-2xl transition-all cursor-pointer"
             >
-              <Button
-                variant="primary"
-                size="lg"
-                icon={<ArrowRight className="h-4 w-4" />}
-                iconPosition="right"
-                className="shadow-2xl"
-              >
-                {currentBanner.ctaText || 'Jelajahi Portofolio'}
-              </Button>
+              <span>{currentBanner.ctaText || 'Jelajahi Portofolio'}</span>
+              <ArrowRight className="h-4 w-4" />
             </a>
+
             <a
               href="/about"
               onClick={(e) => {
@@ -109,50 +110,50 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
                   onNavigate('/about');
                 }
               }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/5 hover:bg-white/15 backdrop-blur-xs text-white px-6 py-3.5 text-sm font-semibold tracking-wide transition-all cursor-pointer"
             >
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white/30 text-white hover:bg-white/15 bg-white/5 backdrop-blur-xs"
-              >
-                Tentang Halla Mohana
-              </Button>
+              <span>Tentang Halla Mohana</span>
             </a>
           </div>
         </div>
 
-        {/* Bottom Destination Switcher */}
-        <div className="border-t border-white/10 pt-6">
+        {/* Bottom Destination Quick Switcher Tabs */}
+        <div className="border-t border-white/15 pt-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-            {/* Quick Clean Destination Tabs */}
+            {/* Quick Switcher Tabs */}
             <div className="flex flex-wrap items-center gap-2 sm:gap-3">
-              {visibleBanners.map((_, i) => {
+              {visibleBanners.map((banner, i) => {
                 const isCurrent = i === currentIndex;
-                const label = slideShortTitles[i] || `Destinasi ${i + 1}`;
+                const label = banner.shortTitle || getDestinationLabel(banner.title, i);
 
                 return (
                   <button
-                    key={i}
+                    key={banner.id || i}
                     type="button"
                     onClick={() => setCurrentIndex(i)}
-                    className={`rounded-lg px-4 py-2 text-xs font-semibold transition-all ${
+                    className={`flex items-center gap-2 rounded-full px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
                       isCurrent
-                        ? 'bg-white text-stone-950 font-bold shadow-md'
+                        ? 'bg-white text-stone-950 shadow-md ring-2 ring-[#8B1E24]'
                         : 'bg-white/10 text-stone-300 hover:bg-white/20 hover:text-white backdrop-blur-xs'
                     }`}
                   >
-                    {label}
+                    <span
+                      className={`h-2 w-2 rounded-full ${
+                        isCurrent ? 'bg-[#8B1E24]' : 'bg-stone-400'
+                      }`}
+                    />
+                    <span>{label}</span>
                   </button>
                 );
               })}
             </div>
 
-            {/* Slider Navigation */}
+            {/* Slider Navigation Arrows */}
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={handlePrev}
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#7A152E] transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#8B1E24] hover:border-[#8B1E24] transition-all cursor-pointer"
                 aria-label="Previous slide"
               >
                 <ChevronLeft className="h-5 w-5" />
@@ -160,7 +161,7 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={handleNext}
-                className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#7A152E] transition-colors"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-[#8B1E24] hover:border-[#8B1E24] transition-all cursor-pointer"
                 aria-label="Next slide"
               >
                 <ChevronRight className="h-5 w-5" />

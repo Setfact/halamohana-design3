@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useCMSData } from '@/context/CMSDataContext';
-import { Building2, Phone, Mail, ArrowRight, CheckCircle2 } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
+import { ArrowRight, CheckCircle2, Phone, Mail, MapPin } from 'lucide-react';
 
 interface PublicFooterProps {
   onNavigate?: (path: string) => void;
@@ -30,57 +29,58 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="bg-[#141822] text-slate-400 text-xs">
-      {/* Upper Footer */}
+    <footer className="bg-[#111622] text-stone-400 text-xs border-t border-stone-800">
+      {/* 4 Proportional Columns Upper Footer */}
       <div className="mx-auto max-w-7xl px-4 sm:px-8 py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
-          {/* Brand & Corporate Affiliation (4 cols) */}
+          {/* Kolom 1: Identitas & Logo Afiliasi MahaDasha/TMT Group (4 cols) */}
           <div className="lg:col-span-4 space-y-5">
-            <div className="flex items-center gap-3">
-              <a
-                href="/"
-                onClick={(e) => handleLinkClick(e, '/')}
-                className="flex h-12 w-auto items-center rounded-xl bg-white p-1.5 shadow-md"
-              >
-                <img
-                  src={generalConfig.logo}
-                  alt="PT Halla Mohana"
-                  className="h-9 w-auto object-contain"
-                />
-              </a>
-            </div>
+            <a
+              href="/"
+              onClick={(e) => handleLinkClick(e, '/')}
+              className="inline-flex h-12 w-auto items-center rounded-xl bg-white p-2 shadow-sm"
+              title="PT Halla Mohana"
+            >
+              <img
+                src={generalConfig.logo}
+                alt="PT Halla Mohana"
+                className="h-9 w-auto object-contain"
+              />
+            </a>
 
-            <p className="text-slate-400 text-xs leading-relaxed max-w-sm">
-              PT Halla Mohana adalah perusahaan pengembang dan pengelola properti perhotelan & pusat perbelanjaan terkemuka di Indonesia, bagian dari MahaDasha Group (PT Tiara Marga Trakindo).
+            <p className="text-stone-400 text-xs leading-relaxed max-w-sm font-normal">
+              PT Halla Mohana adalah pengembang dan pengelola aset properti komersial serta perhotelan bermutu tinggi, bernaung di bawah PT Mahadana Dasha Utama (MahaDasha) dan konglomerasi Tiara Marga Trakindo (TMT Group).
             </p>
 
-            <div className="flex items-center gap-3 pt-2">
+            <div className="flex items-center gap-3 pt-1">
               {generalConfig.footer_logo && (
-                <div className="flex h-10 w-auto items-center rounded-lg bg-white p-1 shadow-2xs">
+                <div className="flex h-10 w-auto items-center rounded-lg bg-white p-1.5 shadow-2xs">
                   <img
                     src={generalConfig.footer_logo}
                     alt="Footer Sub-brand"
-                    className="h-8 w-auto object-contain"
+                    className="h-7 w-auto object-contain"
                   />
                 </div>
               )}
-              <div className="text-[11px] text-slate-400">
+              <div className="text-[11px] text-stone-400">
                 <span className="font-bold text-white block">Member of MahaDasha</span>
                 <span>PT Tiara Marga Trakindo (TMT Group)</span>
               </div>
             </div>
           </div>
 
-          {/* Quick Nav Links (3 cols) */}
-          <div className="lg:col-span-3 space-y-4">
-            <h4 className="font-bold text-white text-xs uppercase tracking-wider">Navigasi Halaman</h4>
-            <ul className="space-y-2">
+          {/* Kolom 2: Navigasi Halaman (2 cols) */}
+          <div className="lg:col-span-2 space-y-4">
+            <h4 className="font-bold text-white text-xs uppercase tracking-widest text-[#8B1E24]">
+              Navigasi Halaman
+            </h4>
+            <ul className="space-y-2.5">
               {visiblePages.map((page) => (
                 <li key={page.id}>
                   <a
                     href={page.navigation}
                     onClick={(e) => handleLinkClick(e, page.navigation)}
-                    className="hover:text-[#A68253] transition-colors inline-block"
+                    className="hover:text-white transition-colors inline-block"
                   >
                     {page.title}
                   </a>
@@ -89,47 +89,66 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({ onNavigate }) => {
             </ul>
           </div>
 
-          {/* Office Contact Summary (2 cols) */}
-          <div className="lg:col-span-2 space-y-4">
-            <h4 className="font-bold text-white text-xs uppercase tracking-wider">Kontak Kantor</h4>
-            <div className="space-y-2 text-[11px] text-slate-400 leading-relaxed">
-              <p className="text-white font-semibold">Head Office Jakarta:</p>
-              <p>Gedung TMT 1 Lt. 1, Cilandak KKO Jakarta 12560</p>
-              <p>Tel: {generalConfig.office_info_input.phone}</p>
-              <p className="text-white font-semibold pt-2">Site Office Pekanbaru:</p>
-              <p>Jl. Riau No. 147, Pekanbaru</p>
-              <p>Tel: +62 761 741 5999</p>
+          {/* Kolom 3: Alamat Lengkap Head Office Jakarta & Site Office Pekanbaru (3 cols) */}
+          <div className="lg:col-span-3 space-y-4">
+            <h4 className="font-bold text-white text-xs uppercase tracking-widest text-[#8B1E24]">
+              Alamat Kantor Resmi
+            </h4>
+            <div className="space-y-3 text-[11px] text-stone-400 leading-relaxed">
+              <div className="space-y-1">
+                <p className="text-white font-bold flex items-center gap-1.5">
+                  <MapPin className="h-3 w-3 text-[#8B1E24]" />
+                  <span>Head Office (Jakarta):</span>
+                </p>
+                <p className="pl-4">Gedung TMT 1 Lt. 1, Jl. Cilandak KKO No. 1, Jakarta Selatan 12560</p>
+                <p className="pl-4 text-stone-300">Tel: (021) 2997 6700</p>
+              </div>
+
+              <div className="space-y-1 pt-2 border-t border-stone-800">
+                <p className="text-white font-bold flex items-center gap-1.5">
+                  <MapPin className="h-3 w-3 text-[#8B1E24]" />
+                  <span>Site Office (Pekanbaru):</span>
+                </p>
+                <p className="pl-4">Jl. Riau No. 147, Senapelan, Pekanbaru, Riau 28154</p>
+                <p className="pl-4 text-stone-300">Tel: +62 761 741 5999</p>
+              </div>
+
+              <div className="pt-1">
+                <p className="text-stone-400 pl-4">Email: info@hallamohana.co.id</p>
+              </div>
             </div>
           </div>
 
-          {/* Newsletter (3 cols) */}
+          {/* Kolom 4: Form Berlangganan Newsletter Minimalis (3 cols) */}
           <div className="lg:col-span-3 space-y-4">
-            <h4 className="font-bold text-white text-xs uppercase tracking-wider">Warta & Informasi</h4>
-            <p className="text-[11px] text-slate-400 leading-relaxed">
-              Dapatkan berita terbaru seputar perkembangan properti komersial dan penawaran korporat.
+            <h4 className="font-bold text-white text-xs uppercase tracking-widest text-[#8B1E24]">
+              Warta & Informasi Korporat
+            </h4>
+            <p className="text-[11px] text-stone-400 leading-relaxed font-normal">
+              Dapatkan pembaruan berkala mengenai perkembangan ruang komersial, agenda MICE, dan siaran pers resmi.
             </p>
 
-            <form onSubmit={handleNewsletter} className="space-y-2">
-              <div className="flex rounded-xl overflow-hidden border border-slate-700 bg-slate-900/80">
+            <form onSubmit={handleNewsletter} className="space-y-2 pt-1">
+              <div className="flex rounded-full overflow-hidden border border-stone-700 bg-stone-900/90 p-1 focus-within:border-[#8B1E24] transition-colors">
                 <input
                   type="email"
                   required
-                  placeholder="Alamat email Anda..."
+                  placeholder="Masukkan alamat email Anda..."
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  className="w-full bg-transparent px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none"
+                  className="w-full bg-transparent px-4 py-2 text-xs text-white placeholder-stone-500 focus:outline-hidden"
                 />
                 <button
                   type="submit"
-                  className="bg-[#7A152E] px-4 text-white hover:bg-[#601024] transition-colors flex items-center justify-center font-bold"
-                  aria-label="Subscribe Newsletter"
+                  className="rounded-full bg-[#8B1E24] hover:bg-[#72181D] px-4 text-white transition-colors flex items-center justify-center shrink-0 cursor-pointer"
+                  aria-label="Berlangganan Newsletter"
                 >
                   <ArrowRight className="h-4 w-4" />
                 </button>
               </div>
 
               {newsletterSuccess && (
-                <p className="text-[11px] text-emerald-400 flex items-center gap-1 mt-1">
+                <p className="text-[11px] text-emerald-400 flex items-center gap-1 mt-1 pl-2">
                   <CheckCircle2 className="h-3.5 w-3.5" />
                   Terima kasih, Anda telah terdaftar dalam warta korporat.
                 </p>
@@ -140,24 +159,20 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({ onNavigate }) => {
       </div>
 
       {/* Bottom Legal / Copyright Bar */}
-      <div className="border-t border-slate-800 bg-[#0E121A] py-6 px-4 sm:px-8 text-[11px] text-slate-500">
+      <div className="border-t border-stone-800 bg-[#0C0F17] py-6 px-4 sm:px-8 text-[11px] text-stone-500">
         <div className="mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>{generalConfig.copyright}</p>
+          <p>© 2026 PT Halla Mohana. All rights reserved. A Subsidiary of MahaDasha (TMT Group).</p>
           <div className="flex items-center gap-6">
-            <a href="#" className="hover:text-slate-300 transition-colors">
+            <a href="#" className="hover:text-stone-300 transition-colors">
               Kebijakan Privasi
             </a>
             <span>•</span>
-            <a href="#" className="hover:text-slate-300 transition-colors">
+            <a href="#" className="hover:text-stone-300 transition-colors">
               Syarat & Ketentuan
             </a>
             <span>•</span>
-            <a
-              href="/admin"
-              onClick={(e) => handleLinkClick(e, '/admin')}
-              className="text-[#A68253] hover:underline"
-            >
-              CMS Console Portal
+            <a href="#" className="hover:text-stone-300 transition-colors">
+              Good Corporate Governance
             </a>
           </div>
         </div>
