@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { PageHeader } from '@/components/ui/PageHeader';
 import {
   Building2,
   Compass,
-  Award,
-  ShieldCheck,
   CheckCircle2,
   ArrowRight,
-  Target
+  Target,
+  Sparkles,
+  ShieldCheck
 } from 'lucide-react';
 
 interface AboutPageProps {
@@ -15,6 +15,52 @@ interface AboutPageProps {
 }
 
 export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
+  // Navigation IDs for Scroll-Spy
+  const navSections = [
+    { id: 'overview', label: 'Halla Mohana Overview' },
+    { id: 'vision-mission', label: 'Vision & Mission' },
+    { id: 'core-values', label: 'Core Values & Leadership Traits' },
+    { id: 'company-structure', label: 'Company Structure' },
+    { id: 'code-of-conduct', label: 'Code of Conduct & Ethics' },
+  ];
+
+  // Active section for Scroll-Spy indicator
+  const [activeSection, setActiveSection] = useState<string>('overview');
+
+  // Culture Segmented Pill Tabs control (Core Values vs Leadership Traits)
+  const [activeCultureTab, setActiveCultureTab] = useState<'values' | 'traits'>('values');
+
+  // Scroll-Spy detection with passive listener
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + 180; // offset for sticky main header + sub-navbar
+      for (let i = navSections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(navSections[i].id);
+        if (el) {
+          const top = el.offsetTop;
+          if (scrollPosition >= top) {
+            setActiveSection(navSections[i].id);
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Smooth scroll handler with offset
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    e.preventDefault();
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+      setActiveSection(id);
+    }
+  };
+
   // 4 Core Values (TMT / MahaDasha Group)
   const coreValues = [
     {
@@ -55,7 +101,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     },
   ];
 
-  // 4 Poin Misi Resmi
+  // 4 Poin Misi Resmi (Bahasa Indonesia Formal Tanpa Teks Bertumpuk)
   const officialMissions = [
     'Menciptakan peluang kerja yang bermakna dan menantang bagi sebanyak mungkin masyarakat Indonesia.',
     'Memastikan pertumbuhan yang berkelanjutan dan menguntungkan guna memaksimalkan nilai pemegang saham.',
@@ -96,46 +142,40 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         onNavigate={onNavigate}
       />
 
-      {/* Corporate Info Sub-Navigation Strip */}
-      <div className="sticky top-20 z-30 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-2xs">
+      {/* Modern Sticky Sub-Navbar ala Vercel / 21st.dev (Scroll-Spy & Horizontal Swipeable) */}
+      <div className="sticky top-[68px] sm:top-[74px] z-30 bg-white/95 backdrop-blur-md border-b border-stone-200 shadow-2xs">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <div className="flex items-center gap-2 sm:gap-6 overflow-x-auto py-3 scrollbar-none text-xs sm:text-sm font-semibold">
-            <a
-              href="#overview"
-              className="text-stone-600 hover:text-[#8B1E24] whitespace-nowrap py-1 px-3 rounded-full hover:bg-stone-50 transition-colors"
-            >
-              Halla Mohana Overview
-            </a>
-            <a
-              href="#vision-mission"
-              className="text-stone-600 hover:text-[#8B1E24] whitespace-nowrap py-1 px-3 rounded-full hover:bg-stone-50 transition-colors"
-            >
-              Vision & Mission
-            </a>
-            <a
-              href="#core-values"
-              className="text-stone-600 hover:text-[#8B1E24] whitespace-nowrap py-1 px-3 rounded-full hover:bg-stone-50 transition-colors"
-            >
-              Core Values & Leadership Traits
-            </a>
-            <a
-              href="#company-structure"
-              className="text-stone-600 hover:text-[#8B1E24] whitespace-nowrap py-1 px-3 rounded-full hover:bg-stone-50 transition-colors"
-            >
-              Company Structure
-            </a>
-            <a
-              href="#code-of-conduct"
-              className="text-stone-600 hover:text-[#8B1E24] whitespace-nowrap py-1 px-3 rounded-full hover:bg-stone-50 transition-colors"
-            >
-              Code of Conduct & Ethics
-            </a>
-          </div>
+          <nav
+            aria-label="Sub navigasi Corporate Info"
+            className="flex items-center gap-6 sm:gap-8 overflow-x-auto scrollbar-none whitespace-nowrap text-xs sm:text-sm pt-3"
+          >
+            {navSections.map((nav) => {
+              const isActive = activeSection === nav.id;
+              return (
+                <a
+                  key={nav.id}
+                  href={`#${nav.id}`}
+                  onClick={(e) => scrollToSection(e, nav.id)}
+                  className={`pb-3 -mb-[1px] border-b-2 font-semibold transition-all cursor-pointer ${
+                    isActive
+                      ? 'border-[#8B1E24] text-[#8B1E24] font-bold'
+                      : 'border-transparent text-stone-500 hover:text-stone-900'
+                  }`}
+                >
+                  {nav.label}
+                </a>
+              );
+            })}
+          </nav>
         </div>
       </div>
 
       {/* 2. Section: Halla Mohana Overview */}
-      <section id="overview" className="py-16 sm:py-24 bg-white border-b border-stone-200 scroll-mt-36">
+      <section
+        id="overview"
+        className="py-16 sm:py-24 bg-white border-b border-stone-200 scroll-mt-[140px]"
+        style={{ scrollMarginTop: '140px' }}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-7 space-y-6">
@@ -250,7 +290,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 3. Section: Vision & Mission */}
-      <section id="vision-mission" className="py-16 sm:py-24 bg-[#F8F9FA] border-b border-stone-200 scroll-mt-36">
+      <section
+        id="vision-mission"
+        className="py-16 sm:py-24 bg-[#F8F9FA] border-b border-stone-200 scroll-mt-[140px]"
+        style={{ scrollMarginTop: '140px' }}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
           <div className="max-w-3xl space-y-2">
             <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">
@@ -261,7 +305,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          {/* Visi Card */}
+          {/* Visi Card (Clean & Elegant) */}
           <div className="rounded-2xl border border-stone-200 bg-white p-8 sm:p-10 shadow-xs space-y-3 border-l-4 border-l-[#8B1E24]">
             <div className="flex items-center gap-2 text-[#8B1E24]">
               <Target className="h-4 w-4" />
@@ -275,7 +319,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </h3>
           </div>
 
-          {/* Misi List */}
+          {/* Misi 2x2 Grid (Tanpa Badge MISI #01 atau Teks Bilingual Bertumpuk) */}
           <div className="space-y-4">
             <div className="flex items-center gap-2 text-stone-900">
               <Compass className="h-4 w-4 text-[#8B1E24]" />
@@ -300,68 +344,103 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 4. Section: Core Values & Leadership Traits */}
-      <section id="core-values" className="py-16 sm:py-24 bg-white border-b border-stone-200 scroll-mt-36">
-        <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
-          <div className="max-w-3xl space-y-2">
-            <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">
-              Core Values & Leadership Traits
-            </h2>
-            <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
-              Fondasi karakter kerja dan kepemimpinan yang menjadi pedoman seluruh insan Halla Mohana, selaras dengan standar nilai Tiara Marga Trakindo (TMT Group).
-            </p>
-          </div>
+      {/* 4. Section: Core Values & Leadership Traits with Segmented Pill Tabs */}
+      <section
+        id="core-values"
+        className="py-16 sm:py-24 bg-white border-b border-stone-200 scroll-mt-[140px]"
+        style={{ scrollMarginTop: '140px' }}
+      >
+        <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-2 border-b border-stone-200">
+            <div className="max-w-2xl space-y-2">
+              <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">
+                Core Values & Leadership Traits
+              </h2>
+              <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+                Fondasi karakter kerja dan kepemimpinan yang menjadi pedoman insan Halla Mohana, diselaraskan dengan standar grup Tiara Marga Trakindo (TMT).
+              </p>
+            </div>
 
-          {/* 4 Core Values */}
-          <div className="space-y-4">
-            <h3 className="text-lg sm:text-xl font-bold text-stone-900 pb-2 border-b border-stone-200">
-              Core Values
-            </h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              {coreValues.map((v) => (
-                <div
-                  key={v.title}
-                  className="rounded-xl border border-stone-200 bg-[#F8F9FA] p-5 space-y-2"
-                >
-                  <h4 className="text-base font-bold text-stone-900">
-                    {v.title}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
-                    {v.desc}
-                  </p>
-                </div>
-              ))}
+            {/* Segmented Pill Tabs Control (Vercel / 21st.dev Style) */}
+            <div className="inline-flex items-center p-1 rounded-full bg-stone-100 border border-stone-200 shrink-0">
+              <button
+                type="button"
+                onClick={() => setActiveCultureTab('values')}
+                className={`rounded-full px-5 py-2 text-xs font-bold transition-all cursor-pointer ${
+                  activeCultureTab === 'values'
+                    ? 'bg-white text-stone-900 shadow-xs'
+                    : 'text-stone-500 hover:text-stone-900'
+                }`}
+              >
+                Core Values (4)
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveCultureTab('traits')}
+                className={`rounded-full px-5 py-2 text-xs font-bold transition-all cursor-pointer ${
+                  activeCultureTab === 'traits'
+                    ? 'bg-white text-stone-900 shadow-xs'
+                    : 'text-stone-500 hover:text-stone-900'
+                }`}
+              >
+                Leadership Traits (4)
+              </button>
             </div>
           </div>
 
-          {/* 4 Leadership Traits */}
-          <div className="space-y-4 pt-4">
-            <h3 className="text-lg sm:text-xl font-bold text-stone-900 pb-2 border-b border-stone-200">
-              Leadership Traits
-            </h3>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-              {leadershipTraits.map((t) => (
-                <div
-                  key={t.trait}
-                  className="rounded-xl border border-stone-200 bg-[#F8F9FA] p-5 space-y-2"
-                >
-                  <h4 className="text-base font-bold text-stone-900">
-                    {t.trait}
-                  </h4>
-                  <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
-                    {t.desc}
-                  </p>
-                </div>
-              ))}
+          {/* Conditional Display Based on Segmented Control */}
+          {activeCultureTab === 'values' ? (
+            <div className="space-y-3 animate-in fade-in duration-300">
+              <span className="text-xs font-bold uppercase tracking-wider text-stone-500 block">
+                Empat Nilai Inti Perusahaan
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                {coreValues.map((v) => (
+                  <div
+                    key={v.title}
+                    className="rounded-xl border border-stone-200 bg-[#F8F9FA] p-5 space-y-2 hover:border-[#8B1E24]/30 hover:bg-white hover:shadow-xs transition-all"
+                  >
+                    <h3 className="text-base font-bold text-stone-900">
+                      {v.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
+                      {v.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="space-y-3 animate-in fade-in duration-300">
+              <span className="text-xs font-bold uppercase tracking-wider text-stone-500 block">
+                Empat Karakter Kepemimpinan Unggul
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                {leadershipTraits.map((t) => (
+                  <div
+                    key={t.trait}
+                    className="rounded-xl border border-stone-200 bg-[#F8F9FA] p-5 space-y-2 hover:border-[#8B1E24]/30 hover:bg-white hover:shadow-xs transition-all"
+                  >
+                    <h3 className="text-base font-bold text-stone-900">
+                      {t.trait}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-stone-600 leading-relaxed font-normal">
+                      {t.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
-      {/* 5. Section: Company Structure (Bagan Struktur Korporasi) */}
-      <section id="company-structure" className="py-16 sm:py-24 bg-[#F8F9FA] border-b border-stone-200 scroll-mt-36">
+      {/* 5. Section: Company Structure (Bagan Hirarki Visual Clean Tree Connector) */}
+      <section
+        id="company-structure"
+        className="py-16 sm:py-24 bg-[#F8F9FA] border-b border-stone-200 scroll-mt-[140px]"
+        style={{ scrollMarginTop: '140px' }}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
           <div className="max-w-3xl space-y-2">
             <h2 className="text-3xl sm:text-4xl font-bold text-stone-900 tracking-tight">
@@ -372,76 +451,77 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          {/* Corporate Ownership & Structure Chart (Bagan Pohon Vertikal Bersih) */}
-          <div className="max-w-3xl mx-auto space-y-4">
+          {/* Clean Tree Connector Bagan Organisasi */}
+          <div className="max-w-3xl mx-auto py-2">
             {/* Level: TMT Group */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 sm:p-6 shadow-xs text-center space-y-1">
-              <span className="text-xs font-semibold text-stone-500 block">
+            <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-xs text-center max-w-lg mx-auto space-y-1">
+              <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">
                 Induk Grup Usaha
               </span>
-              <h3 className="text-lg sm:text-xl font-bold text-stone-900">
+              <h3 className="text-xl font-bold text-stone-900">
                 PT Tiara Marga Trakindo (TMT Group)
               </h3>
-              <p className="text-xs text-stone-600 max-w-xl mx-auto pt-1 leading-relaxed">
+              <p className="text-xs text-stone-600 pt-0.5 leading-relaxed">
                 Konglomerasi nasional terkemuka yang menaungi diversifikasi strategis lintas industri.
               </p>
             </div>
 
-            {/* Vertical Connector Line */}
+            {/* Vertical Connector Line 1 */}
             <div className="flex flex-col items-center">
-              <div className="w-0.5 h-6 bg-stone-300" />
-              <div className="w-2 h-2 rotate-45 border-b-2 border-r-2 border-stone-400" />
+              <div className="w-0.5 h-8 bg-stone-300" />
+              <div className="w-2.5 h-2.5 rotate-45 border-b-2 border-r-2 border-stone-400 -mt-1" />
             </div>
 
             {/* Level: MahaDasha */}
-            <div className="rounded-xl border border-stone-200 bg-white p-5 sm:p-6 shadow-xs text-center space-y-1">
-              <span className="text-xs font-semibold text-stone-500 block">
+            <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-xs text-center max-w-lg mx-auto space-y-1">
+              <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">
                 Perusahaan Induk Langsung
               </span>
-              <h3 className="text-lg sm:text-xl font-bold text-stone-900">
+              <h3 className="text-xl font-bold text-stone-900">
                 PT Mahadana Dasha Utama (MahaDasha)
               </h3>
-              <p className="text-xs text-stone-600 max-w-xl mx-auto pt-1 leading-relaxed">
+              <p className="text-xs text-stone-600 pt-0.5 leading-relaxed">
                 Pengelola portofolio bisnis dan investasi strategis non-alat berat dalam ekosistem TMT Group.
               </p>
             </div>
 
-            {/* Vertical Connector Line */}
+            {/* Vertical Connector Line 2 */}
             <div className="flex flex-col items-center">
-              <div className="w-0.5 h-6 bg-stone-300" />
-              <div className="w-2 h-2 rotate-45 border-b-2 border-r-2 border-stone-400" />
+              <div className="w-0.5 h-8 bg-stone-300" />
+              <div className="w-2.5 h-2.5 rotate-45 border-b-2 border-r-2 border-stone-400 -mt-1" />
             </div>
 
             {/* Level: PT Halla Mohana */}
-            <div className="rounded-xl border-2 border-[#8B1E24]/30 bg-white p-5 sm:p-6 shadow-xs text-center space-y-1">
-              <span className="text-xs font-bold text-[#8B1E24] block">
+            <div className="rounded-2xl border-2 border-[#8B1E24]/30 bg-white p-6 shadow-xs text-center max-w-lg mx-auto space-y-1">
+              <span className="text-[11px] font-bold text-[#8B1E24] uppercase tracking-wider block">
                 Pengembang & Pengelola Properti Komersial
               </span>
-              <h3 className="text-xl sm:text-2xl font-bold text-stone-900">
+              <h3 className="text-2xl font-bold text-stone-900">
                 PT Halla Mohana
               </h3>
-              <p className="text-xs text-stone-600 max-w-xl mx-auto pt-1 leading-relaxed">
+              <p className="text-xs text-stone-600 pt-0.5 leading-relaxed">
                 Didirikan pada tahun 2013, berfokus pada pengembangan dan pengelolaan aset perhotelan bintang 4 serta pusat perbelanjaan gaya hidup.
               </p>
             </div>
 
-            {/* Fork Connector to 2 Properties */}
-            <div className="flex flex-col items-center pt-1">
-              <div className="w-0.5 h-6 bg-stone-300" />
-              {/* Horizontal branch line */}
-              <div className="w-full max-w-md h-px bg-stone-300 relative">
-                <div className="absolute left-0 top-0 w-0.5 h-4 bg-stone-300" />
-                <div className="absolute right-0 top-0 w-0.5 h-4 bg-stone-300" />
+            {/* Symmetrical Fork Connector (Bercabang Dua ke Unit Properti Pekanbaru) */}
+            <div className="relative pt-2">
+              <div className="w-0.5 h-6 bg-stone-300 mx-auto" />
+              <div className="max-w-xl mx-auto h-0.5 bg-stone-300 relative">
+                <div className="absolute left-0 top-0 w-0.5 h-6 bg-stone-300" />
+                <div className="absolute left-[-4px] top-5 w-2.5 h-2.5 rotate-45 border-b-2 border-r-2 border-stone-400" />
+                <div className="absolute right-0 top-0 w-0.5 h-6 bg-stone-300" />
+                <div className="absolute right-[-4px] top-5 w-2.5 h-2.5 rotate-45 border-b-2 border-r-2 border-stone-400" />
               </div>
             </div>
 
-            {/* 2 Operating Property Units */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-3">
-              <div className="rounded-xl border border-stone-200 bg-white p-5 space-y-1.5 shadow-2xs">
-                <span className="text-[11px] font-semibold text-stone-500 block">
+            {/* 2 Symmetrical Property Units */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-8 max-w-2xl mx-auto">
+              <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-xs text-center space-y-1.5 hover:border-[#8B1E24]/40 transition-colors">
+                <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">
                   Hospitality Unit (Pekanbaru)
                 </span>
-                <h4 className="text-base font-bold text-stone-900">
+                <h4 className="text-lg font-bold text-stone-900">
                   FOX Harris Hotel Pekanbaru
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed">
@@ -449,11 +529,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                 </p>
               </div>
 
-              <div className="rounded-xl border border-stone-200 bg-white p-5 space-y-1.5 shadow-2xs">
-                <span className="text-[11px] font-semibold text-stone-500 block">
+              <div className="rounded-2xl border border-stone-200 bg-white p-6 shadow-xs text-center space-y-1.5 hover:border-[#8B1E24]/40 transition-colors">
+                <span className="text-[11px] font-semibold text-stone-500 uppercase tracking-wider block">
                   Commercial Retail Unit (Pekanbaru)
                 </span>
-                <h4 className="text-base font-bold text-stone-900">
+                <h4 className="text-lg font-bold text-stone-900">
                   Pekanbaru Xchange (PX)
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed">
@@ -466,7 +546,11 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
       </section>
 
       {/* 6. Section: Code of Business Conduct & Ethics */}
-      <section id="code-of-conduct" className="py-16 sm:py-24 bg-white border-b border-stone-200 scroll-mt-36">
+      <section
+        id="code-of-conduct"
+        className="py-16 sm:py-24 bg-white border-b border-stone-200 scroll-mt-[140px]"
+        style={{ scrollMarginTop: '140px' }}
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             {/* Left Column: Governance Narrative */}
@@ -496,16 +580,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Right Column: 4 Clean Governance Principles */}
+            {/* Right Column: 4 Clean Editorial Governance Principles */}
             <div className="lg:col-span-7 space-y-3">
               {governancePrinciples.map((item) => (
                 <div
                   key={item.title}
                   className="rounded-xl border border-stone-200 bg-[#F8F9FA] p-5 border-l-2 border-l-[#8B1E24] space-y-1"
                 >
-                  <h4 className="text-sm font-bold text-stone-900">
+                  <h3 className="text-sm font-bold text-stone-900">
                     {item.title}
-                  </h4>
+                  </h3>
                   <p className="text-xs sm:text-sm text-stone-600 leading-relaxed">
                     {item.desc}
                   </p>
