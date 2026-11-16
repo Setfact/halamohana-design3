@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useCMSData } from '@/context/CMSDataContext';
-import { Building2, ShoppingBag, Layers, ArrowUpRight, Compass } from 'lucide-react';
+import { VerticalCutReveal } from '@/components/ui/vertical-cut-reveal';
+import { motion } from 'framer-motion';
+import { Building2, ShoppingBag, Layers, ArrowUpRight, Compass, Sparkles } from 'lucide-react';
 
 interface ArchitecturalPerspective {
   id: 'integrated' | 'hotel' | 'mall';
@@ -74,17 +76,41 @@ export const OverviewSection: React.FC = () => {
         {/* Section Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 pb-6 border-b border-stone-200">
           <div className="max-w-2xl space-y-3">
-            <span className="text-[11px] font-bold tracking-widest uppercase text-[#8B1E24] block">
-              Profil Perusahaan & Ekosistem Grup
-            </span>
+            <div className="flex items-center gap-2">
+              <span className="flex items-center justify-center w-5 h-5 rounded-full bg-[#8B1E24]/10 text-[#8B1E24]">
+                <Sparkles className="h-3 w-3 fill-current text-[#8B1E24]" />
+              </span>
+              <span className="text-[11px] font-bold tracking-widest uppercase text-[#8B1E24] block">
+                Profil Perusahaan & Ekosistem Grup
+              </span>
+            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 tracking-tight leading-tight">
-              Membangun Destinasi Komersial & Gaya Hidup Berkelas
+              <VerticalCutReveal
+                splitBy="words"
+                staggerDuration={0.06}
+                delay={0.15}
+                transition={{ type: 'spring', stiffness: 180, damping: 24 }}
+              >
+                Membangun Destinasi Komersial & Gaya Hidup Berkelas
+              </VerticalCutReveal>
             </h2>
           </div>
 
-          <p className="max-w-md text-stone-600 text-sm sm:text-base leading-relaxed font-normal">
-            PT Halla Mohana berdedikasi menciptakan ruang komersial bermutu tinggi di bawah naungan PT Mahadana Dasha Utama (MahaDasha) dan Tiara Marga Trakindo (TMT Group).
-          </p>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="max-w-md space-y-3"
+          >
+            <div className="inline-flex items-center gap-2 rounded-full border border-stone-200 bg-[#F8F9FA] px-3.5 py-1 text-xs font-semibold text-stone-700">
+              <Building2 className="h-3.5 w-3.5 text-[#8B1E24]" />
+              <span>Member of MahaDasha • TMT Group</span>
+            </div>
+            <p className="text-stone-600 text-sm sm:text-base leading-relaxed font-normal">
+              PT Halla Mohana berdedikasi menciptakan ruang komersial bermutu tinggi di bawah naungan PT Mahadana Dasha Utama (MahaDasha) dan Tiara Marga Trakindo (TMT Group).
+            </p>
+          </motion.div>
         </div>
 
         {/* Asymmetrical Architectural Showcase (Image + Perspective Switcher + Quote Layer) */}
