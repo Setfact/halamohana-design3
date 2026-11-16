@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useCMSData } from '@/context/CMSDataContext';
-import { Images, Maximize2, X, Calendar, Tag } from 'lucide-react';
+import { Maximize2, X, Calendar } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
 import type { GalleryItem } from '@/types';
 
@@ -19,30 +19,33 @@ export const GallerySection: React.FC = () => {
       : visibleItems.filter((g) => g.category === activeCategory);
 
   return (
-    <section id="gallery" className="py-20 sm:py-28 bg-[#F9FAFB] border-b border-stone-200">
+    <section id="gallery" className="py-20 sm:py-28 bg-[#F7F7F5] border-b border-[#E5E5E5] text-left">
       <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
-        {/* Section Header - Direct, Clean */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-stone-200">
-          <div className="max-w-2xl space-y-3">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 tracking-tight">
-              Dokumentasi Properti & Fasilitas
+        {/* Section Header */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-[#E5E5E5]">
+          <div className="max-w-2xl space-y-2">
+            <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
+              Dokumentasi Visual Portofolio
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-semibold text-[#141414] tracking-tight">
+              Dokumentasi Properti &amp; Fasilitas
             </h2>
-            <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
-              Arsip visual fasilitas perhotelan, ruang publik mall, serta agenda penting korporat PT Halla Mohana.
+            <p className="text-base text-[#52525B] leading-relaxed pt-1">
+              Arsip visual fasilitas perhotelan bintang 4, ruang ritel mall, serta agenda penting operasional PT Halla Mohana.
             </p>
           </div>
 
-          {/* Filter Pills */}
-          <div className="flex flex-wrap gap-2">
+          {/* Segmented Filter Control */}
+          <div className="inline-flex border border-[#E5E5E5] rounded-md p-1 bg-white shrink-0 flex-wrap gap-1">
             {categories.map((cat) => (
               <button
                 key={cat}
                 type="button"
                 onClick={() => setActiveCategory(cat)}
-                className={`rounded-xl px-4 py-2 text-xs font-bold tracking-wide transition-all ${
+                className={`px-3.5 py-1.5 text-xs font-semibold rounded transition-colors cursor-pointer ${
                   activeCategory === cat
-                    ? 'bg-[#7A152E] text-white shadow-xs'
-                    : 'bg-white text-stone-600 border border-stone-200 hover:bg-stone-50 hover:text-stone-900'
+                    ? 'bg-[#8B1E24] text-white'
+                    : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
                 }`}
               >
                 {cat === 'All' ? 'Semua Album' : cat}
@@ -57,7 +60,7 @@ export const GallerySection: React.FC = () => {
             <div
               key={item.id}
               onClick={() => setLightboxItem(item)}
-              className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-2xl border border-slate-200 bg-slate-100 shadow-2xs hover:shadow-xl transition-all"
+              className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-lg border border-[#E5E5E5] bg-stone-100 shadow-2xs hover:border-[#8B1E24] transition-colors"
             >
               <img
                 src={item.thumbnail}
@@ -66,22 +69,22 @@ export const GallerySection: React.FC = () => {
               />
 
               {/* Gradient Overlay with Caption */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-90 transition-opacity p-5 flex flex-col justify-end">
+              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/25 to-transparent p-5 flex flex-col justify-end">
                 <div className="space-y-1.5 transform transition-transform duration-300 group-hover:-translate-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="rounded-md bg-white/20 backdrop-blur-xs px-2 py-0.5 text-[10px] font-bold text-white uppercase tracking-wider">
+                    <span className="rounded bg-[#141414]/85 px-2 py-0.5 text-[10px] font-semibold text-white uppercase tracking-wider">
                       {item.category}
                     </span>
-                    <span className="text-[11px] text-slate-300">{item.date}</span>
+                    <span className="text-[11px] text-stone-300">{item.date}</span>
                   </div>
-                  <h4 className="text-sm font-bold text-white leading-snug drop-shadow-xs line-clamp-2">
+                  <h4 className="text-sm font-semibold text-white leading-snug line-clamp-2">
                     {item.title}
                   </h4>
                 </div>
               </div>
 
               {/* Zoom Icon indicator */}
-              <div className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/20 backdrop-blur-md text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-md bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity">
                 <Maximize2 className="h-4 w-4" />
               </div>
             </div>
@@ -91,13 +94,14 @@ export const GallerySection: React.FC = () => {
 
       {/* Lightbox Modal */}
       {lightboxItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="relative max-w-4xl w-full bg-slate-900 rounded-3xl overflow-hidden border border-slate-800 shadow-2xl">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/90 backdrop-blur-xs animate-in fade-in duration-200">
+          <div className="relative max-w-4xl w-full bg-[#141414] rounded-lg overflow-hidden border border-stone-800 shadow-2xl">
             {/* Close button */}
             <button
               type="button"
               onClick={() => setLightboxItem(null)}
-              className="absolute top-4 right-4 z-10 rounded-full bg-black/60 p-2 text-white hover:bg-black/90 transition-colors"
+              className="absolute top-4 right-4 z-10 rounded-md bg-black/60 p-2 text-white hover:bg-[#8B1E24] transition-colors cursor-pointer"
+              aria-label="Tutup Lightbox"
             >
               <X className="h-5 w-5" />
             </button>
@@ -112,17 +116,17 @@ export const GallerySection: React.FC = () => {
             </div>
 
             {/* Lightbox Info */}
-            <div className="p-6 bg-slate-900 text-white space-y-2">
-              <div className="flex items-center gap-3 text-xs text-slate-400">
+            <div className="p-6 bg-[#141414] text-white space-y-2 text-left">
+              <div className="flex items-center gap-3 text-xs text-stone-400">
                 <Badge variant="primary" size="sm">
                   {lightboxItem.category}
                 </Badge>
-                <span className="flex items-center gap-1">
-                  <Calendar className="h-3.5 w-3.5" />
+                <span className="flex items-center gap-1 font-medium">
+                  <Calendar className="h-3.5 w-3.5 text-[#8B1E24]" />
                   {lightboxItem.date}
                 </span>
               </div>
-              <h3 className="text-lg font-bold text-white">{lightboxItem.title}</h3>
+              <h3 className="text-base font-semibold text-white">{lightboxItem.title}</h3>
             </div>
           </div>
         </div>

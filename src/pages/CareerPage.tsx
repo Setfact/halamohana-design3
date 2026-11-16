@@ -11,12 +11,14 @@ export const CareerPage: React.FC<CareerPageProps> = ({ onNavigate }) => {
     <div className="bg-white">
       {/* 1. Dedicated Page Header */}
       <PageHeader
+        category="Pengembangan Talenta & Karir"
         title="Peluang Karir & Pengembangan Talenta"
         description="Jadilah bagian dari tim profesional PT Halla Mohana di bawah naungan ekosistem Tiara Marga Trakindo (TMT Group). Bersama-sama kita ciptakan standar baru keunggulan properti komersial dan perhotelan di Indonesia."
         breadcrumbs={[
           { label: 'Beranda', href: '/' },
           { label: 'Karir & Talenta' },
         ]}
+        imageUrl="/images/hotel/restaurant-wtf-main.jpg"
         onNavigate={onNavigate}
       />
 

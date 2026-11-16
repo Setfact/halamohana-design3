@@ -11,12 +11,14 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
     <div className="bg-white">
       {/* 1. Dedicated Page Header */}
       <PageHeader
+        category="Dokumentasi Visual Portofolio"
         title="Dokumentasi & Galeri Arsitektur"
         description="Koleksi foto resolusi tinggi yang merekam estetika desain arsitektur, fasilitas kamar, kolam renang infinity rooftop, atrium mall, serta momen penting operasional PT Halla Mohana."
         breadcrumbs={[
           { label: 'Beranda', href: '/' },
           { label: 'Dokumentasi & Galeri' },
         ]}
+        imageUrl="/images/hotel/exterior-facade.jpg"
         onNavigate={onNavigate}
       />
 

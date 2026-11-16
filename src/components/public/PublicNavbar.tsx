@@ -93,19 +93,19 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({
               >
                 {page.title}
                 {isActive && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#8B1E24] rounded-full" />
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#8B1E24]" />
                 )}
               </a>
             );
           })}
         </nav>
 
-        {/* Right: Pill CTA Button (Hubungi Kami) - Clean, No CMS toggles */}
+        {/* Right: CTA Button (Hubungi Kami) - Precision Architectural Style */}
         <div className="hidden sm:flex items-center">
           <a
             href="/contact"
             onClick={(e) => handleLinkClick(e, '/contact')}
-            className="inline-flex items-center gap-2 rounded-full bg-[#8B1E24] hover:bg-[#72181D] active:bg-[#5C1317] text-white px-5 py-2.5 text-xs font-bold tracking-wide shadow-sm hover:shadow-md transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-md bg-[#8B1E24] hover:bg-[#72181D] active:bg-[#5C1317] text-white px-5 py-2.5 text-xs font-semibold tracking-wider transition-colors cursor-pointer"
           >
             <span>Hubungi Kami</span>
             <ArrowRight className="h-3.5 w-3.5" />
@@ -193,7 +193,7 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({
               <a
                 href="/contact"
                 onClick={(e) => handleLinkClick(e, '/contact')}
-                className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-[#8B1E24] hover:bg-[#72181D] text-white py-3 text-xs font-bold tracking-wide shadow-sm"
+                className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-[#8B1E24] hover:bg-[#72181D] text-white py-3 text-xs font-semibold tracking-wider transition-colors"
               >
                 <span>Hubungi Kami</span>
                 <ArrowRight className="h-4 w-4" />

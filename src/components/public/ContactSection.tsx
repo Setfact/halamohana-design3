@@ -12,7 +12,6 @@ import {
   Copy,
   Check,
   Compass,
-  ArrowRight,
   ShieldCheck,
   Users2,
   Briefcase,
@@ -102,45 +101,48 @@ export const ContactSection: React.FC = () => {
   };
 
   return (
-    <div id="contact" className="bg-white">
+    <div id="contact" className="bg-white text-left">
       {/* 1. Interactive Dual-Location Map Showcase */}
-      <section className="py-16 sm:py-24 border-b border-stone-200">
+      <section className="py-20 sm:py-28 border-b border-[#E5E5E5] bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-10">
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-stone-200">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#E5E5E5]">
             <div className="max-w-2xl space-y-2">
-              <h2 className="text-3xl sm:text-4xl font-black text-stone-900 tracking-tight">
+              <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
+                Alamat Representatif Resmi
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-[#141414] tracking-tight">
                 Lokasi Kantor &amp; Peta Interaktif
               </h2>
-              <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
+              <p className="text-base text-[#52525B] leading-relaxed pt-1">
                 Kunjungi kantor pusat kami di Jakarta atau kantor operasional properti terintegrasi di Pekanbaru. Pilih tab di bawah untuk melihat rute dan titik koordinat Google Maps.
               </p>
             </div>
 
             {/* Office Tab Switcher */}
-            <div className="inline-flex rounded-xl bg-stone-100 p-1.5 border border-stone-200">
+            <div className="inline-flex border border-[#E5E5E5] rounded-md p-1 bg-white shrink-0">
               <button
                 type="button"
                 onClick={() => setActiveOfficeId('jakarta')}
-                className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
+                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded transition-colors cursor-pointer ${
                   activeOfficeId === 'jakarta'
-                    ? 'bg-white text-[#7A152E] shadow-xs'
-                    : 'text-stone-600 hover:text-stone-900'
+                    ? 'bg-[#8B1E24] text-white'
+                    : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
                 }`}
               >
-                <Building2 className="h-4 w-4" />
+                <Building2 className="h-3.5 w-3.5" />
                 <span>Kantor Pusat (Jakarta)</span>
               </button>
               <button
                 type="button"
                 onClick={() => setActiveOfficeId('pekanbaru')}
-                className={`flex items-center gap-2 rounded-lg px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
+                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded transition-colors cursor-pointer ${
                   activeOfficeId === 'pekanbaru'
-                    ? 'bg-white text-[#7A152E] shadow-xs'
-                    : 'text-stone-600 hover:text-stone-900'
+                    ? 'bg-[#8B1E24] text-white'
+                    : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
                 }`}
               >
-                <Compass className="h-4 w-4" />
+                <Compass className="h-3.5 w-3.5" />
                 <span>Kantor Properti (Pekanbaru)</span>
               </button>
             </div>
@@ -149,31 +151,31 @@ export const ContactSection: React.FC = () => {
           {/* Map & Office Detail Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
             {/* Left: Office Information Card (5 cols) */}
-            <div className="lg:col-span-5 flex flex-col justify-between rounded-2xl border border-stone-200 bg-stone-50/70 p-7 sm:p-8 space-y-6">
+            <div className="lg:col-span-5 flex flex-col justify-between rounded-lg border border-[#E5E5E5] bg-[#F7F7F5] p-7 sm:p-8 space-y-6">
               <div className="space-y-5">
                 <div>
-                  <div className="inline-block rounded-md bg-[#7A152E]/10 px-2.5 py-1 text-[11px] font-bold text-[#7A152E] uppercase tracking-wider mb-2">
+                  <p className="text-xs font-semibold text-[#8B1E24] uppercase tracking-wider mb-1">
                     {currentOffice.city}
-                  </div>
-                  <h3 className="text-xl font-bold text-stone-900">
+                  </p>
+                  <h3 className="text-xl font-semibold text-[#141414]">
                     {currentOffice.title}
                   </h3>
-                  <p className="text-xs text-stone-500 font-medium mt-0.5">
+                  <p className="text-xs text-[#52525B] font-medium mt-0.5">
                     {currentOffice.tag}
                   </p>
                 </div>
 
                 {/* Address */}
-                <div className="space-y-1.5 pt-2 border-t border-stone-200/80 text-xs">
+                <div className="space-y-1.5 pt-2 border-t border-[#E5E5E5] text-xs">
                   <div className="flex items-center justify-between">
-                    <span className="font-bold text-stone-800 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
-                      <MapPin className="h-3.5 w-3.5 text-[#A68253]" />
+                    <span className="font-semibold text-[#141414] uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+                      <MapPin className="h-3.5 w-3.5 text-[#8B1E24]" />
                       Alamat Lengkap
                     </span>
                     <button
                       type="button"
                       onClick={() => handleCopyAddress(currentOffice.address)}
-                      className="flex items-center gap-1 text-[11px] font-semibold text-stone-500 hover:text-[#7A152E] transition-colors cursor-pointer"
+                      className="flex items-center gap-1 text-[11px] font-semibold text-[#8B1E24] hover:underline transition-colors cursor-pointer"
                     >
                       {copiedAddress ? (
                         <>
@@ -183,46 +185,46 @@ export const ContactSection: React.FC = () => {
                       ) : (
                         <>
                           <Copy className="h-3 w-3" />
-                          <span>Salin</span>
+                          <span>Salin Alamat</span>
                         </>
                       )}
                     </button>
                   </div>
-                  <p className="text-stone-600 leading-relaxed font-normal bg-white p-3 rounded-xl border border-stone-200">
+                  <p className="text-[#52525B] leading-relaxed font-normal bg-white p-3 rounded-md border border-[#E5E5E5]">
                     {currentOffice.address}
                   </p>
                 </div>
 
                 {/* Contact numbers */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2 text-xs">
-                  <div className="bg-white p-3 rounded-xl border border-stone-200 space-y-1">
-                    <span className="text-[11px] font-bold text-stone-400 block uppercase">Telepon</span>
+                  <div className="bg-white p-3 rounded-md border border-[#E5E5E5] space-y-1">
+                    <span className="text-[11px] font-semibold text-neutral-400 block uppercase">Telepon</span>
                     <a
                       href={`tel:${currentOffice.phone.replace(/[^0-9+]/g, '')}`}
-                      className="font-bold text-stone-800 hover:text-[#7A152E] transition-colors flex items-center gap-1.5"
+                      className="font-medium text-[#141414] hover:text-[#8B1E24] transition-colors flex items-center gap-1.5"
                     >
-                      <Phone className="h-3.5 w-3.5 text-[#A68253] shrink-0" />
+                      <Phone className="h-3.5 w-3.5 text-[#8B1E24] shrink-0" />
                       <span className="truncate">{currentOffice.phone}</span>
                     </a>
                   </div>
 
-                  <div className="bg-white p-3 rounded-xl border border-stone-200 space-y-1">
-                    <span className="text-[11px] font-bold text-stone-400 block uppercase">Email Resmi</span>
+                  <div className="bg-white p-3 rounded-md border border-[#E5E5E5] space-y-1">
+                    <span className="text-[11px] font-semibold text-neutral-400 block uppercase">Email Resmi</span>
                     <a
                       href={`mailto:${currentOffice.email}`}
-                      className="font-bold text-[#7A152E] hover:underline flex items-center gap-1.5 truncate"
+                      className="font-semibold text-[#8B1E24] hover:underline flex items-center gap-1.5 truncate"
                     >
-                      <Mail className="h-3.5 w-3.5 text-[#A68253] shrink-0" />
+                      <Mail className="h-3.5 w-3.5 text-[#8B1E24] shrink-0" />
                       <span className="truncate">{currentOffice.email}</span>
                     </a>
                   </div>
                 </div>
 
                 {/* Operating hours */}
-                <div className="flex items-start gap-2.5 bg-white p-3 rounded-xl border border-stone-200 text-xs text-stone-600">
-                  <Clock className="h-4 w-4 text-[#A68253] shrink-0 mt-0.5" />
+                <div className="flex items-start gap-2.5 bg-white p-3 rounded-md border border-[#E5E5E5] text-xs text-[#52525B]">
+                  <Clock className="h-4 w-4 text-[#8B1E24] shrink-0 mt-0.5" />
                   <div>
-                    <span className="font-bold text-stone-800 block text-[11px] uppercase">Jam Operasional</span>
+                    <span className="font-semibold text-[#141414] block text-[11px] uppercase">Jam Operasional</span>
                     <span>{currentOffice.hours}</span>
                   </div>
                 </div>
@@ -250,7 +252,7 @@ export const ContactSection: React.FC = () => {
             </div>
 
             {/* Right: Embedded Google Maps Frame (7 cols) */}
-            <div className="lg:col-span-7 relative min-h-[420px] rounded-2xl overflow-hidden border border-stone-200 bg-stone-100 shadow-xs">
+            <div className="lg:col-span-7 relative min-h-[420px] rounded-lg overflow-hidden border border-[#E5E5E5] bg-stone-100 shadow-2xs">
               <iframe
                 title={`Peta Lokasi ${currentOffice.title}`}
                 src={currentOffice.mapEmbedUrl}
@@ -263,11 +265,11 @@ export const ContactSection: React.FC = () => {
                 className="w-full h-full object-cover"
               />
 
-              {/* Subtle top floating location badge */}
+              {/* Top floating location badge */}
               <div className="absolute top-4 left-4 z-10 pointer-events-none">
-                <div className="rounded-xl bg-white/95 px-3.5 py-2 shadow-md border border-stone-200/80 backdrop-blur-xs flex items-center gap-2">
-                  <span className="h-2 w-2 rounded-full bg-[#7A152E] animate-pulse" />
-                  <span className="text-xs font-bold text-stone-800">
+                <div className="rounded-md bg-white px-3 py-1.5 shadow-sm border border-[#E5E5E5] flex items-center gap-2">
+                  <span className="h-2 w-2 rounded-full bg-[#8B1E24]" />
+                  <span className="text-xs font-semibold text-[#141414]">
                     {currentOffice.tag}
                   </span>
                 </div>
@@ -278,69 +280,72 @@ export const ContactSection: React.FC = () => {
       </section>
 
       {/* 2. Direct Inquiry Form & Department Directory */}
-      <section className="py-16 sm:py-24 bg-stone-50/50">
+      <section className="py-20 sm:py-28 bg-[#F7F7F5] border-b border-[#E5E5E5]">
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
-          <div className="max-w-2xl space-y-3">
-            <h2 className="text-2xl sm:text-3xl font-black text-stone-900 tracking-tight">
+          <div className="max-w-2xl space-y-2">
+            <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
+              Korespondensi &amp; Kemitraan
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-semibold text-[#141414] tracking-tight">
               Kirimkan Pesan &amp; Formulir Kemitraan
             </h2>
-            <p className="text-stone-600 text-sm leading-relaxed">
+            <p className="text-base text-[#52525B] leading-relaxed pt-1">
               Hubungi tim pengelola untuk peluang penyewaan tenant ritel di Pekanbaru Xchange, paket ballroom &amp; meeting di FOX Hotel Pekanbaru, atau kemitraan bisnis strategis.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left: Department Contacts & Commitment (5 cols) */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="rounded-2xl border border-stone-200 bg-white p-7 space-y-5">
-                <h3 className="font-bold text-stone-900 text-sm uppercase tracking-wider">
+            <div className="lg:col-span-5 space-y-4">
+              <div className="rounded-lg border border-[#E5E5E5] bg-white p-6 sm:p-7 space-y-4">
+                <h3 className="font-semibold text-[#141414] text-xs uppercase tracking-wider">
                   Direktori Divisi &amp; Kontak Langsung
                 </h3>
 
-                <div className="space-y-4 text-xs">
-                  <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-100 space-y-1">
-                    <div className="flex items-center gap-2 font-bold text-stone-800">
-                      <Briefcase className="h-3.5 w-3.5 text-[#7A152E]" />
+                <div className="space-y-3 text-xs">
+                  <div className="p-3.5 rounded-md bg-[#F7F7F5] border border-[#E5E5E5] space-y-1">
+                    <div className="flex items-center gap-2 font-semibold text-[#141414]">
+                      <Briefcase className="h-3.5 w-3.5 text-[#8B1E24]" />
                       <span>Sewa Tenant &amp; Komersial (PX Mall)</span>
                     </div>
-                    <p className="text-stone-500 text-[11px]">
+                    <p className="text-[#52525B] text-xs">
                       Informasi kavling ritel, atrium event pameran, dan kemitraan tenant.
                     </p>
                     <a
                       href="mailto:leasing@hallamohana.co.id"
-                      className="text-[#7A152E] font-semibold hover:underline block pt-1"
+                      className="text-[#8B1E24] font-semibold hover:underline block pt-0.5"
                     >
                       leasing@hallamohana.co.id
                     </a>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-100 space-y-1">
-                    <div className="flex items-center gap-2 font-bold text-stone-800">
-                      <Building2 className="h-3.5 w-3.5 text-[#A68253]" />
+                  <div className="p-3.5 rounded-md bg-[#F7F7F5] border border-[#E5E5E5] space-y-1">
+                    <div className="flex items-center gap-2 font-semibold text-[#141414]">
+                      <Building2 className="h-3.5 w-3.5 text-[#8B1E24]" />
                       <span>Reservasi MICE &amp; Ballroom (FOX Hotel)</span>
                     </div>
-                    <p className="text-stone-500 text-[11px]">
+                    <p className="text-[#52525B] text-xs">
                       Pemesanan paket seminar korporat, pernikahan, dan grup akomodasi.
                     </p>
                     <a
                       href="mailto:reservation@hallamohana.co.id"
-                      className="text-[#7A152E] font-semibold hover:underline block pt-1"
+                      className="text-[#8B1E24] font-semibold hover:underline block pt-0.5"
                     >
                       reservation@hallamohana.co.id
                     </a>
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-100 space-y-1">
-                    <div className="flex items-center gap-2 font-bold text-stone-800">
-                      <Users2 className="h-3.5 w-3.5 text-stone-600" />
+                  <div className="p-3.5 rounded-md bg-[#F7F7F5] border border-[#E5E5E5] space-y-1">
+                    <div className="flex items-center gap-2 font-semibold text-[#141414]">
+                      <Users2 className="h-3.5 w-3.5 text-[#8B1E24]" />
                       <span>Hubungan Media &amp; Karir Holding</span>
                     </div>
-                    <p className="text-stone-500 text-[11px]">
+                    <p className="text-[#52525B] text-xs">
                       Siaran pers, rekrutmen profesional, dan korespondensi holding.
                     </p>
                     <a
                       href="mailto:recruitment@hallamohana.co.id"
-                      className="text-[#7A152E] font-semibold hover:underline block pt-1"
+                      className="text-[#8B1E24] font-semibold hover:underline block pt-0.5"
                     >
                       recruitment@hallamohana.co.id
                     </a>
@@ -349,13 +354,13 @@ export const ContactSection: React.FC = () => {
               </div>
 
               {/* Service SLA Commitment */}
-              <div className="rounded-2xl border border-stone-200 bg-white p-5 flex items-start gap-3.5 text-xs text-stone-600">
+              <div className="rounded-lg border border-[#E5E5E5] bg-white p-5 flex items-start gap-3.5 text-xs text-[#52525B]">
                 <ShieldCheck className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
                 <div className="space-y-1">
-                  <span className="font-bold text-stone-800 block text-xs">
+                  <span className="font-semibold text-[#141414] block text-xs">
                     Standar Respon Profesional
                   </span>
-                  <p className="text-[11px] text-stone-500 leading-relaxed">
+                  <p className="text-xs text-[#52525B] leading-relaxed">
                     Setiap inquiri yang masuk diverifikasi dan ditindaklanjuti oleh representatif resmi PT Halla Mohana dalam waktu maksimal 1x24 jam kerja.
                   </p>
                 </div>
@@ -364,22 +369,22 @@ export const ContactSection: React.FC = () => {
 
             {/* Right: Clean Inquiry Form (7 cols) */}
             <div className="lg:col-span-7">
-              <div className="rounded-2xl border border-stone-200 bg-white p-8 sm:p-10 shadow-xs space-y-6">
+              <div className="rounded-lg border border-[#E5E5E5] bg-white p-6 sm:p-8 space-y-6">
                 <div>
-                  <h3 className="text-xl font-bold text-stone-900">
+                  <h3 className="text-lg font-semibold text-[#141414]">
                     Formulir Korespondensi Bisnis
                   </h3>
-                  <p className="text-xs text-stone-500 mt-1">
+                  <p className="text-xs text-[#52525B] mt-1">
                     Pesan Anda akan otomatis terarsip di sistem CMS dan diteruskan ke email:{' '}
-                    <strong className="text-stone-700">{generalConfig.auto_send_email.send_contact_us}</strong>
+                    <strong className="text-[#141414]">{generalConfig.auto_send_email.send_contact_us}</strong>
                   </p>
                 </div>
 
                 {isSuccess && (
-                  <div className="rounded-xl border border-emerald-200 bg-emerald-50/80 p-4 text-xs font-semibold text-emerald-800 flex items-center gap-3">
+                  <div className="rounded-md border border-emerald-200 bg-emerald-50/80 p-4 text-xs font-semibold text-emerald-800 flex items-center gap-3">
                     <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0" />
                     <div>
-                      <p className="font-bold text-sm">Pesan Berhasil Terkirim!</p>
+                      <p className="font-semibold text-sm">Pesan Berhasil Terkirim!</p>
                       <p className="font-normal text-emerald-700 mt-0.5">
                         Terima kasih telah menghubungi PT Halla Mohana. Tim kami akan segera menindaklanjuti kebutuhan Anda.
                       </p>
@@ -390,7 +395,7 @@ export const ContactSection: React.FC = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1.5">
                         Nama Lengkap *
                       </label>
                       <input
@@ -399,12 +404,12 @@ export const ContactSection: React.FC = () => {
                         value={fullName}
                         onChange={(e) => setFullName(e.target.value)}
                         placeholder="Nama dan gelar Anda..."
-                        className="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-800 focus:border-[#7A152E] focus:outline-hidden"
+                        className="w-full rounded-md border border-[#E5E5E5] bg-white px-3.5 py-2.5 text-sm text-[#141414] focus:border-[#8B1E24] focus:outline-hidden"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1.5">
                         Nomor Telepon / WhatsApp *
                       </label>
                       <input
@@ -413,14 +418,14 @@ export const ContactSection: React.FC = () => {
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="+62 8..."
-                        className="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-800 focus:border-[#7A152E] focus:outline-hidden"
+                        className="w-full rounded-md border border-[#E5E5E5] bg-white px-3.5 py-2.5 text-sm text-[#141414] focus:border-[#8B1E24] focus:outline-hidden"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1.5">
                         Alamat Email *
                       </label>
                       <input
@@ -429,18 +434,18 @@ export const ContactSection: React.FC = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="nama@instansi.com"
-                        className="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-800 focus:border-[#7A152E] focus:outline-hidden"
+                        className="w-full rounded-md border border-[#E5E5E5] bg-white px-3.5 py-2.5 text-sm text-[#141414] focus:border-[#8B1E24] focus:outline-hidden"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                      <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1.5">
                         Kategori Inquiry
                       </label>
                       <select
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
-                        className="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-800 focus:border-[#7A152E] focus:outline-hidden"
+                        className="w-full rounded-md border border-[#E5E5E5] bg-white px-3.5 py-2.5 text-sm text-[#141414] focus:border-[#8B1E24] focus:outline-hidden"
                       >
                         <option value="Kemitraan Tenant & Ritel PX Mall">
                           Kemitraan Tenant Ritel PX Mall
@@ -459,7 +464,7 @@ export const ContactSection: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1.5">
                       Subjek Pesan
                     </label>
                     <input
@@ -467,12 +472,12 @@ export const ContactSection: React.FC = () => {
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
                       placeholder="Contoh: Proposal Sewa Ruang Komersial Lantai 1..."
-                      className="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-800 focus:border-[#7A152E] focus:outline-hidden"
+                      className="w-full rounded-md border border-[#E5E5E5] bg-white px-3.5 py-2.5 text-sm text-[#141414] focus:border-[#8B1E24] focus:outline-hidden"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-stone-700 mb-1.5">
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-neutral-500 mb-1.5">
                       Rincian Pesan *
                     </label>
                     <textarea
@@ -481,7 +486,7 @@ export const ContactSection: React.FC = () => {
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Tuliskan detail kebutuhan, estimasi jadwal, dan pertanyaan Anda..."
-                      className="w-full rounded-xl border border-stone-300 bg-white px-3.5 py-2.5 text-sm text-stone-800 focus:border-[#7A152E] focus:outline-hidden"
+                      className="w-full rounded-md border border-[#E5E5E5] bg-white px-3.5 py-2.5 text-sm text-[#141414] focus:border-[#8B1E24] focus:outline-hidden"
                     />
                   </div>
 

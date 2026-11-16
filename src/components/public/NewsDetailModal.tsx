@@ -17,7 +17,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ news, onClose 
     <Modal isOpen={!!news} onClose={onClose} title={news.title} maxWidth="4xl">
       <div className="space-y-6">
         {/* Featured Image */}
-        <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-slate-100 shadow-md">
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-stone-100 border border-[#E5E5E5]">
           <img
             src={news.imageUrl}
             alt={news.title}
@@ -52,7 +52,7 @@ export const NewsDetailModal: React.FC<NewsDetailModalProps> = ({ news, onClose 
               navigator.clipboard.writeText(window.location.origin + '#' + news.url);
               alert('Tautan berita disalin ke clipboard!');
             }}
-            className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-600 hover:text-[#7A152E] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-stone-600 hover:text-[#8B1E24] transition-colors"
           >
             <Share2 className="h-4 w-4" />
             Bagikan Berita Ini

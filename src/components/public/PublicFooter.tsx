@@ -29,7 +29,7 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="bg-[#111622] text-stone-400 text-xs border-t border-stone-800">
+    <footer className="bg-[#0F1117] text-stone-400 text-xs border-t border-stone-800">
       {/* 4 Proportional Columns Upper Footer */}
       <div className="mx-auto max-w-7xl px-4 sm:px-8 py-16 sm:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10">
@@ -130,18 +130,18 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({ onNavigate }) => {
             </p>
 
             <form onSubmit={handleNewsletter} className="space-y-2 pt-1">
-              <div className="flex rounded-full overflow-hidden border border-stone-700 bg-stone-900/90 p-1 focus-within:border-[#8B1E24] transition-colors">
+              <div className="flex rounded-md overflow-hidden border border-stone-700 bg-stone-900/90 p-1 focus-within:border-[#8B1E24] transition-colors">
                 <input
                   type="email"
                   required
                   placeholder="Masukkan alamat email Anda..."
                   value={newsletterEmail}
                   onChange={(e) => setNewsletterEmail(e.target.value)}
-                  className="w-full bg-transparent px-4 py-2 text-xs text-white placeholder-stone-500 focus:outline-hidden"
+                  className="w-full bg-transparent px-3.5 py-2 text-xs text-white placeholder-stone-500 focus:outline-hidden"
                 />
                 <button
                   type="submit"
-                  className="rounded-full bg-[#8B1E24] hover:bg-[#72181D] px-4 text-white transition-colors flex items-center justify-center shrink-0 cursor-pointer"
+                  className="rounded bg-[#8B1E24] hover:bg-[#72181D] px-3.5 text-white transition-colors flex items-center justify-center shrink-0 cursor-pointer"
                   aria-label="Berlangganan Newsletter"
                 >
                   <ArrowRight className="h-4 w-4" />

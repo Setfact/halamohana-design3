@@ -19,7 +19,7 @@ export const Badge: React.FC<BadgeProps> = ({
   };
 
   const variantClasses = {
-    primary: 'bg-[#FBF2F4] text-[#7A152E] border border-[#F2DCE1]',
+    primary: 'bg-[#8B1E24]/10 text-[#8B1E24] border border-[#8B1E24]/20',
     secondary: 'bg-[#F1F7F4] text-[#2D5A43] border border-[#E1EFE7]',
     warm: 'bg-[#FAF6F0] text-[#8F6E41] border border-[#EFE7DC]',
     slate: 'bg-stone-100 text-stone-800 border border-stone-200',

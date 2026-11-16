@@ -11,12 +11,14 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onNavigate }) => {
     <div className="bg-white">
       {/* 1. Dedicated Page Header */}
       <PageHeader
+        category="Publikasi & Media Rilis"
         title="Kabar Terbaru & Siaran Pers"
         description="Pusat informasi resmi dan rilis media seputar perkembangan ekspansi properti, inovasi layanan hospitalitas, kegiatan CSR, serta pengumuman korporat PT Halla Mohana."
         breadcrumbs={[
           { label: 'Beranda', href: '/' },
           { label: 'Kabar & Siaran Pers' },
         ]}
+        imageUrl="/images/hotel/hero-corporate-wide.jpg"
         onNavigate={onNavigate}
       />
 

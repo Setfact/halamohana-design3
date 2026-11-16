@@ -130,7 +130,7 @@ function AppContent() {
 
   // Render Public Multi-Page Routes
   return (
-    <div className="min-h-screen bg-white text-stone-800 font-sans selection:bg-[#7A152E] selection:text-white flex flex-col justify-between">
+    <div className="min-h-screen bg-white text-[#141414] font-sans selection:bg-[#8B1E24] selection:text-white flex flex-col justify-between">
       <Toaster position="top-right" richColors />
 
       <PublicNavbar currentPath={currentPath} onNavigate={navigate} />

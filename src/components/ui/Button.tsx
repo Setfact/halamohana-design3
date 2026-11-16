@@ -20,7 +20,7 @@ export const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseClasses =
-    'inline-flex items-center justify-center font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer rounded-lg';
+    'inline-flex items-center justify-center font-semibold transition-all duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer rounded-md';
 
   const sizeClasses = {
     sm: 'text-xs px-3 py-1.5 gap-1.5',
@@ -30,11 +30,11 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantClasses = {
     primary:
-      'bg-[#7A152E] text-white hover:bg-[#630E22] active:bg-[#4F0B1B] shadow-xs hover:shadow-sm focus-visible:outline-[#7A152E]',
+      'bg-[#8B1E24] text-white hover:bg-[#72181D] active:bg-[#5C1317] shadow-xs hover:shadow-sm focus-visible:outline-[#8B1E24]',
     secondary:
-      'bg-[#1E2433] text-white hover:bg-[#111622] active:bg-black shadow-xs hover:shadow-sm focus-visible:outline-[#1E2433]',
+      'bg-[#141414] text-white hover:bg-[#262626] active:bg-black shadow-xs hover:shadow-sm focus-visible:outline-[#141414]',
     outline:
-      'border border-stone-300 text-stone-700 bg-white hover:bg-stone-50 hover:border-stone-400 focus-visible:outline-stone-500',
+      'border border-[#E5E5E5] text-[#141414] bg-white hover:bg-[#F7F7F5] hover:border-stone-400 focus-visible:outline-stone-500',
     ghost:
       'text-stone-700 hover:bg-stone-100 active:bg-stone-200 focus-visible:outline-stone-400',
     danger:

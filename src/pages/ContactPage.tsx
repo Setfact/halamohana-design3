@@ -11,12 +11,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     <div className="bg-white">
       {/* 1. Dedicated Page Header */}
       <PageHeader
+        category="Layanan Informasi & Kontak Resmi"
         title="Hubungi PT Halla Mohana"
         description="Kantor representatif kami di Jakarta dan Pekanbaru siap melayani inquiri kerjasama komersial, sewa ruang ritel mall, reservasi MICE & ballroom, serta komunikasi media."
         breadcrumbs={[
           { label: 'Beranda', href: '/' },
           { label: 'Hubungi Kami' },
         ]}
+        imageUrl="/images/hotel/exterior-facade.jpg"
         onNavigate={onNavigate}
       />
 

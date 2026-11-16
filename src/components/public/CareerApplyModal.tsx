@@ -72,13 +72,13 @@ export const CareerApplyModal: React.FC<CareerApplyModalProps> = ({ career, onCl
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               placeholder="Sesuai kartu identitas..."
-              className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#7A152E] focus:outline-hidden"
+              className="w-full rounded-md border border-[#E5E5E5] px-3.5 py-2.5 text-sm focus:border-[#8B1E24] focus:outline-hidden"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
                 Alamat Email Aktif *
               </label>
               <input
@@ -87,12 +87,12 @@ export const CareerApplyModal: React.FC<CareerApplyModalProps> = ({ career, onCl
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="email@domain.com"
-                className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#7A152E] focus:outline-hidden"
+                className="w-full rounded-md border border-[#E5E5E5] px-3.5 py-2.5 text-sm focus:border-[#8B1E24] focus:outline-hidden"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
                 Nomor WhatsApp / HP *
               </label>
               <input
@@ -101,13 +101,13 @@ export const CareerApplyModal: React.FC<CareerApplyModalProps> = ({ career, onCl
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+62 8..."
-                className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#7A152E] focus:outline-hidden"
+                className="w-full rounded-md border border-[#E5E5E5] px-3.5 py-2.5 text-sm focus:border-[#8B1E24] focus:outline-hidden"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
               Tautan LinkedIn / Portofolio (Opsional)
             </label>
             <input
@@ -115,16 +115,16 @@ export const CareerApplyModal: React.FC<CareerApplyModalProps> = ({ career, onCl
               value={portfolioUrl}
               onChange={(e) => setPortfolioUrl(e.target.value)}
               placeholder="https://linkedin.com/in/..."
-              className="w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#7A152E] focus:outline-hidden"
+              className="w-full rounded-md border border-[#E5E5E5] px-3.5 py-2.5 text-sm focus:border-[#8B1E24] focus:outline-hidden"
             />
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
               Lampiran Resume / CV (PDF) *
             </label>
-            <div className="flex items-center gap-3 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-3.5">
-              <Upload className="h-5 w-5 text-[#A68253]" />
+            <div className="flex items-center gap-3 rounded-md border border-dashed border-[#E5E5E5] bg-stone-50 p-3.5">
+              <Upload className="h-5 w-5 text-[#8B1E24]" />
               <div className="flex-1 text-xs">
                 <input
                   type="text"
@@ -138,7 +138,7 @@ export const CareerApplyModal: React.FC<CareerApplyModalProps> = ({ career, onCl
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+            <label className="block text-xs font-semibold text-slate-700 uppercase tracking-wider mb-1">
               Surat Pengantar / Motivasi Singkat
             </label>
             <textarea
@@ -146,7 +146,7 @@ export const CareerApplyModal: React.FC<CareerApplyModalProps> = ({ career, onCl
               value={coverLetter}
               onChange={(e) => setCoverLetter(e.target.value)}
               placeholder="Ceritakan pengalaman relevan dan motivasi Anda bergabung dengan PT Halla Mohana..."
-              className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:border-[#7A152E] focus:outline-hidden"
+              className="w-full rounded-md border border-[#E5E5E5] px-3.5 py-2 text-sm focus:border-[#8B1E24] focus:outline-hidden"
             />
           </div>
 

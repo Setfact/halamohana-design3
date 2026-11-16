@@ -29,17 +29,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <NewsSection />
 
       {/* 6. Direct Concierge & Inquiry CTA Band (Jakarta Head Office & Pekanbaru Site Office) */}
-      <section className="bg-[#111622] text-white py-20 sm:py-24 border-t border-stone-800">
+      <section className="bg-[#0F1117] text-white py-20 sm:py-24 border-t border-stone-800 text-left">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-10">
-            <div className="max-w-2xl space-y-3">
-              <span className="text-[11px] font-bold tracking-widest uppercase text-[#8B1E24] bg-[#8B1E24]/10 px-3 py-1 rounded-full border border-[#8B1E24]/30 inline-block">
-                Layanan Kemitraan & Sewa Komersial
-              </span>
-              <h3 className="text-3xl sm:text-4xl font-black text-white tracking-tight">
+          <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10">
+            <div className="max-w-2xl space-y-2">
+              <p className="text-xs tracking-widest uppercase text-neutral-400 font-medium">
+                Layanan Kemitraan &amp; Sewa Komersial
+              </p>
+              <h3 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">
                 Tertarik Bermitra atau Menyewa Ruang Komersial?
               </h3>
-              <p className="text-stone-300 text-sm sm:text-base leading-relaxed font-normal">
+              <p className="text-stone-300 text-sm sm:text-base leading-relaxed font-normal pt-1">
                 Hubungi tim representatif PT Halla Mohana di Jakarta atau Pekanbaru untuk informasi kemitraan tenant ritel, reservasi MICE Ballroom, dan kerjasama korporat terpadu.
               </p>
             </div>
@@ -51,7 +51,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   e.preventDefault();
                   onNavigate('/contact');
                 }}
-                className="inline-flex items-center gap-2.5 rounded-full bg-[#8B1E24] hover:bg-[#72181D] active:bg-[#5C1317] text-white px-7 py-3.5 text-sm font-bold tracking-wide shadow-xl transition-all cursor-pointer"
+                className="inline-flex items-center gap-2.5 rounded-md bg-[#8B1E24] hover:bg-[#72181D] active:bg-[#5C1317] text-white px-6 py-3.5 text-xs font-semibold tracking-wider transition-colors cursor-pointer"
               >
                 <span>Hubungi Tim Kami</span>
                 <ArrowRight className="h-4 w-4" />
@@ -63,7 +63,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   e.preventDefault();
                   onNavigate('/about');
                 }}
-                className="inline-flex items-center gap-2 rounded-full border border-stone-700 bg-stone-900/60 hover:bg-stone-800 text-stone-200 px-6 py-3.5 text-sm font-semibold tracking-wide transition-all cursor-pointer"
+                className="inline-flex items-center gap-2 rounded-md border border-stone-700 bg-stone-900/60 hover:bg-stone-800 text-stone-200 px-6 py-3.5 text-xs font-semibold tracking-wider transition-colors cursor-pointer"
               >
                 <span>Tentang Holding</span>
               </a>
