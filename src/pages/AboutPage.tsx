@@ -482,320 +482,420 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Container Bagan Hierarki */}
-          <div className="overflow-x-auto pb-4 scrollbar-thin">
-            <div className="min-w-[960px] max-w-6xl mx-auto space-y-0 pt-2">
-              {/* Top Node: PT Tiara Marga Trakindo (TMT Group) */}
-              <div className="flex justify-center">
-                <div
-                  onClick={() => setIsTmtExpanded(!isTmtExpanded)}
-                  className={`rounded-lg border border-[#E5E5E5] bg-white p-6 shadow-xs text-left w-[460px] border-t-2 border-t-[#141414] transition-all cursor-pointer hover:shadow-md ${
-                    isTmtExpanded ? 'ring-1 ring-slate-300' : ''
-                  }`}
-                >
-                  <div className="flex items-center justify-between">
-                    <p className="text-[11px] tracking-widest uppercase text-neutral-500 font-medium">
+          {/* Interactive Bento & Nested Accordion Container (Zero Connector Lines) */}
+          <div className="space-y-6 pt-2">
+            {/* 1. Collapsed State: Full-Width Split Card for Induk Utama TMT Group */}
+            <div
+              onClick={() => setIsTmtExpanded(!isTmtExpanded)}
+              className={`w-full rounded-2xl border bg-white p-6 sm:p-8 shadow-xs border-t-[4px] border-t-[#141414] transition-all cursor-pointer hover:shadow-md ${
+                isTmtExpanded ? 'border-stone-400 ring-2 ring-stone-900/5' : 'border-[#E5E5E5]'
+              }`}
+            >
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+                {/* Left Column: Heading, Lineage & Description */}
+                <div className="max-w-3xl space-y-2">
+                  <div className="flex items-center gap-3">
+                    <div className="w-6 h-0.5 bg-[#141414]" />
+                    <p className="text-xs tracking-widest uppercase text-neutral-500 font-semibold">
                       Induk Grup Usaha • Ultimate Holding Group
                     </p>
-                    <span className="text-[10px] uppercase font-semibold text-neutral-500 bg-stone-100 px-2 py-0.5 rounded">
-                      8 Entitas
-                    </span>
                   </div>
 
-                  <h3 className="text-lg font-semibold text-[#141414] mt-1.5">
+                  <h3 className="text-xl sm:text-2xl font-semibold text-[#141414] tracking-tight">
                     PT Tiara Marga Trakindo (TMT Group)
                   </h3>
-                  <p className="text-xs text-[#52525B] pt-1 leading-relaxed">
-                    Konglomerasi nasional terkemuka yang menaungi 8 entitas anak perusahaan lintas sektor industri di Indonesia.
-                  </p>
 
-                  {/* Interactive Button inside Parent Card */}
-                  <div className="mt-4 pt-3 border-t border-[#E5E5E5] flex items-center justify-between">
-                    <span className="text-xs font-semibold text-[#8B1E24] flex items-center gap-1.5">
-                      <Layers className="h-3.5 w-3.5" />
-                      <span>{isTmtExpanded ? 'Sembunyikan Struktur Anak Perusahaan' : 'Buka Struktur Anak Perusahaan (8 Entitas)'}</span>
-                    </span>
-                    <span className="flex items-center gap-1 text-xs text-neutral-500 font-medium">
-                      <span>{isTmtExpanded ? 'Tutup' : 'Buka'}</span>
-                      <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${isTmtExpanded ? 'rotate-180' : ''}`} />
-                    </span>
+                  <p className="text-sm text-[#52525B] leading-relaxed max-w-2xl font-normal">
+                    Konglomerasi investasi nasional terkemuka yang menaungi 8 entitas anak perusahaan strategis lintas sektor industri di Indonesia—mulai dari alat berat, energi, pembiayaan komersial, hingga hospitalitas dan properti.
+                  </p>
+                </div>
+
+                {/* Right Column: Interactive Trigger Button */}
+                <div className="shrink-0 flex items-center">
+                  <div className="inline-flex items-center gap-2.5 rounded-lg border border-[#E5E5E5] bg-stone-50 px-5 py-3 text-xs font-semibold text-[#141414] transition-all hover:bg-stone-100 hover:border-stone-300">
+                    <Building2 className="h-4 w-4 text-[#8B1E24]" />
+                    <span>{isTmtExpanded ? 'Sembunyikan 8 Entitas Bisnis' : 'Lihat 8 Entitas Bisnis'}</span>
+                    <ChevronDown
+                      className={`h-4 w-4 text-neutral-600 transition-transform duration-300 ${
+                        isTmtExpanded ? 'rotate-180' : ''
+                      }`}
+                    />
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* AnimatePresence for Level 1 Subsidiaries */}
-              <AnimatePresence>
-                {isTmtExpanded && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: 'auto' }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.35, ease: 'easeInOut' }}
-                    className="overflow-hidden"
-                  >
-                    {/* Solid Vertical Connector Line from Parent Node (Standard 2px thickness, Slate Neutral, No Arrowheads) */}
-                    <div className="flex flex-col items-center">
-                      <div className="w-[2px] h-8 bg-slate-300" />
-                    </div>
-
-                    {/* Continuous Solid Connector Bar for the 5 Columns */}
-                    <div className="grid grid-cols-5 gap-4">
-                      {/* Column 1 Connector: starts from center to right */}
-                      <div className="relative h-6 flex justify-center">
-                        <div className="absolute top-0 right-0 left-1/2 h-[2px] bg-slate-300 -mr-2" />
-                        <div className="w-[2px] h-full bg-slate-300" />
-                      </div>
-                      {/* Column 2 Connector: full horizontal span */}
-                      <div className="relative h-6 flex justify-center">
-                        <div className="absolute top-0 -left-2 -right-2 h-[2px] bg-slate-300" />
-                        <div className="w-[2px] h-full bg-slate-300" />
-                      </div>
-                      {/* Column 3 Connector (Center): full horizontal span connected to vertical stem */}
-                      <div className="relative h-6 flex justify-center">
-                        <div className="absolute top-0 -left-2 -right-2 h-[2px] bg-slate-300" />
-                        <div className="w-[2px] h-full bg-slate-300" />
-                      </div>
-                      {/* Column 4 Connector: full horizontal span */}
-                      <div className="relative h-6 flex justify-center">
-                        <div className="absolute top-0 -left-2 -right-2 h-[2px] bg-slate-300" />
-                        <div className="w-[2px] h-full bg-slate-300" />
-                      </div>
-                      {/* Column 5 Connector: starts from left to center */}
-                      <div className="relative h-6 flex justify-center">
-                        <div className="absolute top-0 left-0 right-1/2 h-[2px] bg-slate-300 -ml-2" />
-                        <div className="w-[2px] h-full bg-slate-300" />
-                      </div>
-                    </div>
-
-                    {/* Baris 1: 5 Entitas Utama Sejajar (Clean White Cards + Subtle Muted Top Borders) */}
-                    <div className="grid grid-cols-5 gap-4">
-                      {/* 1. PT Trakindo Utama (Warm Amber Accent) */}
-                      <div className="rounded-lg border border-[#E5E5E5] bg-white p-4 text-left shadow-xs border-t-2 border-t-[#D97706] hover:shadow-sm transition-shadow">
-                        <div className="w-5 h-0.5 bg-[#D97706] mb-2" />
-                        <p className="text-[11px] tracking-widest uppercase text-[#B45309] font-medium">
+            {/* 2. Level 2: Bento Grid 8 Anak Perusahaan TMT Group (Expanded State) */}
+            <AnimatePresence>
+              {isTmtExpanded && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.35, ease: 'easeOut' }}
+                  className="space-y-6"
+                >
+                  {/* 4-Column Responsive Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+                    {/* 1. PT Trakindo Utama (Warm Amber) */}
+                    <div className="rounded-xl border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-t-[3px] border-t-[#D97706] hover:shadow-md transition-shadow flex flex-col justify-between">
+                      <div>
+                        <div className="w-6 h-0.5 bg-[#D97706] mb-2.5" />
+                        <p className="text-[11px] tracking-wider uppercase text-[#B45309] font-semibold">
                           Heavy Equipment
                         </p>
-                        <h4 className="text-sm font-semibold text-[#141414] mt-1">
+                        <h4 className="text-base font-semibold text-[#141414] mt-1.5 leading-snug">
                           PT Trakindo Utama
                         </h4>
-                        <p className="text-xs text-[#52525B] leading-relaxed mt-1">
-                          Solusi alat berat dan mesin industri Caterpillar terdepan di Indonesia.
+                        <p className="text-xs text-[#52525B] leading-relaxed mt-2">
+                          Solusi alat berat dan mesin industri Caterpillar terdepan di Indonesia sejak tahun 1970.
                         </p>
                       </div>
-
-                      {/* 2. PT Mahadana Dasha Utama (Slate Blue Accent + Interactive Sub-Holding Toggle) */}
-                      <div
-                        onClick={() => setIsMahadashaExpanded(!isMahadashaExpanded)}
-                        className={`rounded-lg border border-[#E5E5E5] bg-white p-4 text-left shadow-xs border-t-2 border-t-[#3B82F6] transition-all cursor-pointer hover:shadow-sm ${
-                          isMahadashaExpanded ? 'ring-1 ring-blue-300' : ''
-                        }`}
-                      >
-                        <div className="w-5 h-0.5 bg-[#3B82F6] mb-2" />
-                        <div className="flex items-center justify-between">
-                          <p className="text-[11px] tracking-widest uppercase text-[#1D4ED8] font-medium">
-                            Sub-Holding
-                          </p>
-                          <span className="text-[10px] text-blue-700 font-semibold bg-blue-50 px-1.5 py-0.5 rounded">
-                            3 Entitas
-                          </span>
-                        </div>
-                        <h4 className="text-sm font-semibold text-[#141414] mt-1">
-                          PT Mahadana Dasha Utama (MahaDasha)
-                        </h4>
-                        <p className="text-xs text-[#52525B] leading-relaxed mt-1">
-                          Pengelola portofolio diversifikasi usaha dan investasi terintegrasi.
-                        </p>
-
-                        {/* Interactive Toggle Button inside MahaDasha Card */}
-                        <div className="mt-3 pt-2.5 border-t border-[#E5E5E5] flex items-center justify-between">
-                          <span className="text-[11px] font-semibold text-blue-700">
-                            {isMahadashaExpanded ? 'Tutup Portofolio' : 'Buka Portofolio'}
-                          </span>
-                          <ChevronDown className={`h-3.5 w-3.5 text-blue-700 transition-transform duration-300 ${isMahadashaExpanded ? 'rotate-180' : ''}`} />
-                        </div>
-                      </div>
-
-                      {/* 3. PT ABM Investama Tbk. (Sage Green Accent) */}
-                      <div className="rounded-lg border border-[#E5E5E5] bg-white p-4 text-left shadow-xs border-t-2 border-t-[#10B981] hover:shadow-sm transition-shadow">
-                        <div className="w-5 h-0.5 bg-[#10B981] mb-2" />
-                        <p className="text-[11px] tracking-widest uppercase text-[#047857] font-medium">
-                          Energy Solutions
-                        </p>
-                        <h4 className="text-sm font-semibold text-[#141414] mt-1">
-                          PT ABM Investama Tbk.
-                        </h4>
-                        <p className="text-xs text-[#52525B] leading-relaxed mt-1">
-                          Solusi energi dan pertambangan terintegrasi dari hulu hingga hilir.
-                        </p>
-                      </div>
-
-                      {/* 4. PT Chandra Sakti Utama Leasing (Dusty Cyan Accent) */}
-                      <div className="rounded-lg border border-[#E5E5E5] bg-white p-4 text-left shadow-xs border-t-2 border-t-[#0EA5E9] hover:shadow-sm transition-shadow">
-                        <div className="w-5 h-0.5 bg-[#0EA5E9] mb-2" />
-                        <p className="text-[11px] tracking-widest uppercase text-[#0369A1] font-medium">
-                          Financial Services
-                        </p>
-                        <h4 className="text-sm font-semibold text-[#141414] mt-1">
-                          PT Chandra Sakti Utama Leasing
-                        </h4>
-                        <p className="text-xs text-[#52525B] leading-relaxed mt-1">
-                          Layanan pembiayaan dan sewa guna usaha komersial (CSULfinance).
-                        </p>
-                      </div>
-
-                      {/* 5. PT Radana Bhaskara Finance Tbk. (Muted Terracotta Accent) */}
-                      <div className="rounded-lg border border-[#E5E5E5] bg-white p-4 text-left shadow-xs border-t-2 border-t-[#F43F5E] hover:shadow-sm transition-shadow">
-                        <div className="w-5 h-0.5 bg-[#F43F5E] mb-2" />
-                        <p className="text-[11px] tracking-widest uppercase text-[#BE123C] font-medium">
-                          Multifinance
-                        </p>
-                        <h4 className="text-sm font-semibold text-[#141414] mt-1">
-                          PT Radana Bhaskara Finance Tbk.
-                        </h4>
-                        <p className="text-xs text-[#52525B] leading-relaxed mt-1">
-                          Solusi pembiayaan multiguna dan modal kerja (Radana Finance).
-                        </p>
+                      <div className="mt-4 pt-3 border-t border-[#E5E5E5] text-[11px] text-neutral-400 font-medium">
+                        Caterpillar Dealership
                       </div>
                     </div>
 
-                    {/* Level 2: AnimatePresence for MahaDasha Sub-Holding Cluster */}
-                    <AnimatePresence>
-                      {isMahadashaExpanded && (
-                        <motion.div
-                          initial={{ opacity: 0, height: 0 }}
-                          animate={{ opacity: 1, height: 'auto' }}
-                          exit={{ opacity: 0, height: 0 }}
-                          transition={{ duration: 0.3, ease: 'easeInOut' }}
-                          className="overflow-hidden pt-1"
-                        >
-                          {/* Connector Stem down from MahaDasha (No arrowheads) */}
-                          <div className="flex flex-col items-center pt-3">
-                            <div className="w-[2px] h-7 bg-slate-300" />
+                    {/* 2. PT Mahadana Dasha Utama / MahaDasha (Slate Blue - Sub-Holding Trigger) */}
+                    <div
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setIsMahadashaExpanded(!isMahadashaExpanded);
+                      }}
+                      className={`rounded-xl border bg-white p-5 text-left shadow-xs border-t-[3px] border-t-[#2563EB] transition-all cursor-pointer hover:shadow-md flex flex-col justify-between ${
+                        isMahadashaExpanded
+                          ? 'border-blue-400 ring-2 ring-blue-500/15 shadow-md bg-blue-50/20'
+                          : 'border-[#E5E5E5]'
+                      }`}
+                    >
+                      <div>
+                        <div className="w-6 h-0.5 bg-[#2563EB] mb-2.5" />
+                        <div className="flex items-center justify-between gap-2">
+                          <p className="text-[11px] tracking-wider uppercase text-[#1D4ED8] font-semibold">
+                            Sub-Holding
+                          </p>
+                          <span className="text-[10px] font-semibold uppercase tracking-wider text-blue-700 bg-blue-100/70 px-2 py-0.5 rounded">
+                            Sub-Holding
+                          </span>
+                        </div>
+                        <h4 className="text-base font-semibold text-[#141414] mt-1.5 leading-snug">
+                          PT Mahadana Dasha Utama
+                        </h4>
+                        <p className="text-xs text-[#52525B] leading-relaxed mt-2">
+                          Pengelola portofolio diversifikasi usaha terpadu, investasi strategis, dan akselerator pertumbuhan holding.
+                        </p>
+                      </div>
+
+                      {/* Interactive Button inside MahaDasha Card */}
+                      <div className="mt-4 pt-3 border-t border-[#E5E5E5] flex items-center justify-between">
+                        <span className="text-xs font-semibold text-blue-700 flex items-center gap-1.5">
+                          <span>{isMahadashaExpanded ? 'Tutup Portofolio' : 'Lihat Pilar Bisnis'}</span>
+                        </span>
+                        <span className="flex items-center gap-1 text-xs text-blue-700 font-medium">
+                          <ChevronDown
+                            className={`h-3.5 w-3.5 transition-transform duration-300 ${
+                              isMahadashaExpanded ? 'rotate-180' : ''
+                            }`}
+                          />
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* 3. PT ABM Investama Tbk. (Sage Green) */}
+                    <div className="rounded-xl border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-t-[3px] border-t-[#059669] hover:shadow-md transition-shadow flex flex-col justify-between">
+                      <div>
+                        <div className="w-6 h-0.5 bg-[#059669] mb-2.5" />
+                        <p className="text-[11px] tracking-wider uppercase text-[#047857] font-semibold">
+                          Energy Solutions
+                        </p>
+                        <h4 className="text-base font-semibold text-[#141414] mt-1.5 leading-snug">
+                          PT ABM Investama Tbk.
+                        </h4>
+                        <p className="text-xs text-[#52525B] leading-relaxed mt-2">
+                          Solusi energi terintegrasi, pertambangan, dan rantai pasok logistik dari hulu hingga hilir (IDX: ABMM).
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-[#E5E5E5] text-[11px] text-neutral-400 font-medium">
+                        Energy &amp; Mining
+                      </div>
+                    </div>
+
+                    {/* 4. PT Chandra Sakti Utama Leasing (Dusty Cyan) */}
+                    <div className="rounded-xl border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-t-[3px] border-t-[#0284C7] hover:shadow-md transition-shadow flex flex-col justify-between">
+                      <div>
+                        <div className="w-6 h-0.5 bg-[#0284C7] mb-2.5" />
+                        <p className="text-[11px] tracking-wider uppercase text-[#0369A1] font-semibold">
+                          Financial Services
+                        </p>
+                        <h4 className="text-base font-semibold text-[#141414] mt-1.5 leading-snug">
+                          PT Chandra Sakti Utama Leasing
+                        </h4>
+                        <p className="text-xs text-[#52525B] leading-relaxed mt-2">
+                          Layanan pembiayaan komersial, sewa guna usaha alat berat, dan anjak piutang (CSULfinance).
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-[#E5E5E5] text-[11px] text-neutral-400 font-medium">
+                        CSULfinance
+                      </div>
+                    </div>
+
+                    {/* 5. PT Radana Bhaskara Finance Tbk. (Muted Terracotta / Rose) */}
+                    <div className="rounded-xl border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-t-[3px] border-t-[#E11D48] hover:shadow-md transition-shadow flex flex-col justify-between">
+                      <div>
+                        <div className="w-6 h-0.5 bg-[#E11D48] mb-2.5" />
+                        <p className="text-[11px] tracking-wider uppercase text-[#BE123C] font-semibold">
+                          Multifinance
+                        </p>
+                        <h4 className="text-base font-semibold text-[#141414] mt-1.5 leading-snug">
+                          PT Radana Bhaskara Finance Tbk.
+                        </h4>
+                        <p className="text-xs text-[#52525B] leading-relaxed mt-2">
+                          Solusi pembiayaan multiguna, anjak piutang, dan fasilitas dana produktif komersial (Radana Finance).
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-[#E5E5E5] text-[11px] text-neutral-400 font-medium">
+                        Radana Finance
+                      </div>
+                    </div>
+
+                    {/* 6. PT Pastika Nirmala (Muted Teal) */}
+                    <div className="rounded-xl border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-t-[3px] border-t-[#0D9488] hover:shadow-md transition-shadow flex flex-col justify-between">
+                      <div>
+                        <div className="w-6 h-0.5 bg-[#0D9488] mb-2.5" />
+                        <p className="text-[11px] tracking-wider uppercase text-[#0F766E] font-semibold">
+                          Healthcare &amp; Facilities
+                        </p>
+                        <h4 className="text-base font-semibold text-[#141414] mt-1.5 leading-snug">
+                          PT Pastika Nirmala
+                        </h4>
+                        <p className="text-xs text-[#52525B] leading-relaxed mt-2">
+                          Penyedia layanan kesehatan modern terpadu dan pengelolaan fasilitas rumah sakit terpercaya di Indonesia.
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-[#E5E5E5] text-[11px] text-neutral-400 font-medium">
+                        Healthcare Solutions
+                      </div>
+                    </div>
+
+                    {/* 7. PT Karya Kharisma Mandiri (Dusty Indigo) */}
+                    <div className="rounded-xl border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-t-[3px] border-t-[#4F46E5] hover:shadow-md transition-shadow flex flex-col justify-between">
+                      <div>
+                        <div className="w-6 h-0.5 bg-[#4F46E5] mb-2.5" />
+                        <p className="text-[11px] tracking-wider uppercase text-[#4338CA] font-semibold">
+                          Human Capital Services
+                        </p>
+                        <h4 className="text-base font-semibold text-[#141414] mt-1.5 leading-snug">
+                          PT Karya Kharisma Mandiri
+                        </h4>
+                        <p className="text-xs text-[#52525B] leading-relaxed mt-2">
+                          Layanan manajemen talenta korporat, rekrutmen profesional, dan solusi alih daya sumber daya manusia.
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-[#E5E5E5] text-[11px] text-neutral-400 font-medium">
+                        Human Capital
+                      </div>
+                    </div>
+
+                    {/* 8. PT Mitra Solusi Telematika (Muted Violet) */}
+                    <div className="rounded-xl border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-t-[3px] border-t-[#7C3AED] hover:shadow-md transition-shadow flex flex-col justify-between">
+                      <div>
+                        <div className="w-6 h-0.5 bg-[#7C3AED] mb-2.5" />
+                        <p className="text-[11px] tracking-wider uppercase text-[#6D28D9] font-semibold">
+                          ICT &amp; Digital Solutions
+                        </p>
+                        <h4 className="text-base font-semibold text-[#141414] mt-1.5 leading-snug">
+                          PT Mitra Solusi Telematika
+                        </h4>
+                        <p className="text-xs text-[#52525B] leading-relaxed mt-2">
+                          Solusi infrastruktur teknologi informasi, komunikasi data, keamanan siber, dan transformasi digital korporat (MST).
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-[#E5E5E5] text-[11px] text-neutral-400 font-medium">
+                        MST Telematika
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* 3. Level 3: Nested Expansion Khusus Sub-Holding (MahaDasha -> PT Halla Mohana -> Unit Bisnis) */}
+                  <AnimatePresence>
+                    {isMahadashaExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        exit={{ opacity: 0, height: 0 }}
+                        transition={{ duration: 0.35, ease: 'easeInOut' }}
+                        className="overflow-hidden pt-2"
+                      >
+                        <div className="rounded-2xl border border-[#E5E5E5] bg-[#F2F2EF] p-6 sm:p-8 space-y-6 text-left">
+                          {/* Drawer Header */}
+                          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E5E5E5]">
+                            <div className="space-y-1">
+                              <div className="flex items-center gap-2">
+                                <span className="h-2 w-2 rounded-full bg-[#8B1E24]" />
+                                <p className="text-xs tracking-widest uppercase text-[#8B1E24] font-semibold">
+                                  Portofolio Diversifikasi MahaDasha • Pilar Hospitalitas &amp; Properti Komersial
+                                </p>
+                              </div>
+                              <p className="text-xs text-[#52525B]">
+                                Struktur kepemilikan sub-holding PT Mahadana Dasha Utama yang memayungi PT Halla Mohana serta aset operasional terpadu di Kota Pekanbaru.
+                              </p>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => setIsMahadashaExpanded(false)}
+                              className="text-xs font-semibold text-neutral-500 hover:text-[#141414] transition-colors self-start sm:self-auto cursor-pointer"
+                            >
+                              Tutup Panel ✕
+                            </button>
                           </div>
 
-                          {/* 3-Column Solid Connector Bar for the Diversified Entities */}
-                          <div className="max-w-4xl mx-auto">
-                            <div className="grid grid-cols-3 gap-6">
-                              {/* Column 1: center to right */}
-                              <div className="relative h-6 flex justify-center">
-                                <div className="absolute top-0 right-0 left-1/2 h-[2px] bg-slate-300 -mr-3" />
-                                <div className="w-[2px] h-full bg-slate-300" />
+                          {/* Drawer Content: Split Layout */}
+                          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                            {/* Left Column (5 cols): PT Halla Mohana Flagship Card */}
+                            <div className="lg:col-span-5 rounded-xl border-2 border-[#8B1E24] bg-white p-6 shadow-sm flex flex-col justify-between">
+                              <div className="space-y-3">
+                                <div className="flex items-center justify-between">
+                                  <p className="text-xs tracking-wider uppercase text-[#8B1E24] font-semibold">
+                                    Pilar Utama Website • Unit Bisnis Fokus
+                                  </p>
+                                  <span className="text-[10px] uppercase font-semibold text-white bg-[#8B1E24] px-2 py-0.5 rounded">
+                                    Anak Usaha
+                                  </span>
+                                </div>
+
+                                <div>
+                                  <h4 className="text-xl font-semibold text-[#141414]">
+                                    PT Halla Mohana
+                                  </h4>
+                                  <p className="text-xs text-neutral-500 font-medium mt-0.5">
+                                    Hospitality &amp; Commercial Retail Property Development
+                                  </p>
+                                </div>
+
+                                <p className="text-xs text-[#52525B] leading-relaxed">
+                                  Didirikan pada tahun 2013 sebagai anak perusahaan PT Mahadana Dasha Utama (MahaDasha) dan bagian dari ekosistem TMT Group. Berfokus pada pengembangan, pembangunan, dan pengelolaan perhotelan bintang 4 serta pusat perbelanjaan komersial modern terpadu.
+                                </p>
+
+                                <div className="pt-2 border-t border-[#F0F0EE] space-y-1">
+                                  <p className="text-[11px] text-neutral-500">
+                                    <strong className="text-neutral-700">Head Office:</strong> Gedung TMT 1 Lt. 1, Cilandak, Jakarta Selatan
+                                  </p>
+                                  <p className="text-[11px] text-neutral-500">
+                                    <strong className="text-neutral-700">Kawasan Terpadu:</strong> Jl. Riau No. 147, Senapelan, Pekanbaru
+                                  </p>
+                                </div>
                               </div>
-                              {/* Column 2: full span */}
-                              <div className="relative h-6 flex justify-center">
-                                <div className="absolute top-0 -left-3 -right-3 h-[2px] bg-slate-300" />
-                                <div className="w-[2px] h-full bg-slate-300" />
-                              </div>
-                              {/* Column 3: left to center */}
-                              <div className="relative h-6 flex justify-center">
-                                <div className="absolute top-0 left-0 right-1/2 h-[2px] bg-slate-300 -ml-3" />
-                                <div className="w-[2px] h-full bg-slate-300" />
+
+                              <div className="mt-6 pt-4 border-t border-[#E5E5E5] flex items-center justify-between">
+                                <img
+                                  src="/images/logo/logo.png"
+                                  alt="PT Halla Mohana Logo"
+                                  className="h-8 w-auto object-contain"
+                                />
+                                <a
+                                  href="/projects"
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    onNavigate('/projects');
+                                  }}
+                                  className="text-xs font-semibold text-[#8B1E24] hover:text-[#72181D] transition-colors flex items-center gap-1 cursor-pointer"
+                                >
+                                  <span>Eksplorasi Properti</span>
+                                  <ArrowRight className="h-3.5 w-3.5" />
+                                </a>
                               </div>
                             </div>
 
-                            {/* Baris 2: 3 Entitas Sejajar (Clean White Cards + Distinct Muted Accents) */}
-                            <div className="grid grid-cols-3 gap-6">
-                              {/* 1. PT Halla Mohana (Maroon Accent + Highlighted) */}
-                              <div className="rounded-lg border-2 border-[#8B1E24] bg-white p-5 text-left shadow-xs border-t-2 border-t-[#8B1E24]">
-                                <div className="w-5 h-0.5 bg-[#8B1E24] mb-2" />
-                                <p className="text-[11px] tracking-widest uppercase text-[#8B1E24] font-semibold">
-                                  Hospitality &amp; Commercial Retail
-                                </p>
+                            {/* Right Column (7 cols): 2 Operating Property Units */}
+                            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                              {/* Unit 1: FOX Harris Hotel Pekanbaru */}
+                              <div className="rounded-xl border border-[#E5E5E5] bg-white p-5 shadow-xs border-l-4 border-l-[#8B1E24] flex flex-col justify-between hover:shadow-sm transition-shadow">
+                                <div className="space-y-3">
+                                  <div className="h-36 w-full overflow-hidden rounded-lg border border-[#E5E5E5] bg-stone-100">
+                                    <img
+                                      src="/images/hotel/rooftop-skypool-evening.jpg"
+                                      alt="FOX Harris Hotel Pekanbaru"
+                                      className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
+                                    />
+                                  </div>
 
-                                <h4 className="text-base font-semibold text-[#141414] mt-1">
-                                  PT Halla Mohana
-                                </h4>
-                                <p className="text-xs text-[#52525B] leading-relaxed mt-1">
-                                  Didirikan tahun 2013, berfokus pada pembangunan dan pengelolaan hotel bintang 4 serta commercial lifestyle mall.
-                                </p>
+                                  <div>
+                                    <p className="text-[10px] tracking-widest uppercase text-neutral-500 font-semibold">
+                                      Hospitality Unit • Pekanbaru
+                                    </p>
+                                    <h5 className="text-base font-semibold text-[#141414] mt-0.5">
+                                      FOX Harris Hotel Pekanbaru
+                                    </h5>
+                                  </div>
 
-                                {/* Logo Resmi hm Halla Mohana */}
-                                <div className="mt-4 pt-3 border-t border-[#E5E5E5] flex items-center justify-start">
-                                  <img
-                                    src="/images/logo/logo.png"
-                                    alt="PT Halla Mohana Logo"
-                                    className="h-7 w-auto object-contain"
-                                  />
-                                </div>
-                              </div>
-
-                              {/* 2. PT Pastika Nirmala (Muted Teal Accent) */}
-                              <div className="rounded-lg border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-t-2 border-t-[#14B8A6] hover:shadow-sm transition-shadow">
-                                <div className="w-5 h-0.5 bg-[#14B8A6] mb-2" />
-                                <p className="text-[11px] tracking-widest uppercase text-[#0F766E] font-medium">
-                                  Healthcare &amp; Facilities
-                                </p>
-                                <h4 className="text-sm font-semibold text-[#141414] mt-1">
-                                  PT Pastika Nirmala
-                                </h4>
-                                <p className="text-xs text-[#52525B] leading-relaxed mt-1">
-                                  Penyedia layanan kesehatan modern dan pengelolaan fasilitas rumah sakit terpercaya.
-                                </p>
-                              </div>
-
-                              {/* 3. PT Karya Kharisma Mandiri (Dusty Indigo Accent) */}
-                              <div className="rounded-lg border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-t-2 border-t-[#6366F1] hover:shadow-sm transition-shadow">
-                                <div className="w-5 h-0.5 bg-[#6366F1] mb-2" />
-                                <p className="text-[11px] tracking-widest uppercase text-[#4F46E5] font-medium">
-                                  Human Capital Services
-                                </p>
-                                <h4 className="text-sm font-semibold text-[#141414] mt-1">
-                                  PT Karya Kharisma Mandiri
-                                </h4>
-                                <p className="text-xs text-[#52525B] leading-relaxed mt-1">
-                                  Layanan pengelolaan talenta, rekrutmen profesional, dan alih daya sumber daya manusia.
-                                </p>
-                              </div>
-                            </div>
-
-                            {/* Sub-Branch: 2 Unit Properti Operasional di Pekanbaru di bawah PT Halla Mohana */}
-                            <div className="pt-2">
-                              {/* Solid Connector Stem from PT Halla Mohana (col 1, No arrowheads) */}
-                              <div className="grid grid-cols-3 gap-6">
-                                <div className="flex flex-col items-center">
-                                  <div className="w-[2px] h-6 bg-slate-300" />
-                                </div>
-                                <div />
-                                <div />
-                              </div>
-
-                              {/* 2 Unit Properti di Pekanbaru */}
-                              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                {/* Unit 1: FOX Harris Hotel Pekanbaru */}
-                                <div className="rounded-lg border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-l-2 border-l-[#8B1E24]">
-                                  <p className="text-[11px] tracking-widest uppercase text-neutral-500 font-medium">
-                                    Hospitality Unit • Pekanbaru
-                                  </p>
-                                  <h5 className="text-sm font-semibold text-[#141414] mt-1">
-                                    FOX Harris Hotel Pekanbaru
-                                  </h5>
-                                  <p className="text-xs text-[#52525B] leading-relaxed mt-1">
-                                    Hotel bintang 4 berkapasitas 225 kamar &amp; suite modern, Grand Ballroom, WTF Restaurant, dan indoor rooftop sky pool tertinggi di Pekanbaru.
+                                  <p className="text-xs text-[#52525B] leading-relaxed">
+                                    Hotel bintang 4 berkapasitas 225 kamar &amp; suite (12 lantai), indoor rooftop sky pool tertinggi di Pekanbaru, restoran Where’s The Food (WTF), Grand Ballroom, dan 6 ruang rapat.
                                   </p>
                                 </div>
 
-                                {/* Unit 2: Pekanbaru Xchange (PX) */}
-                                <div className="rounded-lg border border-[#E5E5E5] bg-white p-5 text-left shadow-xs border-l-2 border-l-[#8B1E24]">
-                                  <p className="text-[11px] tracking-widest uppercase text-neutral-500 font-medium">
-                                    Commercial Retail Unit • Pekanbaru
+                                <div className="mt-4 pt-3 border-t border-[#E5E5E5]">
+                                  <a
+                                    href="/projects"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      onNavigate('/projects');
+                                    }}
+                                    className="text-xs font-semibold text-[#8B1E24] hover:text-[#72181D] transition-colors flex items-center gap-1 cursor-pointer"
+                                  >
+                                    <span>Lihat Fasilitas &amp; Kamar</span>
+                                    <ChevronRight className="h-3.5 w-3.5" />
+                                  </a>
+                                </div>
+                              </div>
+
+                              {/* Unit 2: Pekanbaru Xchange (PX) */}
+                              <div className="rounded-xl border border-[#E5E5E5] bg-white p-5 shadow-xs border-l-4 border-l-[#8B1E24] flex flex-col justify-between hover:shadow-sm transition-shadow">
+                                <div className="space-y-3">
+                                  <div className="h-36 w-full overflow-hidden rounded-lg border border-[#E5E5E5] bg-stone-100">
+                                    <img
+                                      src="/images/mall/hero-px-mall.jpg"
+                                      alt="Pekanbaru Xchange"
+                                      className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
+                                    />
+                                  </div>
+
+                                  <div>
+                                    <p className="text-[10px] tracking-widest uppercase text-neutral-500 font-semibold">
+                                      Commercial Retail Unit • Pekanbaru
+                                    </p>
+                                    <h5 className="text-base font-semibold text-[#141414] mt-0.5">
+                                      Pekanbaru Xchange (PX)
+                                    </h5>
+                                  </div>
+
+                                  <p className="text-xs text-[#52525B] leading-relaxed">
+                                    Lifestyle mall 3 lantai terintegrasi langsung dengan menara FOX Harris Hotel, dilengkapi bioskop Cinema XXI, koridor kuliner Alfresco Dining, dan plaza event komunitas.
                                   </p>
-                                  <h5 className="text-sm font-semibold text-[#141414] mt-1">
-                                    Pekanbaru Xchange (PX)
-                                  </h5>
-                                  <p className="text-xs text-[#52525B] leading-relaxed mt-1">
-                                    Pusat perbelanjaan gaya hidup modern terintegrasi dengan bioskop Cinema XXI, koridor kuliner Alfresco Dining, dan area pertunjukan komunitas.
-                                  </p>
+                                </div>
+
+                                <div className="mt-4 pt-3 border-t border-[#E5E5E5]">
+                                  <a
+                                    href="/projects"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      onNavigate('/projects');
+                                    }}
+                                    className="text-xs font-semibold text-[#8B1E24] hover:text-[#72181D] transition-colors flex items-center gap-1 cursor-pointer"
+                                  >
+                                    <span>Lihat Ritel &amp; Tenan</span>
+                                    <ChevronRight className="h-3.5 w-3.5" />
+                                  </a>
                                 </div>
                               </div>
                             </div>
                           </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </section>
