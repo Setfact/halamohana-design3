@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useCMSData } from '@/context/CMSDataContext';
-import { MapPin, ArrowUpRight, ChevronRight, Award, ShieldCheck, Clock, CheckCircle2 } from 'lucide-react';
+import { MapPin, ArrowUpRight, ChevronRight, Award, ShieldCheck, Clock, CheckCircle2, Phone } from 'lucide-react';
 import { ProjectDetailModal } from './ProjectDetailModal';
 import type { ProjectItem } from '@/types';
 
@@ -13,10 +13,10 @@ export const ProjectsSection: React.FC = () => {
   const [activeProjectId, setActiveProjectId] = useState<string>('');
 
   const categories = [
-    { label: 'Semua', value: 'All' },
-    { label: 'Hospitality', value: 'Hospitality & Hotel' },
-    { label: 'Retail', value: 'Shopping Mall & Retail' },
-    { label: 'Commercial Office', value: 'Commercial Office' },
+    { label: 'Semua Portofolio', value: 'All' },
+    { label: 'Hospitality (FOX Hotel)', value: 'Hospitality & Hotel' },
+    { label: 'Retail & Mall (PX)', value: 'Shopping Mall & Retail' },
+    { label: 'Kantor Pusat', value: 'Commercial Office' },
   ];
 
   const filteredProjects =
@@ -39,30 +39,30 @@ export const ProjectsSection: React.FC = () => {
   const activeProject =
     filteredProjects.find((p) => p.id === activeProjectId) || filteredProjects[0];
 
-  // 4-Column Key Metrics Corporate Achievement
+  // 4-Column Key Metrics Corporate Achievement (100% Akurat sesuai data resmi)
   const corporateMetrics = [
     {
-      value: '30+ Tahun',
-      label: 'Rekam Jejak Unggul',
-      desc: 'Pengembangan properti komersial sejak 1989',
+      value: '2013',
+      label: 'Tahun Pendirian Resmi',
+      desc: 'Pengembang properti terpadu di bawah naungan MahaDasha & TMT Group',
       icon: <Clock className="h-4 w-4 text-[#8B1E24]" />,
     },
     {
       value: '100.000+ m²',
-      label: 'Ruang Dikelola',
-      desc: 'Aset perhotelan, ritel & perkantoran terpadu',
+      label: 'Kawasan Komersial',
+      desc: 'Pengembangan kawasan mixed-use hotel & lifestyle mall terpadu',
       icon: <ShieldCheck className="h-4 w-4 text-[#8B1E24]" />,
     },
     {
-      value: '220+ Kamar',
+      value: '225 Kamar',
       label: 'Akomodasi Bintang 4',
-      desc: 'Kamar & suite modern di jantung Pekanbaru',
+      desc: 'Kamar & suite FOX Hotel dengan sky pool tertinggi di Pekanbaru',
       icon: <Award className="h-4 w-4 text-[#8B1E24]" />,
     },
     {
       value: '100%',
       label: 'Standar Mutu MahaDasha',
-      desc: 'Kepatuhan K3, ESG & sinergi TMT Group',
+      desc: 'Kepatuhan K3, audit berkala & sinergi ekosistem TMT Group',
       icon: <CheckCircle2 className="h-4 w-4 text-[#8B1E24]" />,
     },
   ];
@@ -80,7 +80,7 @@ export const ProjectsSection: React.FC = () => {
               Aset Properti Komersial Unggulan
             </h2>
             <p className="text-stone-600 text-sm sm:text-base leading-relaxed">
-              Destinasi perhotelan prestisius dan pusat perbelanjaan gaya hidup modern terpadu yang dikembangkan serta dikelola oleh PT Halla Mohana.
+              Fokus aset komersial utama PT Halla Mohana berada di kawasan terpadu Jl. Riau No. 147 Pekanbaru, mengintegrasikan keramahan perhotelan bintang 4 dengan pusat perbelanjaan gaya hidup modern.
             </p>
           </div>
 
@@ -173,7 +173,9 @@ export const ProjectsSection: React.FC = () => {
                 {/* Primary Action Button (Pills) */}
                 <div className="flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-stone-100">
                   <span className="text-xs text-stone-500 font-medium">
-                    Aset Dikelola oleh PT Halla Mohana
+                    {activeProject.id === 'prj-3'
+                      ? 'Kantor Pusat Korporat PT Halla Mohana'
+                      : 'Aset Komersial Dikelola oleh PT Halla Mohana'}
                   </span>
 
                   <div className="flex items-center gap-3">
@@ -272,10 +274,10 @@ export const ProjectsSection: React.FC = () => {
               {/* Ecosystem Footprint Card */}
               <div className="rounded-2xl border border-stone-200 bg-white p-5 space-y-2 shadow-2xs">
                 <h4 className="text-xs font-bold text-stone-900">
-                  Pengembangan Aset Berkelanjutan
+                  Kawasan Terpadu Jl. Riau Pekanbaru
                 </h4>
                 <p className="text-xs text-stone-600 leading-relaxed">
-                  Setiap properti PT Halla Mohana dirancang dengan efisiensi energi tinggi, standar keselamatan internasional, dan integrasi fasilitas yang menunjang mobilitas pebisnis serta rekreasi keluarga.
+                  Menyatukan kenyamanan hotel bintang 4 berkapasitas 225 kamar dengan fasilitas hiburan Cinema XXI dan koridor alfresco dining Pekanbaru Xchange dalam satu kawasan strategis.
                 </p>
               </div>
             </div>
@@ -295,7 +297,7 @@ export const ProjectsSection: React.FC = () => {
           </div>
         )}
 
-        {/* 4-Column Corporate Achievement Metrics Strip */}
+        {/* 4-Column Corporate Achievement Metrics Strip (Official 2013 + 225 Kamar) */}
         <div className="pt-4 border-t border-stone-200">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {corporateMetrics.map((metric, i) => (
@@ -307,8 +309,8 @@ export const ProjectsSection: React.FC = () => {
                   <div className="flex h-9 w-9 items-center justify-center rounded-full bg-[#8B1E24]/10">
                     {metric.icon}
                   </div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400">
-                    METRIK #{i + 1}
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-stone-400 font-mono">
+                    0{i + 1}
                   </span>
                 </div>
 
@@ -319,7 +321,7 @@ export const ProjectsSection: React.FC = () => {
                   <p className="text-xs font-bold text-stone-800">
                     {metric.label}
                   </p>
-                  <p className="text-xs text-stone-500 leading-relaxed">
+                  <p className="text-xs text-stone-500 leading-relaxed font-normal">
                     {metric.desc}
                   </p>
                 </div>

@@ -199,21 +199,21 @@ const initialProjects: ProjectItem[] = [
   {
     id: 'prj-1',
     no: 1,
-    title: 'FOX Harris Hotel Pekanbaru',
+    title: 'FOX Hotel Pekanbaru (FOX Harris Hotel)',
     category: 'Hospitality & Hotel',
-    location: 'Jl. Riau No. 147, Senapelan, Pekanbaru, Riau',
+    location: 'Jl. Riau No. 147, Senapelan, Pekanbaru, Riau 28154',
     imageUrl: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&auto=format&fit=crop&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1200&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&auto=format&fit=crop&q=80',
     ],
-    description: 'FOX Harris Hotel Pekanbaru adalah hotel bintang empat berkarakter dinamis dan segar, dirancang untuk kalangan pelancong bisnis dan keluarga urban. Menawarkan kamar modern, infinity pool rooftop dengan panorama kota Pekanbaru yang menawan, serta restoran WTF (Where’s The Food) yang menyajikan kuliner bercita rasa tinggi.',
+    description: 'FOX Hotel Pekanbaru (FOX Harris Hotel) adalah hotel bintang empat berkarakter dinamis dan segar di bawah naungan PT Halla Mohana. Memiliki 225 unit kamar dan suite modern, sarana MICE berskala besar, restoran Where’s The Food (WTF), spa, pusat kebugaran, serta kolam renang indoor rooftop sky pool tertinggi di kota Pekanbaru (sebelumnya beroperasi sebagai Tangram Hotel).',
     specs: [
-      { label: 'Jumlah Kamar', value: '223 Kamar & Suite' },
-      { label: 'Fasilitas Utama', value: 'Rooftop Infinity Pool, WTF Resto, Gym & Spa' },
-      { label: 'Ruang Pertemuan', value: 'FOX Ballroom & 6 Ruang Rapat Fleksibel' },
-      { label: 'Status Operasional', value: 'Beroperasi Penuh' },
+      { label: 'Jumlah Kamar', value: '225 Kamar & Suite' },
+      { label: 'Fasilitas Unggulan', value: 'Indoor Rooftop Sky Pool, WTF Resto, Gym & Spa' },
+      { label: 'Fasilitas MICE', value: 'FOX Ballroom & 6 Ruang Pertemuan' },
+      { label: 'Kontak Reservasi', value: '+62 761 741 5999' },
     ],
     create_time: '2025-01-20',
     updated: '2026-09-15',
@@ -225,19 +225,19 @@ const initialProjects: ProjectItem[] = [
     no: 2,
     title: 'Pekanbaru Xchange (PX)',
     category: 'Shopping Mall & Retail',
-    location: 'Jl. Riau No. 147, Senapelan, Pekanbaru, Riau',
+    location: 'Jl. Riau No. 147, Senapelan, Pekanbaru, Riau 28154',
     imageUrl: 'https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=1200&auto=format&fit=crop&q=80',
     gallery: [
       'https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=1200&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?w=1200&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&auto=format&fit=crop&q=80',
     ],
-    description: 'Pekanbaru Xchange (PX), sebelumnya dikenal sebagai Sadira Plaza, telah ditransformasikan menjadi pusat perbelanjaan dan hiburan gaya hidup generasi baru. Terhubung langsung dengan FOX Harris Hotel, PX menghadirkan tenan ritel nasional dan internasional ternama, bioskop, area bermain, serta plaza alfresco terbuka untuk pertunjukan musik dan komunitas.',
+    description: 'Pekanbaru Xchange (PX), sebelumnya dikenal sebagai Sadira Plaza, telah ditransformasikan menjadi pusat perbelanjaan dan rekreasi gaya hidup generasi baru. Terhubung langsung dalam satu kawasan mixed-use terpadu dengan FOX Hotel Pekanbaru, PX menghadirkan tenan ritel nasional dan internasional, bioskop Cinema XXI, Alfresco Dining di Ground Floor, serta plaza terbuka untuk pertunjukan musik dan komunitas.',
     specs: [
       { label: 'Luas Area (NLA)', value: '38.500 m²' },
       { label: 'Konsep', value: 'Lifestyle, Dining & Urban Entertainment' },
-      { label: 'Anchor Tenants', value: 'Cinema XXI, Supermarket, Kuliner Alfresco' },
-      { label: 'Konektivitas', value: 'Terintegrasi langsung dengan FOX Harris Hotel' },
+      { label: 'Anchor Tenants', value: 'Cinema XXI, Supermarket, Alfresco Dining' },
+      { label: 'Kontak Operasional', value: '+62 761 741 5000' },
     ],
     create_time: '2025-01-22',
     updated: '2026-09-18',
@@ -247,7 +247,7 @@ const initialProjects: ProjectItem[] = [
   {
     id: 'prj-3',
     no: 3,
-    title: 'Gedung TMT Commercial Office Complex',
+    title: 'Gedung TMT 1 (Head Office)',
     category: 'Commercial Office',
     location: 'Jl. Cilandak KKO No. 1, Jakarta Selatan 12560',
     imageUrl: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&auto=format&fit=crop&q=80',
@@ -255,12 +255,12 @@ const initialProjects: ProjectItem[] = [
       'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&auto=format&fit=crop&q=80',
       'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&auto=format&fit=crop&q=80',
     ],
-    description: 'Kompleks perkantoran terpadu TMT Group di kawasan strategis Cilandak Jakarta Selatan. Dilengkapi sarana gedung hijau modern, manajemen fasilitas canggih, ballroom korporat serbaguna, dan sistem keamanan 24 jam bertaraf internasional.',
+    description: 'Gedung TMT 1 di Cilandak KKO Jakarta Selatan merupakan Kantor Pusat Korporat (Head Office) PT Halla Mohana dan kompleks perkantoran terpadu Tiara Marga Trakindo (TMT Group). Bukan merupakan unit properti komersial yang dipasarkan Halla Mohana.',
     specs: [
-      { label: 'Klasifikasi Gedung', value: 'Grade A Commercial Office' },
-      { label: 'Sertifikasi', value: 'Green Building Environmental Standard' },
-      { label: 'Fasilitas Terpadu', value: 'Auditorium, Food Hall, Smart Parking System' },
-      { label: 'Aksesibilitas', value: 'Dekat Simpang Tol TB Simatupang' },
+      { label: 'Peran Gedung', value: 'Head Office PT Halla Mohana' },
+      { label: 'Klasifikasi', value: 'Grade A Corporate Office' },
+      { label: 'Induk Usaha', value: 'MahaDasha (TMT Group)' },
+      { label: 'Telepon Kantor Pusat', value: '(021) 2997 6700' },
     ],
     create_time: '2025-02-10',
     updated: '2026-08-10',
@@ -274,12 +274,13 @@ const initialCorporateInfo: CorporateInfoItem[] = [
     id: 'ci-1',
     no: 1,
     date: '2026-01-15',
-    title: 'Tentang PT Halla Mohana & Ekosistem Grup',
-    url: 'tentang-halla-mohana',
+    title: 'Halla Mohana Overview',
+    url: 'halla-mohana-overview',
     content: `
-      <h3>Dedikasi untuk Pengembangan Properti Berkelanjutan</h3>
-      <p>PT Halla Mohana merupakan perusahaan pengembang dan pengelola properti yang bernaung di bawah <strong>PT Mahadana Dasha Utama (MahaDasha)</strong>, bagian integral dari konglomerasi terkemuka <strong>PT Tiara Marga Trakindo (TMT Group)</strong>.</p>
-      <p>Dengan rekam jejak profesional dan dedikasi terhadap standar kualitas tertinggi, Halla Mohana berfokus menghadirkan fasilitas terpadu yang memadukan kebutuhan mobilitas pebisnis modern dengan kenyamanan lingkungan ramah keluarga.</p>
+      <h3>Pengembangan Properti Komersial & Hospitalitas Terpadu</h3>
+      <p><strong>Didirikan pada tahun 2013</strong>, PT Halla Mohana adalah perusahaan pengembang dan pengelola properti perhotelan (<em>hospitality</em>) dan pusat perbelanjaan (<em>mall</em>) yang bernaung di bawah <strong>PT Mahadana Dasha Utama (MahaDasha)</strong> dan bagian dari konglomerasi terkemuka <strong>PT Tiara Marga Trakindo (TMT Group)</strong>.</p>
+      <p>Fokus utama perusahaan adalah mengembangkan fasilitas modern dengan konsep segar (<em>fresh concepts</em>) yang memenuhi tuntutan pelancong bisnis (<em>business travelers</em>) dan kebutuhan gaya hidup urban (<em>urban lifestyle requirements</em>).</p>
+      <p>Portofolio unggulan Halla Mohana berada di kawasan terpadu Jl. Riau No. 147 Pekanbaru, yang mencakup <strong>FOX Hotel Pekanbaru</strong> (225 kamar dengan indoor rooftop sky pool tertinggi di Pekanbaru) dan <strong>Pekanbaru Xchange (PX)</strong>.</p>
     `,
     create_time: '2025-01-15',
     updated: '2026-09-01',
@@ -289,19 +290,19 @@ const initialCorporateInfo: CorporateInfoItem[] = [
     id: 'ci-2',
     no: 2,
     date: '2026-01-15',
-    title: 'Visi, Misi & Nilai-Nilai Perusahaan',
-    url: 'visi-misi-nilai',
+    title: 'Vision & Mission',
+    url: 'vision-and-mission',
     content: `
-      <h3>Visi Kami</h3>
-      <p>Menjadi pengembang dan pengelola properti gaya hidup serta perhotelan terdepan dan terpercaya di Indonesia yang memberikan nilai tambah berkelanjutan bagi seluruh pemangku kepentingan.</p>
-      <h3>Misi Kami</h3>
-      <ul>
-        <li>Mengembangkan properti komersial bermutu tinggi dengan desain arsitektur modern dan fungsional.</li>
-        <li>Menyediakan layanan keramah-tamahan (hospitality) berstandar internasional yang hangat dan autentik.</li>
-        <li>Mendorong pertumbuhan ekonomi lokal melalui penciptaan lapangan kerja dan kemitraan strategis.</li>
-      </ul>
-      <h3>Corporate Values (TMT Group):</h3>
-      <p>Integrity, Continuous Development, Excellence, Proactive, and Synergistic Collaboration.</p>
+      <h3>Visi Perusahaan (Vision)</h3>
+      <p><em>"Menghadirkan produk dan layanan inovatif di bisnis perhotelan untuk menciptakan imbal hasil positif bagi pemegang saham."</em></p>
+      <p><em>("Deliver innovative products and services, in hospitality business to create a positive return for shareholders.")</em></p>
+      <h3>Misi Perusahaan (Mission)</h3>
+      <ol>
+        <li>Terus menciptakan peluang kerja yang bermakna dan menantang bagi sebanyak mungkin masyarakat Indonesia (<em>To continuously create meaningful and challenging job opportunities for as many Indonesians as possible</em>).</li>
+        <li>Memastikan pertumbuhan yang berkelanjutan dan menguntungkan guna memaksimalkan nilai pemegang saham (<em>To ensure sustainable and profitable growth that maximizes shareholder value</em>).</li>
+        <li>Menyediakan solusi bernilai tambah yang mengoptimalkan kepuasan pelanggan (<em>To provide value-added solutions that optimize customer satisfaction</em>).</li>
+        <li>Terlibat secara aktif di dalam masyarakat sebagai warga korporat yang baik (<em>To actively engage in communities as a good corporate citizen</em>).</li>
+      </ol>
     `,
     create_time: '2025-01-15',
     updated: '2026-09-01',
@@ -311,11 +312,32 @@ const initialCorporateInfo: CorporateInfoItem[] = [
     id: 'ci-3',
     no: 3,
     date: '2026-01-20',
-    title: 'Dewan Direksi & Manajemen Profesional',
-    url: 'dewan-direksi-manajemen',
+    title: 'Core Values & Leadership Traits',
+    url: 'core-values-leadership-traits',
     content: `
-      <h3>Kepemimpinan yang Berorientasi ke Depan</h3>
-      <p>Manajemen PT Halla Mohana dipimpin oleh para profesional berpengalaman di bidang manajemen aset properti, perhotelan, keuangan, dan rekayasa teknik dari berbagai latar belakang industri terkemuka di tanah air.</p>
+      <h3>4 Core Values (Standar Grup TMT & MahaDasha)</h3>
+      <ul>
+        <li><strong>Integrity:</strong> Kejujuran, etika bisnis, dan ketepatan janji dalam setiap interaksi kemitraan.</li>
+        <li><strong>Continuous Development:</strong> Senantiasa belajar dan berinovasi meningkatkan mutu fasilitas properti.</li>
+        <li><strong>Excellence:</strong> Memberikan standar layanan hospitality bintang 4 dan manajemen ritel terbaik.</li>
+        <li><strong>Compassion:</strong> Peduli terhadap keselamatan kerja (K3), kesejahteraan insan korporat, dan lingkungan.</li>
+      </ul>
+      <h3>4 Leadership Traits</h3>
+      <p>Competent, Open-minded, Reliable, and Courageous.</p>
+    `,
+    create_time: '2025-01-20',
+    updated: '2026-08-25',
+    visibility: true,
+  },
+  {
+    id: 'ci-4',
+    no: 4,
+    date: '2026-01-20',
+    title: 'Code of Business Conduct & Ethics',
+    url: 'code-of-conduct-ethics',
+    content: `
+      <h3>Tata Kelola Perusahaan yang Baik (GCG)</h3>
+      <p>PT Halla Mohana menjunjung tinggi standar kepatuhan etika bisnis, transparansi, akuntabilitas, responsibilitas, dan independensi sesuai ketetapan MahaDasha & Tiara Marga Trakindo (TMT Group).</p>
     `,
     create_time: '2025-01-20',
     updated: '2026-08-25',
@@ -705,7 +727,7 @@ interface CMSDataContextType {
 
 const CMSDataContext = createContext<CMSDataContextType | null>(null);
 
-const STORAGE_KEY_PREFIX = 'hm_cms_';
+const STORAGE_KEY_PREFIX = 'hm_cms_v10_';
 
 function getStoredItem<T>(key: string, defaultValue: T): T {
   try {

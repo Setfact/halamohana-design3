@@ -107,10 +107,11 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({ onNavigate }) => {
               <div className="space-y-1 pt-2 border-t border-stone-800">
                 <p className="text-white font-bold flex items-center gap-1.5">
                   <MapPin className="h-3 w-3 text-[#8B1E24]" />
-                  <span>Site Office (Pekanbaru):</span>
+                  <span>Site Office / Projects (Pekanbaru):</span>
                 </p>
                 <p className="pl-4">Jl. Riau No. 147, Senapelan, Pekanbaru, Riau 28154</p>
-                <p className="pl-4 text-stone-300">Tel: +62 761 741 5999</p>
+                <p className="pl-4 text-stone-300">Phone FOX Hotel: +62 761 741 5999</p>
+                <p className="pl-4 text-stone-300">Phone Pekanbaru Xchange: +62 761 741 5000</p>
               </div>
 
               <div className="pt-1">
