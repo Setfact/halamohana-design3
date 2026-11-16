@@ -21,6 +21,7 @@ import type {
 const initialGeneralConfig: GeneralConfig = {
   status: 'active',
   logo: '/images/logo/logo.png',
+  logo_dark: '/images/logo/logo-dark-bg.png',
   footer_logo: '/images/logo/footerlogo.jpg',
   copyright: 'Copyright © 2026 PT Halla Mohana. Member of MahaDasha (TMT Group). All rights reserved.',
   check_ip_login: false,
@@ -978,9 +979,15 @@ function setStoredItem<T>(key: string, value: T): void {
 }
 
 export const CMSDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [generalConfig, setGeneralConfig] = useState<GeneralConfig>(() =>
-    getStoredItem('general_config', initialGeneralConfig)
-  );
+  const [generalConfig, setGeneralConfig] = useState<GeneralConfig>(() => {
+    const stored = getStoredItem('general_config', initialGeneralConfig);
+    return {
+      ...initialGeneralConfig,
+      ...stored,
+      logo: '/images/logo/logo.png',
+      logo_dark: '/images/logo/logo-dark-bg.png',
+    };
+  });
   const [currentUser, setCurrentUser] = useState<UserProfile>(() =>
     getStoredItem('current_user', initialCurrentUser)
   );

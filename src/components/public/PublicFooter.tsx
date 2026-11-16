@@ -38,13 +38,13 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({ onNavigate }) => {
             <a
               href="/"
               onClick={(e) => handleLinkClick(e, '/')}
-              className="inline-flex h-12 w-auto items-center rounded-xl bg-white p-2 shadow-sm"
-              title="PT Halla Mohana"
+              className="inline-block group focus:outline-hidden"
+              title="PT Halla Mohana - Beranda"
             >
               <img
-                src={generalConfig.logo}
-                alt="PT Halla Mohana"
-                className="h-9 w-auto object-contain"
+                src={generalConfig.logo_dark || '/images/logo/logo-dark-bg.png'}
+                alt="PT Halla Mohana Logo"
+                className="h-12 sm:h-13 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
               />
             </a>
 
@@ -54,11 +54,11 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({ onNavigate }) => {
 
             <div className="flex items-center gap-3 pt-1">
               {generalConfig.footer_logo && (
-                <div className="flex h-10 w-auto items-center rounded-lg bg-white p-1.5 shadow-2xs">
+                <div className="flex h-9 w-auto items-center rounded border border-stone-800 bg-white/95 p-1 shadow-2xs">
                   <img
                     src={generalConfig.footer_logo}
-                    alt="Footer Sub-brand"
-                    className="h-7 w-auto object-contain"
+                    alt="Member of MahaDasha - TMT Group"
+                    className="h-6 w-auto object-contain"
                   />
                 </div>
               )}

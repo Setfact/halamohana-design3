@@ -1,6 +1,7 @@
 export interface GeneralConfig {
   status: 'active' | 'maintenance';
   logo: string;
+  logo_dark?: string;
   footer_logo: string;
   copyright: string;
   check_ip_login: boolean;

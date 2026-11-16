@@ -66,11 +66,11 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({
           title="PT Halla Mohana - Beranda"
           aria-label="PT Halla Mohana - Beranda"
         >
-          <div className="flex h-11 sm:h-12 w-auto items-center">
+          <div className="flex h-12 sm:h-14 w-auto items-center">
             <img
               src={generalConfig.logo}
               alt="PT Halla Mohana Logo"
-              className="h-9 sm:h-11 w-auto object-contain transition-transform group-hover:scale-[1.02]"
+              className="h-[42px] sm:h-[48px] w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
             />
           </div>
         </a>
@@ -142,8 +142,8 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({
                 >
                   <img
                     src={generalConfig.logo}
-                    alt="Halla Mohana"
-                    className="h-9 w-auto object-contain"
+                    alt="PT Halla Mohana Logo"
+                    className="h-[42px] w-auto object-contain"
                   />
                 </a>
                 <button
