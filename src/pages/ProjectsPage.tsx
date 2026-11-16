@@ -15,70 +15,70 @@ interface ProjectsPageProps {
 }
 
 export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
-  // Gallery states for both flagship assets
+  // Gallery states for both flagship assets (all 12 unique, zero duplicates)
   const hotelPhotos = [
     {
-      url: '/images/hotel/overview-facade-landscape.jpg',
+      url: '/images/hotel/exterior-drone.jpg',
       title: 'Fasad Menara FOX Harris Hotel',
-      desc: 'Menara akomodasi 12 lantai berkonsep dinamis dan modern.',
+      desc: 'Menara akomodasi modern 14 lantai berkonsep dinamis dan segar di koridor Jl. Riau.',
     },
     {
-      url: '/images/hotel/showcase-hotel-facade.jpg',
-      title: 'Perspektif Eksterior Urban',
-      desc: 'Arsitektur kontemporer di koridor strategis Jl. Riau Pekanbaru.',
-    },
-    {
-      url: '/images/hotel/pool-infinity.jpg',
-      title: 'Indoor Rooftop Sky Pool',
-      desc: 'Kolam renang indoor rooftop tertinggi di Kota Pekanbaru.',
+      url: '/images/hotel/rooftop-skypool-evening.jpg',
+      title: 'Indoor Rooftop Sky Pool & Skyline Lounge',
+      desc: 'Kolam renang indoor rooftop tertinggi di Pekanbaru dengan pemandangan cakrawala kota saat senja.',
     },
     {
       url: '/images/hotel/room-suite-bedroom.jpg',
-      title: 'Suite Room & Bedroom',
-      desc: 'Interior kamar nyaman dan modern berstandar bintang empat.',
+      title: 'Executive Suite Room & Bedroom',
+      desc: 'Interior kamar nyaman dan modern berstandar bintang empat dengan fasilitas lengkap.',
     },
     {
-      url: '/images/hotel/restaurant-wtf-main.jpg',
-      title: 'Where’s The Food (WTF) Restaurant',
-      desc: 'Restoran utama dengan konsep santap santai dan menu nusantara.',
+      url: '/images/hotel/bar-lounge-interior.jpg',
+      title: 'Lobby Bar & Executive Lounge',
+      desc: 'Area bar modern dengan tata pencahayaan arsitektural hangat untuk santai dan temu bisnis.',
     },
     {
-      url: '/images/hotel/ballroom-orange-fox.jpg',
-      title: 'Grand Ballroom MICE',
-      desc: 'Fasilitas pertemuan representatif untuk konvensi dan pernikahan.',
+      url: '/images/hotel/restaurant-wtf-buffet.jpg',
+      title: 'Where’s The Food (WTF) Restaurant Buffet',
+      desc: 'Sajian buffet sarapan dan hidangan nusantara kontemporer dengan tata ruang santap lapang.',
+    },
+    {
+      url: '/images/hotel/meeting-roundtable-fox.jpg',
+      title: 'MICE Ballroom & Meeting Roundtable',
+      desc: 'Fasilitas pertemuan korporat dan seminar berstandar bintang empat dengan branding resmi FOX Harris Hotels.',
     },
   ];
 
   const mallPhotos = [
     {
-      url: '/images/mall/px-facade-integrated.jpg',
-      title: 'Fasad Terpadu Pekanbaru Xchange',
-      desc: 'Podium ritel 3 lantai dengan kanopi geometris modern.',
-    },
-    {
       url: '/images/mall/hero-px-mall.jpg',
-      title: 'Entrance Plaza Pekanbaru Xchange',
-      desc: 'Akses masuk utama pusat perbelanjaan dan area komersial.',
+      title: 'Fasad Ikonik Pekanbaru Xchange',
+      desc: 'Fasad melengkung bermotif segitiga geometris modern di koridor Jl. Riau No. 147.',
     },
     {
       url: '/images/mall/cinema-xxi.jpg',
       title: 'Cinema XXI (Lantai 3)',
-      desc: 'Bioskop premium dengan fasilitas studio modern dan terkini.',
+      desc: 'Bioskop premium dengan fasilitas studio modern dan area refreshment premier.',
     },
     {
       url: '/images/mall/alfresco-dining.jpg',
-      title: 'Alfresco Dining Corridor',
-      desc: 'Area kuliner terbuka di Ground Floor untuk tempat santai komunitas.',
+      title: 'Alfresco Dining Promenade',
+      desc: 'Area kuliner terbuka di Ground Floor untuk tempat santai komunitas bersama tenant pilihan.',
+    },
+    {
+      url: '/images/mall/retail-fashion.jpg',
+      title: 'Tenant Busana & Lifestyle',
+      desc: 'Pilihan ritel busana dan gaya hidup kontemporer bagi keluarga dan pengunjung urban.',
     },
     {
       url: '/images/mall/atrium-corridor.jpg',
-      title: 'Koridor Ritel & Atrium',
-      desc: 'Sirkulasi belanja yang lapang dan terhubung dengan menara hotel.',
+      title: 'Main Atrium & Food Galore',
+      desc: 'Sirkulasi belanja yang lapang dan terhubung langsung dengan koridor menara hotel.',
     },
     {
       url: '/images/mall/plaza-live-event.jpg',
-      title: 'Plaza Event Komunitas',
-      desc: 'Panggung terbuka untuk pameran dan pertunjukan komunitas.',
+      title: 'Lifestyle & Optical Care Store',
+      desc: 'Gerai layanan kesehatan mata dan aksesoris gaya hidup modern di lantai komersial.',
     },
   ];
 
@@ -91,7 +91,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
       <div className="relative bg-[#0F1117] text-white py-16 sm:py-24 border-b border-stone-800 overflow-hidden text-left">
         <div className="absolute inset-0">
           <img
-            src="/images/hotel/exterior-facade.jpg"
+            src="/images/hotel/overview-facade-landscape.jpg"
             alt="Kawasan Terpadu PT Halla Mohana"
             className="w-full h-full object-cover object-center opacity-25"
           />
