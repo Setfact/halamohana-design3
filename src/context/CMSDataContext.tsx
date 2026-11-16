@@ -336,36 +336,32 @@ const initialNews: NewsItem[] = [
   {
     id: 'news-1',
     no: 1,
+    title: 'Instalasi Panel Surya Rooftop Sebagai Langkah Konkret Dekarbonisasi Kawasan',
+    url: 'instalasi-panel-surya-rooftop-dekarbonisasi',
+    date: '2026-01-15',
+    category: 'News',
+    imageUrl: '/images/hotel/exterior-drone.jpg',
+    description: `
+      <p><strong>Pekanbaru, Riau</strong> — PT Halla Mohana bersama PT Mahadana Dasha Utama (MahaDasha) dan PT Tiara Marga Trakindo (TMT Group) secara resmi mengoperasikan sistem pembangkit listrik tenaga surya (PLTS) atap di kawasan terpadu Jl. Riau No. 147 Pekanbaru. Inisiatif ini merupakan bagian dari peta jalan keberlanjutan korporat untuk mereduksi emisi karbon hingga 25% dan mendukung operasional ramah lingkungan di FOX Harris Hotel dan Pekanbaru Xchange (PX).</p>
+      <p>Pemasangan modul fotovoltaik berkapasitas tinggi di rooftop bangunan hotel dan mall diharapkan dapat menghasilkan energi bersih hingga 320.000 kWh per tahun, sekaligus mengoptimalkan efisiensi energi kawasan secara terukur.</p>
+      <p>Penerapan sistem tenaga surya ini menegaskan komitmen PT Halla Mohana terhadap prinsip Environmental, Social, and Governance (ESG) dalam industri perhotelan dan properti ritel komersial nasional.</p>
+    `,
+    create_time: '2026-01-15 09:00',
+    updated: '2026-01-15 10:30',
+    visibility: true,
+    featured: true,
+  },
+  {
+    id: 'news-2',
+    no: 2,
     title: 'Pekanbaru Xchange Memperkuat Posisi Sebagai Pusat Gaya Hidup & Komunitas Terdepan di Riau',
     url: 'pekanbaru-xchange-pusat-gaya-hidup-terdepan',
     date: '2026-09-15',
-    category: 'Corporate Release',
+    category: 'Press Release',
     imageUrl: '/images/mall/plaza-live-event.jpg',
     description: `
       <p><strong>Pekanbaru, Riau</strong> — PT Halla Mohana secara konsisten melanjutkan penguatan konsep Pekanbaru Xchange (PX) sebagai episentrum rekreasi, belanja, dan pertunjukan kreatif di Pekanbaru. Dengan penambahan ragam tenant kuliner alfresco serta agenda hiburan berkala, PX menjadi destinasi pilihan utama keluarga dan kalangan muda profesional.</p>
-      <h4>Inovasi Fasilitas & Kemudahan Akses</h4>
       <p>Direktur Properti PT Halla Mohana menyatakan bahwa integrasi langsung dengan FOX Harris Hotel memberikan keunggulan sinergis yang signifikan bagi pengunjung luar kota maupun masyarakat setempat.</p>
-      <table>
-        <thead>
-          <tr>
-            <th>Fasilitas</th>
-            <th>Kapasitas</th>
-            <th>Keunggulan</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Alfresco Plaza</td>
-            <td>800 Pengunjung</td>
-            <td>Panggung Musik & Ruang Terbuka</td>
-          </tr>
-          <tr>
-            <td>Retail Tenancy</td>
-            <td>120+ Brands</td>
-            <td>F&B, Fashion, Cinema XXI</td>
-          </tr>
-        </tbody>
-      </table>
     `,
     create_time: '2026-09-15 10:00',
     updated: '2026-09-15 11:30',
@@ -373,12 +369,12 @@ const initialNews: NewsItem[] = [
     featured: true,
   },
   {
-    id: 'news-2',
-    no: 2,
-    title: 'FOX Harris Hotel Pekanbaru Raih Penghargaan Hospitality Excellence Award',
+    id: 'news-3',
+    no: 3,
+    title: 'FOX Harris Hotel Pekanbaru Raih Penghargaan Hospitality Excellence Award 2026',
     url: 'fox-harris-hotel-raih-penghargaan-hospitality',
     date: '2026-08-20',
-    category: 'Awards & Achievement',
+    category: 'News',
     imageUrl: '/images/hotel/pool-infinity.jpg',
     description: `
       <p><strong>Jakarta</strong> — Berkat komitmen konsisten terhadap pelayanan prima, kebersihan, dan inovasi pengalaman tamu, FOX Harris Hotel Pekanbaru yang dikelola PT Halla Mohana berhasil meraih predikat Best City Business Hotel dalam ajang Tourism & Hospitality Awards tahun ini.</p>
@@ -390,18 +386,115 @@ const initialNews: NewsItem[] = [
     featured: false,
   },
   {
-    id: 'news-3',
-    no: 3,
-    title: 'Komitmen Keberlanjutan Lingkungan Melalui Program TMT Green Building & Waste Reduction',
-    url: 'komitmen-keberlanjutan-lingkungan-tmt',
-    date: '2026-07-10',
-    category: 'Sustainability',
-    imageUrl: '/images/hotel/exterior-drone.jpg',
+    id: 'news-4',
+    no: 4,
+    title: 'Sinergi MahaDasha dan Jaringan Perhotelan Terkemuka Perkuat Standar Layanan Unggul',
+    url: 'sinergi-mahadasha-jaringan-perhotelan-layanan-unggul',
+    date: '2025-11-12',
+    category: 'Press Release',
+    imageUrl: '/images/hotel/hero-corporate-wide.jpg',
     description: `
-      <p>Sebagai bagian dari MahaDasha dan TMT Group, PT Halla Mohana menerapkan efisiensi konsumsi energi terbarukan, pengelolaan limbah terpadu, dan pengurangan plastik sekali pakai di seluruh unit operasional properti dan hotel yang dikelola.</p>
+      <p><strong>Jakarta</strong> — PT Mahadana Dasha Utama (MahaDasha) melalui anak usahanya PT Halla Mohana terus memperkuat kemitraan strategis dengan operator perhotelan global The Ascott Limited untuk mempertahankan standar pelayanan bintang 4 terbaik di FOX Harris Hotel Pekanbaru.</p>
+      <p>Langkah ini mencakup peningkatan fasilitas kamar, adopsi teknologi reservasi cerdas, dan pelatihan berkelanjutan bagi seluruh staf pelayanan.</p>
     `,
-    create_time: '2026-07-10 09:30',
-    updated: '2026-07-10 09:30',
+    create_time: '2025-11-12 11:00',
+    updated: '2025-11-12 11:00',
+    visibility: true,
+    featured: false,
+  },
+  {
+    id: 'news-5',
+    no: 5,
+    title: 'Revitalisasi Area Alfresco Dining Pekanbaru Xchange Hadirkan Pengalaman Kuliner Terbuka',
+    url: 'revitalisasi-alfresco-dining-px-kuliner-terbuka',
+    date: '2025-06-18',
+    category: 'News',
+    imageUrl: '/images/mall/alfresco-dining.jpg',
+    description: `
+      <p><strong>Pekanbaru</strong> — Merespons antusiasme pengunjung terhadap konsep kuliner semi-terbuka, PT Halla Mohana merampungkan peremajaan koridor Alfresco Dining di Ground Floor Pekanbaru Xchange. Hadirnya brand kafe nasional dan tata pencahayaan arsitektural modern menjadikan area ini titik kumpul favorit komunitas.</p>
+    `,
+    create_time: '2025-06-18 15:30',
+    updated: '2025-06-18 15:30',
+    visibility: true,
+    featured: false,
+  },
+  {
+    id: 'news-6',
+    no: 6,
+    title: 'PT Halla Mohana Bukukan Pertumbuhan Kunjungan dan Okupansi Positif Sepanjang 2024',
+    url: 'halla-mohana-pertumbuhan-positif-2024',
+    date: '2024-12-10',
+    category: 'Press Release',
+    imageUrl: '/images/hotel/lobby-grand.jpg',
+    description: `
+      <p><strong>Jakarta</strong> — PT Halla Mohana mencatatkan kinerja operasional yang solid sepanjang tahun 2024. Rata-rata tingkat keterisian kamar (occupancy rate) FOX Harris Hotel Pekanbaru menembus angka di atas rata-rata industri regional, ditopang oleh tingginya aktivitas kegiatan MICE korporat dan pemerintahan.</p>
+    `,
+    create_time: '2024-12-10 10:00',
+    updated: '2024-12-10 10:00',
+    visibility: true,
+    featured: false,
+  },
+  {
+    id: 'news-7',
+    no: 7,
+    title: 'Pekanbaru Xchange Hadirkan Rangkaian Acara Kreatif Bersama Komunitas Seni Riau',
+    url: 'px-hadirkan-acara-kreatif-komunitas-riau',
+    date: '2024-04-25',
+    category: 'News',
+    imageUrl: '/images/mall/cinema-xxi.jpg',
+    description: `
+      <p><strong>Pekanbaru</strong> — Sebagai wujud dukungan terhadap pelaku ekonomi kreatif di Riau, Pekanbaru Xchange berkolaborasi dengan komunitas seni lokal menyelenggarakan pameran karya visual dan pertunjukan musik akustik di atrium mall.</p>
+    `,
+    create_time: '2024-04-25 16:00',
+    updated: '2024-04-25 16:00',
+    visibility: true,
+    featured: false,
+  },
+  {
+    id: 'news-8',
+    no: 8,
+    title: 'Satu Dekade PT Halla Mohana: Dedikasi Menghadirkan Ruang Urban Bernilai Tambah',
+    url: 'satu-dekade-halla-mohana-dedikasi-ruang-urban',
+    date: '2023-10-18',
+    category: 'Press Release',
+    imageUrl: '/images/hotel/exterior-facade.jpg',
+    description: `
+      <p><strong>Jakarta / Pekanbaru</strong> — Memperingati perjalanan 10 tahun sejak didirikan pada tahun 2013, PT Halla Mohana menegaskan kembali komitmennya dalam mengembangkan properti komersial berkualitas tinggi di bawah naungan PT Mahadana Dasha Utama dan TMT Group.</p>
+    `,
+    create_time: '2023-10-18 09:00',
+    updated: '2023-10-18 09:00',
+    visibility: true,
+    featured: false,
+  },
+  {
+    id: 'news-9',
+    no: 9,
+    title: 'Peremajaan Fasilitas Grand Ballroom FOX Harris Hotel Dukung Kebutuhan MICE Regional',
+    url: 'peremajaan-grand-ballroom-fox-harris-mice',
+    date: '2023-05-14',
+    category: 'News',
+    imageUrl: '/images/hotel/ballroom-orange-fox.jpg',
+    description: `
+      <p><strong>Pekanbaru</strong> — PT Halla Mohana menyelesaikan peningkatan fasilitas sistem tata suara, pencahayaan LED cerdas, serta interior Grand Ballroom FOX Harris Hotel Pekanbaru guna mengakomodasi perhelatan konferensi nasional dan pesta pernikahan berskala besar.</p>
+    `,
+    create_time: '2023-05-14 13:00',
+    updated: '2023-05-14 13:00',
+    visibility: true,
+    featured: false,
+  },
+  {
+    id: 'news-10',
+    no: 10,
+    title: 'Implementasi Standar Keamanan & Kesehatan Kerja (K3) Terpadu di Seluruh Unit Properti',
+    url: 'implementasi-k3-terpadu-seluruh-aset',
+    date: '2022-09-08',
+    category: 'News',
+    imageUrl: '/images/hotel/gym-fitness.jpg',
+    description: `
+      <p><strong>Pekanbaru</strong> — Sebagai bagian dari pilar Compassion dan Excellence dalam nilai inti korporat, PT Halla Mohana menerapkan sistem manajemen keselamatan kerja dan proteksi gedung terintegrasi di FOX Harris Hotel Pekanbaru dan Pekanbaru Xchange.</p>
+    `,
+    create_time: '2022-09-08 10:00',
+    updated: '2022-09-08 10:00',
     visibility: true,
     featured: false,
   },
@@ -941,9 +1034,13 @@ export const CMSDataProvider: React.FC<{ children: React.ReactNode }> = ({ child
   const [corporateInfo, setCorporateInfo] = useState<CorporateInfoItem[]>(() =>
     getStoredItem('corporate_info', initialCorporateInfo)
   );
-  const [newsList, setNewsList] = useState<NewsItem[]>(() =>
-    getStoredItem('news_list', initialNews)
-  );
+  const [newsList, setNewsList] = useState<NewsItem[]>(() => {
+    const stored = getStoredItem('news_list', initialNews);
+    if (!stored || stored.length <= 3) {
+      return initialNews;
+    }
+    return stored;
+  });
   const [gallery, setGallery] = useState<GalleryItem[]>(() =>
     getStoredItem('gallery', initialGallery)
   );

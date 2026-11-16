@@ -30,6 +30,7 @@ function AppContent() {
     if (p.includes('/about') || p.includes('/corporate-info') || p.includes('/profil')) return '/about';
     if (p.includes('/projects') || p.includes('/project') || p.includes('/properti') || p.includes('/portofolio')) return '/projects';
     if (p.includes('/gallery') || p.includes('/galeri') || p.includes('/dokumentasi')) return '/gallery';
+    if (p.startsWith('/news/') && p.length > 6) return p;
     if (p.includes('/news') || p.includes('/berita') || p.includes('/press')) return '/news';
     if (p.includes('/career') || p.includes('/karir') || p.includes('/lowongan')) return '/career';
     if (p.includes('/contact') || p.includes('/kontak') || p.includes('/hubungi')) return '/contact';
@@ -86,7 +87,11 @@ function AppContent() {
       '/contact': 'Hubungi Kami | PT Halla Mohana',
       '/admin': 'Console CMS Administrator | PT Halla Mohana',
     };
-    document.title = titles[currentPath] || 'PT Halla Mohana';
+    if (currentPath.startsWith('/news/')) {
+      document.title = 'Kabar & Siaran Pers | PT Halla Mohana';
+    } else {
+      document.title = titles[currentPath] || 'PT Halla Mohana';
+    }
   }, [currentPath]);
 
   // Maintenance mode handling
@@ -142,8 +147,8 @@ function AppContent() {
           <ProjectsPage onNavigate={navigate} />
         ) : currentPath === '/gallery' ? (
           <GalleryPage onNavigate={navigate} />
-        ) : currentPath === '/news' ? (
-          <NewsPage onNavigate={navigate} />
+        ) : currentPath.startsWith('/news') ? (
+          <NewsPage onNavigate={navigate} currentPath={currentPath} />
         ) : currentPath === '/career' ? (
           <CareerPage onNavigate={navigate} />
         ) : currentPath === '/contact' ? (
