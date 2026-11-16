@@ -11,15 +11,16 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
   const visibleBanners = banners.filter((b) => b.visibility).sort((a, b) => a.order - b.order);
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
-  // Auto-play timer
+  // Auto-play timer (pauses on hover)
   useEffect(() => {
-    if (visibleBanners.length <= 1) return;
+    if (visibleBanners.length <= 1 || isPaused) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % visibleBanners.length);
     }, 7500);
     return () => clearInterval(interval);
-  }, [visibleBanners.length]);
+  }, [visibleBanners.length, isPaused]);
 
   if (visibleBanners.length === 0) return null;
 
@@ -41,7 +42,12 @@ export const HeroSlider: React.FC<HeroSliderProps> = ({ onNavigate }) => {
   };
 
   return (
-    <section id="home" className="relative min-h-[640px] sm:min-h-[700px] lg:min-h-[740px] w-full overflow-hidden bg-[#0F1117] text-left">
+    <section
+      id="home"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      className="relative min-h-[640px] sm:min-h-[700px] lg:min-h-[740px] w-full overflow-hidden bg-[#0F1117] text-left"
+    >
       {/* Background Slides with Soft Vignette Overlay */}
       {visibleBanners.map((banner, idx) => (
         <div

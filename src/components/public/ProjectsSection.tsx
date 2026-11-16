@@ -28,7 +28,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onNavigate }) 
       title: 'Pekanbaru Xchange (PX)',
       category: 'Commercial Retail & Lifestyle Mall',
       location: 'Jl. Riau No. 147, Senapelan, Pekanbaru, Riau',
-      imageUrl: '/images/mall/hero-px-mall.jpg',
+      imageUrl: '/images/mall/px-facade-integrated.jpg',
       description: 'Pusat perbelanjaan dan rekreasi modern terintegrasi dengan bioskop Cinema XXI, koridor kuliner Alfresco Dining, dan plaza terbuka event komunitas.',
       actionText: 'Jelajahi Ritel & Tenan',
     },
