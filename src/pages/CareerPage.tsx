@@ -18,7 +18,7 @@ export const CareerPage: React.FC<CareerPageProps> = ({ onNavigate }) => {
           { label: 'Beranda', href: '/' },
           { label: 'Karir & Talenta' },
         ]}
-        imageUrl="/images/hotel/restaurant-wtf-main.jpg"
+        imageUrl="/images/New-Asset/Hotel/Restaurant%203.png"
         onNavigate={onNavigate}
       />
 

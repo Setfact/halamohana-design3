@@ -35,7 +35,7 @@ export const ManageProjectModule: React.FC = () => {
     title: '',
     category: 'Hospitality & Hotel' as ProjectItem['category'],
     location: '',
-    imageUrl: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&auto=format&fit=crop&q=80',
+    imageUrl: '/images/New-Asset/Hotel/Deluxe.png',
     gallery: [] as string[],
     description: '',
     specs: [
@@ -52,7 +52,7 @@ export const ManageProjectModule: React.FC = () => {
       title: '',
       category: 'Hospitality & Hotel',
       location: 'Pekanbaru, Riau',
-      imageUrl: 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1200&auto=format&fit=crop&q=80',
+      imageUrl: '/images/New-Asset/Hotel/Deluxe.png',
       gallery: [],
       description: 'Deskripsi lengkap keunggulan properti komersial atau hotel...',
       specs: [

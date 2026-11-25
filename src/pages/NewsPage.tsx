@@ -1,6 +1,12 @@
 import React, { useState, useMemo, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useCMSData } from '@/context/CMSDataContext';
 import { PageHeader } from '@/components/ui/PageHeader';
+import {
+  ArchitecturalStagger,
+  ArchitecturalStaggerItem,
+  ARCHITECTURAL_EASE,
+} from '@/components/ui/MotionPrimitives';
 import { Calendar, ArrowLeft, Share2, Copy, Check, ArrowRight, Eye, RefreshCw } from 'lucide-react';
 import { toast } from 'sonner';
 import type { NewsItem } from '@/types';
@@ -155,7 +161,7 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onNavigate, currentPath = '/
                 { label: 'Kabar & Siaran Pers' },
               ]
         }
-        imageUrl="/images/hotel/hero-corporate-wide.jpg"
+        imageUrl="/images/New-Asset/Hotel/Restaurant%202.png"
         onNavigate={onNavigate}
       />
 
@@ -346,11 +352,19 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onNavigate, currentPath = '/
             {/* Swaps between Grid List or Full Article Detail View      */}
             {/* ======================================================== */}
             <main className="lg:col-span-9 xl:col-span-9">
+              <AnimatePresence mode="wait">
               {activeArticle ? (
                 /* ---------------------------------------------------- */
                 /* ARTICLE DETAIL VIEW (Matches Screenshot 2 Layout)    */
                 /* ---------------------------------------------------- */
-                <article className="space-y-6">
+                <motion.article
+                  key={`detail-${activeArticle.id}`}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3, ease: ARCHITECTURAL_EASE }}
+                  className="space-y-6"
+                >
                   {/* Back to List Navigation */}
                   <div className="flex items-center justify-between pb-4 border-b border-[#E5E5E5]">
                     <button
@@ -431,12 +445,19 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onNavigate, currentPath = '/
                       </button>
                     </div>
                   </div>
-                </article>
+                </motion.article>
               ) : (
                 /* ---------------------------------------------------- */
                 /* GRID VIEW (Matches Screenshot 1 Layout)             */
                 /* ---------------------------------------------------- */
-                <div className="space-y-6">
+                <motion.div
+                  key={`grid-${selectedCategory}-${selectedYear}`}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3, ease: ARCHITECTURAL_EASE }}
+                  className="space-y-6"
+                >
                   {/* Filter Status Subhead */}
                   <div className="flex items-center justify-between pb-3 border-b border-[#E5E5E5]">
                     <div className="flex items-center gap-2 text-xs text-[#52525B]">
@@ -465,52 +486,57 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onNavigate, currentPath = '/
 
                   {/* Square Card Grid (2 Columns on Desktop) */}
                   {filteredNews.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <ArchitecturalStagger className="grid grid-cols-1 md:grid-cols-2 gap-6" staggerDelay={0.07}>
                       {filteredNews.map((item) => (
-                        <article
-                          key={item.id}
-                          onClick={() => handleSelectArticle(item)}
-                          className="group relative aspect-square w-full overflow-hidden rounded border border-[#E5E5E5] bg-stone-900 cursor-pointer shadow-2xs hover:border-[#8B1E24] transition-all duration-300"
-                        >
-                          {/* Full Background Photograph */}
-                          <img
-                            src={item.imageUrl}
-                            alt={item.title}
-                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                          />
+                        <ArchitecturalStaggerItem key={item.id}>
+                          <motion.article
+                            whileHover={{ y: -4 }}
+                            transition={{ duration: 0.28, ease: ARCHITECTURAL_EASE }}
+                            onClick={() => handleSelectArticle(item)}
+                            className="group relative aspect-square w-full overflow-hidden rounded border border-[#E5E5E5] bg-stone-900 cursor-pointer shadow-2xs hover:border-[#8B1E24] transition-colors duration-300"
+                          >
+                            {/* Full Background Photograph */}
+                            <img
+                              src={item.imageUrl}
+                              alt={item.title}
+                              loading="lazy"
+                              decoding="async"
+                              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                            />
 
-                          {/* Gradient Overlays for High-Contrast Readability */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/30 group-hover:from-black/98 transition-colors" />
+                            {/* Gradient Overlays for High-Contrast Readability */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/45 to-black/30 group-hover:from-black/98 transition-colors" />
 
-                          {/* Top Header Tag inside Card */}
-                          <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-white/90">
-                            <span className="text-[11px] font-medium tracking-widest uppercase text-white/80">
-                              PT Halla Mohana
-                            </span>
-                            <span className="text-[10px] tracking-wider uppercase bg-black/40 px-2 py-0.5 rounded text-white/90 backdrop-blur-xs">
-                              {item.category}
-                            </span>
-                          </div>
-
-                          {/* Bottom Typography & Title Overlay inside Card */}
-                          <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 space-y-2 text-white">
-                            <p className="text-[11px] text-white/70 font-medium tracking-wide">
-                              {formatDate(item.date)}
-                            </p>
-
-                            <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-white leading-snug group-hover:text-red-100 transition-colors line-clamp-3">
-                              {item.title}
-                            </h3>
-
-                            <div className="pt-2 flex items-center text-xs font-semibold text-white/90 group-hover:text-white transition-colors">
-                              <span className="inline-flex items-center gap-1.5 group-hover:underline">
-                                Baca Rilis Lengkap <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                            {/* Top Header Tag inside Card */}
+                            <div className="absolute top-4 left-4 right-4 flex items-center justify-between text-white/90">
+                              <span className="text-[11px] font-medium tracking-widest uppercase text-white/80">
+                                PT Halla Mohana
+                              </span>
+                              <span className="text-[10px] tracking-wider uppercase bg-black/55 px-2 py-0.5 rounded text-white/95">
+                                {item.category}
                               </span>
                             </div>
-                          </div>
-                        </article>
+
+                            {/* Bottom Typography & Title Overlay inside Card */}
+                            <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6 space-y-2 text-white">
+                              <p className="text-[11px] text-white/70 font-medium tracking-wide">
+                                {formatDate(item.date)}
+                              </p>
+
+                              <h3 className="text-base sm:text-lg lg:text-xl font-semibold text-white leading-snug group-hover:text-red-100 transition-colors line-clamp-3">
+                                {item.title}
+                              </h3>
+
+                              <div className="pt-2 flex items-center text-xs font-semibold text-white/90 group-hover:text-white transition-colors">
+                                <span className="inline-flex items-center gap-1.5 group-hover:underline">
+                                  Baca Rilis Lengkap <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                                </span>
+                              </div>
+                            </div>
+                          </motion.article>
+                        </ArchitecturalStaggerItem>
                       ))}
-                    </div>
+                    </ArchitecturalStagger>
                   ) : (
                     /* Empty Archive State */
                     <div className="py-20 text-center space-y-4 border border-dashed border-[#E5E5E5] rounded bg-[#F7F7F5]">
@@ -532,8 +558,9 @@ export const NewsPage: React.FC<NewsPageProps> = ({ onNavigate, currentPath = '/
                       </div>
                     </div>
                   )}
-                </div>
+                </motion.div>
               )}
+              </AnimatePresence>
             </main>
           </div>
         </div>

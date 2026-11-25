@@ -48,7 +48,7 @@ export const BannerModule: React.FC = () => {
       subtitle: '',
       ctaText: 'Pelajari Selengkapnya',
       ctaUrl: '#projects',
-      imageUrl: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&auto=format&fit=crop&q=85',
+      imageUrl: '/images/New-Asset/Mall%20Photo/PX%20MALL.png',
       visibility: true,
       order: banners.length + 1,
     });
@@ -280,8 +280,8 @@ export const BannerModule: React.FC = () => {
                   Pilih dari Media Library
                 </Button>
                 <input
-                  type="url"
-                  placeholder="Atau tempel URL gambar langsung..."
+                  type="text"
+                  placeholder="Atau tempel path / URL gambar..."
                   value={formData.imageUrl}
                   onChange={(e) => setFormData({ ...formData, imageUrl: e.target.value })}
                   className="w-full rounded-lg border border-slate-300 bg-white px-2.5 py-1 text-xs focus:border-[#7A152E] focus:outline-hidden"

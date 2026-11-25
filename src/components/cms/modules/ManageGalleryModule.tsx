@@ -34,8 +34,8 @@ export const ManageGalleryModule: React.FC = () => {
     title: '',
     category: 'FOX Harris Hotel',
     date: new Date().toISOString().split('T')[0],
-    thumbnail: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&auto=format&fit=crop&q=80',
-    imageUrl: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&auto=format&fit=crop&q=85',
+    thumbnail: '/images/New-Asset/Hotel/Pool.png',
+    imageUrl: '/images/New-Asset/Hotel/Pool.png',
     visibility: true,
   });
 
@@ -45,8 +45,8 @@ export const ManageGalleryModule: React.FC = () => {
       title: '',
       category: 'FOX Harris Hotel',
       date: new Date().toISOString().split('T')[0],
-      thumbnail: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&auto=format&fit=crop&q=80',
-      imageUrl: 'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=1600&auto=format&fit=crop&q=85',
+      thumbnail: '/images/New-Asset/Hotel/Pool.png',
+      imageUrl: '/images/New-Asset/Hotel/Pool.png',
       visibility: true,
     });
     setIsModalOpen(true);

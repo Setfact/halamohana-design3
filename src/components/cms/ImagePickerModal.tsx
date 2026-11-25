@@ -26,7 +26,7 @@ export const ImagePickerModal: React.FC<ImagePickerModalProps> = ({
   // Upload state
   const [uploadName, setUploadName] = useState('');
   const [uploadUrl, setUploadUrl] = useState('');
-  const [uploadFolder, setUploadFolder] = useState('/images/general');
+  const [uploadFolder, setUploadFolder] = useState('/images/New-Asset/Hotel');
   const [showUploadForm, setShowUploadForm] = useState(false);
 
   const imageFiles = mediaFiles.filter((f) => f.type === 'image');
@@ -98,10 +98,10 @@ export const ImagePickerModal: React.FC<ImagePickerModalProps> = ({
         {isCustomMode ? (
           <div className="py-4 space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-700">URL Gambar Web / CDN</label>
+              <label className="block text-xs font-semibold text-slate-700">Path / URL Gambar</label>
               <input
-                type="url"
-                placeholder="https://images.unsplash.com/photo-..."
+                type="text"
+                placeholder="/images/New-Asset/Hotel/Lobby.png"
                 value={customUrl}
                 onChange={(e) => setCustomUrl(e.target.value)}
                 className="mt-1 w-full rounded-xl border border-slate-300 px-3.5 py-2.5 text-sm focus:border-[#7A152E] focus:outline-hidden"
@@ -189,10 +189,10 @@ export const ImagePickerModal: React.FC<ImagePickerModalProps> = ({
                   </div>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700">URL Gambar</label>
+                  <label className="block text-xs font-semibold text-slate-700">Path / URL Gambar</label>
                   <input
-                    type="url"
-                    placeholder="https://images.unsplash.com/..."
+                    type="text"
+                    placeholder="/images/New-Asset/Hotel/Lobby.png"
                     value={uploadUrl}
                     onChange={(e) => setUploadUrl(e.target.value)}
                     required

@@ -195,6 +195,8 @@ export interface CareerApplication {
   phone: string;
   portfolioUrl?: string;
   resumeName: string;
+  resumeSize?: string;
+  resumeUrl?: string;
   coverLetter?: string;
   submittedAt: string;
   status: 'Pending' | 'Reviewed' | 'Interviewed' | 'Rejected';

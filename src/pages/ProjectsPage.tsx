@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+  ArchitecturalReveal,
+  ARCHITECTURAL_EASE,
+} from '@/components/ui/MotionPrimitives';
 import {
   ChevronRight,
   ArrowRight,
-  MapPin,
-  Building2,
-  Phone,
-  Film,
-  Utensils,
-  Maximize2
 } from 'lucide-react';
 
 interface ProjectsPageProps {
@@ -15,70 +14,71 @@ interface ProjectsPageProps {
 }
 
 export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
-  // Gallery states for both flagship assets (all 12 unique, zero duplicates)
+  // Hotel: 6 unique photos - Lobby, Pool Lounge, Deluxe King, Deluxe Twin, Bar, WTF Restaurant Buffet
   const hotelPhotos = [
     {
-      url: '/images/hotel/exterior-drone.jpg',
-      title: 'Fasad Menara FOX Harris Hotel',
-      desc: 'Menara akomodasi modern 14 lantai berkonsep dinamis dan segar di koridor Jl. Riau.',
+      url: '/images/New-Asset/Hotel/Lobby.png',
+      title: 'Main Lobby & Front Desk FOX Harris Hotel',
+      desc: 'Area resepsionis kontemporer dengan panel kayu arsitektural hangat di koridor Jl. Riau.',
     },
     {
-      url: '/images/hotel/rooftop-skypool-evening.jpg',
-      title: 'Indoor Rooftop Sky Pool & Skyline Lounge',
-      desc: 'Kolam renang indoor rooftop tertinggi di Pekanbaru dengan pemandangan cakrawala kota saat senja.',
+      url: '/images/New-Asset/Hotel/Pool Lounge.jpg',
+      title: 'Rooftop Sky Lounge & Bean Bag Terrace',
+      desc: 'Area bersantai rooftop bergaya urban dengan pemandangan cakrawala kota Pekanbaru di malam hari.',
     },
     {
-      url: '/images/hotel/room-suite-bedroom.jpg',
-      title: 'Executive Suite Room & Bedroom',
-      desc: 'Interior kamar nyaman dan modern berstandar bintang empat dengan fasilitas lengkap.',
+      url: '/images/New-Asset/Hotel/Deluxe.png',
+      title: 'Kamar Deluxe King Bed',
+      desc: 'Interior kamar nyaman dan modern berstandar bintang empat dengan meja kerja ergonomis.',
     },
     {
-      url: '/images/hotel/bar-lounge-interior.jpg',
+      url: '/images/New-Asset/Hotel/Deluxe - Twin.png',
+      title: 'Kamar Deluxe Twin Bed',
+      desc: 'Pilihan kamar twin modern yang ideal untuk delegasi bisnis maupun perjalanan keluarga.',
+    },
+    {
+      url: '/images/New-Asset/Hotel/bar.png',
       title: 'Lobby Bar & Executive Lounge',
-      desc: 'Area bar modern dengan tata pencahayaan arsitektural hangat untuk santai dan temu bisnis.',
+      desc: 'Area bar modern dengan pencahayaan arsitektural hangat untuk bersantai dan temu bisnis.',
     },
     {
-      url: '/images/hotel/restaurant-wtf-buffet.jpg',
-      title: 'Where’s The Food (WTF) Restaurant Buffet',
-      desc: 'Sajian buffet sarapan dan hidangan nusantara kontemporer dengan tata ruang santap lapang.',
-    },
-    {
-      url: '/images/hotel/meeting-roundtable-fox.jpg',
-      title: 'MICE Ballroom & Meeting Roundtable',
-      desc: 'Fasilitas pertemuan korporat dan seminar berstandar bintang empat dengan branding resmi FOX Harris Hotels.',
+      url: '/images/New-Asset/Hotel/WTF Restaurant.jpg',
+      title: "Where's The Food (WTF) Restaurant — Buffet Area",
+      desc: 'Sajian hidangan nusantara dan internasional dalam suasana restoran hangat bergaya resort tropis.',
     },
   ];
 
+  // Mall: 6 unique photos — PX Mall facade, ATRIUM, XXI 1, Wingstop, FRUIT CITY, Kiddyhope
   const mallPhotos = [
     {
-      url: '/images/mall/hero-px-mall.jpg',
-      title: 'Fasad Ikonik Pekanbaru Xchange',
-      desc: 'Fasad melengkung bermotif segitiga geometris modern di koridor Jl. Riau No. 147.',
+      url: '/images/New-Asset/Mall Photo/PX MALL.png',
+      title: 'Fasad Kawasan Terpadu Pekanbaru Xchange (PX)',
+      desc: 'Fasad melengkung bermotif geometris ikonik yang terhubung langsung dengan menara FOX Harris Hotel.',
     },
     {
-      url: '/images/mall/cinema-xxi.jpg',
-      title: 'Cinema XXI (Lantai 3)',
-      desc: 'Bioskop premium dengan fasilitas studio modern dan area refreshment premier.',
+      url: '/images/New-Asset/Mall Photo/ATRIUM.png',
+      title: 'Main Atrium & Layanan Informasi Pelanggan',
+      desc: 'Koridor atrium yang lapang dan terang dengan integrasi akses langsung menuju area hotel.',
     },
     {
-      url: '/images/mall/alfresco-dining.jpg',
-      title: 'Alfresco Dining Promenade',
-      desc: 'Area kuliner terbuka di Ground Floor untuk tempat santai komunitas bersama tenant pilihan.',
+      url: '/images/New-Asset/Mall Photo/XXI 1.png',
+      title: 'Cinema XXI Entertainment (Lantai 3)',
+      desc: 'Bioskop premier modern dengan studio berkualitas tinggi dan area refreshment.',
     },
     {
-      url: '/images/mall/retail-fashion.jpg',
-      title: 'Tenant Busana & Lifestyle',
-      desc: 'Pilihan ritel busana dan gaya hidup kontemporer bagi keluarga dan pengunjung urban.',
+      url: '/images/New-Asset/Mall Photo/Wingstop.png',
+      title: 'Wingstop Dining Promenade',
+      desc: 'Area bersantap modern di bawah struktur atap kaca yang terang bagi keluarga dan komunitas.',
     },
     {
-      url: '/images/mall/atrium-corridor.jpg',
-      title: 'Main Atrium & Food Galore',
-      desc: 'Sirkulasi belanja yang lapang dan terhubung langsung dengan koridor menara hotel.',
+      url: '/images/New-Asset/Mall Photo/FRUIT CITY.png',
+      title: 'Fruit City — Fresh Market & Lifestyle Grocery',
+      desc: 'Toko segar bergaya lifestyle dengan produk buah pilihan dan kebutuhan konsumsi premium.',
     },
     {
-      url: '/images/mall/plaza-live-event.jpg',
-      title: 'Lifestyle & Optical Care Store',
-      desc: 'Gerai layanan kesehatan mata dan aksesoris gaya hidup modern di lantai komersial.',
+      url: '/images/New-Asset/Mall Photo/Kiddyhope.png',
+      title: 'Kiddyhope — Kids Education & Playground Zone',
+      desc: 'Zona bermain dan edukasi anak berstandar internasional di dalam kawasan mal terpadu.',
     },
   ];
 
@@ -89,17 +89,25 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
     <div className="bg-white min-h-screen text-[#141414]">
       {/* 1. Dedicated Corporate Hero Header */}
       <div className="relative bg-[#0F1117] text-white py-16 sm:py-24 border-b border-stone-800 overflow-hidden text-left">
-        <div className="absolute inset-0">
-          <img
-            src="/images/hotel/overview-facade-landscape.jpg"
-            alt="Kawasan Terpadu PT Halla Mohana"
-            className="w-full h-full object-cover object-center opacity-25"
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.img
+            src="/images/New-Asset/Hotel/Pool Lounge.jpg"
+            alt="Interior Arsitektural PT Halla Mohana"
+            initial={{ scale: 1.07, opacity: 0.14 }}
+            animate={{ scale: 1, opacity: 0.28 }}
+            transition={{ duration: 1.1, ease: ARCHITECTURAL_EASE }}
+            className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F1117]/95 via-[#161217]/90 to-[#2A0E13]/85" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0F1117] via-transparent to-transparent" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 space-y-4">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: ARCHITECTURAL_EASE }}
+          className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 space-y-4"
+        >
           {/* Breadcrumb Trail */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-stone-400 font-medium">
             <a
@@ -132,21 +140,28 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
           <p className="text-xs text-stone-400 pt-1">
             Kawasan Terpadu 1,5 Hektar • 2 Aset Properti Utama • Senapelan, Pekanbaru
           </p>
-        </div>
+        </motion.div>
       </div>
 
-      {/* 2. Section 1: FOX Harris Hotel Pekanbaru (Latar #FFFFFF, 60% Foto di Kiri, 40% Spesifikasi di Kanan) */}
+      {/* 2. Section 1: FOX Harris Hotel Pekanbaru */}
       <section id="fox-hotel" className="py-20 sm:py-28 bg-white border-b border-[#E5E5E5] text-left">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
-            {/* Kiri: 60% Foto Besar & Thumbnail Switcher (7 Kolom pada LG) */}
-            <div className="lg:col-span-7 space-y-4">
-              <div className="rounded-lg overflow-hidden border border-[#E5E5E5] bg-stone-100">
-                <img
-                  src={hotelPhotos[activeHotelPhotoIdx].url}
-                  alt={hotelPhotos[activeHotelPhotoIdx].title}
-                  className="w-full aspect-[16/10] object-cover transition-opacity duration-300"
-                />
+            {/* Kiri: 60% Foto Besar & Thumbnail Switcher */}
+            <ArchitecturalReveal className="lg:col-span-7 space-y-4" direction="left" distance={16}>
+              <div className="relative rounded-lg overflow-hidden border border-[#E5E5E5] bg-stone-100 aspect-[16/10]">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={hotelPhotos[activeHotelPhotoIdx].url}
+                    src={hotelPhotos[activeHotelPhotoIdx].url}
+                    alt={hotelPhotos[activeHotelPhotoIdx].title}
+                    initial={{ opacity: 0, scale: 1.03 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: ARCHITECTURAL_EASE }}
+                    className="w-full h-full object-cover"
+                  />
+                </AnimatePresence>
               </div>
 
               {/* Caption & Image Switcher Gallery */}
@@ -160,14 +175,14 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
                 </span>
               </div>
 
-              {/* Thumbnails Strip (Hairline Border, Tanpa Pill Badges) */}
+              {/* Thumbnails Strip */}
               <div className="grid grid-cols-6 gap-2 pt-2">
                 {hotelPhotos.map((item, idx) => (
                   <button
                     key={idx}
                     type="button"
                     onClick={() => setActiveHotelPhotoIdx(idx)}
-                    className={`rounded overflow-hidden border transition-all cursor-pointer ${
+                    className={`relative rounded overflow-hidden border transition-all cursor-pointer ${
                       activeHotelPhotoIdx === idx
                         ? 'border-[#8B1E24] ring-1 ring-[#8B1E24]'
                         : 'border-[#E5E5E5] opacity-70 hover:opacity-100'
@@ -176,15 +191,17 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
                     <img
                       src={item.url}
                       alt={item.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full aspect-square object-cover"
                     />
                   </button>
                 ))}
               </div>
-            </div>
+            </ArchitecturalReveal>
 
-            {/* Kanan: 40% Spesifikasi Arsitektural & Fasilitas (5 Kolom pada LG) */}
-            <div className="lg:col-span-5 lg:border-l lg:border-[#E5E5E5] lg:pl-10 space-y-5">
+            {/* Kanan: 40% Spesifikasi */}
+            <ArchitecturalReveal className="lg:col-span-5 lg:border-l lg:border-[#E5E5E5] lg:pl-10 space-y-5" delay={0.12}>
               <div className="space-y-1">
                 <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
                   Hospitality & Hotel
@@ -201,7 +218,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
                 Hotel bintang empat berkonsep dinamis, segar, dan modern (sebelumnya beroperasi sebagai Tangram Hotel) yang dikelola bersama jaringan internasional The Ascott Limited / TAUZIA Hotels. Dirancang untuk memenuhi kebutuhan pelancong bisnis dan wisatawan urban yang mengutamakan kenyamanan, fleksibilitas, dan akses langsung ke lifestyle mall.
               </p>
 
-              {/* Spesifikasi Arsitektural & Fasilitas (Hairline Divided Table) */}
+              {/* Spesifikasi Arsitektural */}
               <div className="pt-4 border-t border-[#E5E5E5] space-y-3">
                 <div className="flex justify-between py-1.5 border-b border-[#E5E5E5] text-xs sm:text-sm">
                   <span className="text-[#52525B]">Kapasitas Kamar</span>
@@ -213,7 +230,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-[#E5E5E5] text-xs sm:text-sm">
                   <span className="text-[#52525B]">Kuliner & F&B</span>
-                  <span className="font-semibold text-[#141414]">Where’s The Food (WTF) Restaurant</span>
+                  <span className="font-semibold text-[#141414]">Where's The Food (WTF) Restaurant</span>
                 </div>
                 <div className="flex justify-between py-1.5 border-b border-[#E5E5E5] text-xs sm:text-sm">
                   <span className="text-[#52525B]">Fasilitas MICE</span>
@@ -243,17 +260,17 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
-            </div>
+            </ArchitecturalReveal>
           </div>
         </div>
       </section>
 
-      {/* 3. Section 2: Pekanbaru Xchange (PX) (Latar #F7F7F5 Warm Off-White, 40% Deskripsi di Kiri, 60% Foto di Kanan) */}
+      {/* 3. Section 2: Pekanbaru Xchange (PX) */}
       <section id="pekanbaru-xchange" className="py-20 sm:py-28 bg-[#F7F7F5] border-b border-[#E5E5E5] text-left">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-14 items-start">
-            {/* Kiri: 40% Deskripsi & Anchor Tenants (5 Kolom pada LG) */}
-            <div className="lg:col-span-5 lg:border-r lg:border-[#E5E5E5] lg:pr-10 space-y-5">
+            {/* Kiri: 40% Deskripsi */}
+            <ArchitecturalReveal className="lg:col-span-5 lg:border-r lg:border-[#E5E5E5] lg:pr-10 space-y-5">
               <div className="space-y-1">
                 <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
                   Commercial Retail & Lifestyle Mall
@@ -270,7 +287,7 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
                 Pusat perbelanjaan dan hiburan gaya hidup modern (sebelumnya beroperasi sebagai Sadira Plaza) yang terhubung langsung dengan menara FOX Harris Hotel. Dirancang sebagai destinasi sosial komunitas urban dengan perpaduan bioskop modern, koridor kuliner alfresco, serta plaza event terbuka.
               </p>
 
-              {/* Anchor Tenants & Spesifikasi Ritel (Hairline Divided Table) */}
+              {/* Anchor Tenants & Spesifikasi */}
               <div className="pt-4 border-t border-[#E5E5E5] space-y-3">
                 <div className="flex justify-between py-1.5 border-b border-[#E5E5E5] text-xs sm:text-sm">
                   <span className="text-[#52525B]">Anchor Tenant Utama</span>
@@ -316,16 +333,23 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
-            </div>
+            </ArchitecturalReveal>
 
-            {/* Kanan: 60% Foto Besar & Thumbnail Switcher (7 Kolom pada LG) */}
-            <div className="lg:col-span-7 space-y-4">
-              <div className="rounded-lg overflow-hidden border border-[#E5E5E5] bg-stone-100">
-                <img
-                  src={mallPhotos[activeMallPhotoIdx].url}
-                  alt={mallPhotos[activeMallPhotoIdx].title}
-                  className="w-full aspect-[16/10] object-cover transition-opacity duration-300"
-                />
+            {/* Kanan: 60% Foto Besar & Thumbnail Switcher */}
+            <ArchitecturalReveal className="lg:col-span-7 space-y-4" delay={0.12}>
+              <div className="relative rounded-lg overflow-hidden border border-[#E5E5E5] bg-stone-100 aspect-[16/10]">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={mallPhotos[activeMallPhotoIdx].url}
+                    src={mallPhotos[activeMallPhotoIdx].url}
+                    alt={mallPhotos[activeMallPhotoIdx].title}
+                    initial={{ opacity: 0, scale: 1.03 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.4, ease: ARCHITECTURAL_EASE }}
+                    className="w-full h-full object-cover"
+                  />
+                </AnimatePresence>
               </div>
 
               {/* Caption & Image Switcher Gallery */}
@@ -355,20 +379,23 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
                     <img
                       src={item.url}
                       alt={item.title}
+                      loading="lazy"
+                      decoding="async"
                       className="w-full aspect-square object-cover"
                     />
                   </button>
                 ))}
               </div>
-            </div>
+            </ArchitecturalReveal>
           </div>
         </div>
       </section>
 
-      {/* 4. Section 3: Commercial Leasing & Partnership Inquiry (#FFFFFF) */}
+      {/* 4. Section 3: Commercial Leasing & Partnership Inquiry */}
       <section className="py-20 sm:py-24 bg-white border-b border-[#E5E5E5] text-left">
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
-          <div className="rounded-lg border border-[#E5E5E5] bg-[#F7F7F5] p-8 sm:p-12 space-y-4">
+          <ArchitecturalReveal>
+            <div className="rounded-lg border border-[#E5E5E5] bg-[#F7F7F5] p-8 sm:p-12 space-y-4">
             <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
               Kemitraan Komersial
             </p>
@@ -391,7 +418,8 @@ export const ProjectsPage: React.FC<ProjectsPageProps> = ({ onNavigate }) => {
                 <ArrowRight className="h-4 w-4" />
               </a>
             </div>
-          </div>
+            </div>
+          </ArchitecturalReveal>
         </div>
       </section>
     </div>

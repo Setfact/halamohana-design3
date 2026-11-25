@@ -18,7 +18,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           { label: 'Beranda', href: '/' },
           { label: 'Hubungi Kami' },
         ]}
-        imageUrl="/images/hotel/exterior-facade.jpg"
+        imageUrl="/images/New-Asset/Mall%20Photo/Customer%20Service.png"
         onNavigate={onNavigate}
       />
 

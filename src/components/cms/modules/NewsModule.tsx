@@ -37,7 +37,7 @@ export const NewsModule: React.FC = () => {
     url: '',
     date: new Date().toISOString().split('T')[0],
     category: 'Corporate Release',
-    imageUrl: 'https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=1000&auto=format&fit=crop&q=80',
+    imageUrl: '/images/New-Asset/Hotel/Lobby.png',
     description: '',
     visibility: true,
   });
@@ -49,7 +49,7 @@ export const NewsModule: React.FC = () => {
       url: '',
       date: new Date().toISOString().split('T')[0],
       category: 'Corporate Release',
-      imageUrl: 'https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?w=1000&auto=format&fit=crop&q=80',
+      imageUrl: '/images/New-Asset/Hotel/Lobby.png',
       description: '<p>Tuliskan isi siaran pers atau berita korporat di sini...</p>',
       visibility: true,
     });

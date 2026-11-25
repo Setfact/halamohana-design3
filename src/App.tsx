@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { MotionConfig, AnimatePresence, motion } from 'framer-motion';
 import { CMSDataProvider, useCMSData } from '@/context/CMSDataContext';
+import { ARCHITECTURAL_EASE } from '@/components/ui/MotionPrimitives';
 import { PublicNavbar } from '@/components/public/PublicNavbar';
 import { PublicFooter } from '@/components/public/PublicFooter';
 import { HomePage } from '@/pages/HomePage';
@@ -140,22 +142,32 @@ function AppContent() {
 
       <PublicNavbar currentPath={currentPath} onNavigate={navigate} />
 
-      <main className="flex-1">
-        {currentPath === '/about' ? (
-          <AboutPage onNavigate={navigate} />
-        ) : currentPath === '/projects' ? (
-          <ProjectsPage onNavigate={navigate} />
-        ) : currentPath === '/gallery' ? (
-          <GalleryPage onNavigate={navigate} />
-        ) : currentPath.startsWith('/news') ? (
-          <NewsPage onNavigate={navigate} currentPath={currentPath} />
-        ) : currentPath === '/career' ? (
-          <CareerPage onNavigate={navigate} />
-        ) : currentPath === '/contact' ? (
-          <ContactPage onNavigate={navigate} />
-        ) : (
-          <HomePage onNavigate={navigate} />
-        )}
+      <main className="flex-1 overflow-x-clip">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentPath.startsWith('/news') ? '/news-route' : currentPath}
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -6 }}
+            transition={{ duration: 0.28, ease: ARCHITECTURAL_EASE }}
+          >
+            {currentPath === '/about' ? (
+              <AboutPage onNavigate={navigate} />
+            ) : currentPath === '/projects' ? (
+              <ProjectsPage onNavigate={navigate} />
+            ) : currentPath === '/gallery' ? (
+              <GalleryPage onNavigate={navigate} />
+            ) : currentPath.startsWith('/news') ? (
+              <NewsPage onNavigate={navigate} currentPath={currentPath} />
+            ) : currentPath === '/career' ? (
+              <CareerPage onNavigate={navigate} />
+            ) : currentPath === '/contact' ? (
+              <ContactPage onNavigate={navigate} />
+            ) : (
+              <HomePage onNavigate={navigate} />
+            )}
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       <PublicFooter onNavigate={navigate} />
@@ -165,9 +177,11 @@ function AppContent() {
 
 export function App() {
   return (
-    <CMSDataProvider>
-      <AppContent />
-    </CMSDataProvider>
+    <MotionConfig reducedMotion="user">
+      <CMSDataProvider>
+        <AppContent />
+      </CMSDataProvider>
+    </MotionConfig>
   );
 }
 

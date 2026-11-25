@@ -3,6 +3,7 @@ import { useCMSData } from '@/context/CMSDataContext';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
 import { Badge } from '@/components/ui/Badge';
+import { getUploadedFileBlob } from '@/lib/fileStorage';
 import {
   Briefcase,
   Plus,
@@ -11,11 +12,13 @@ import {
   Eye,
   EyeOff,
   UserCheck,
-  Calendar,
   MapPin,
   Search,
   FileText,
+  Download,
+  ExternalLink,
 } from 'lucide-react';
+import { toast } from 'sonner';
 import type { CareerItem, CareerApplication } from '@/types';
 
 export const ManageCareerModule: React.FC = () => {
@@ -26,13 +29,15 @@ export const ManageCareerModule: React.FC = () => {
     deleteCareer,
     toggleCareerVisibility,
     careerApplications,
+    updateCareerApplicationStatus,
     generalConfig,
   } = useCMSData();
 
   const [activeTab, setActiveTab] = useState<'postings' | 'applications'>('postings');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingCareerId, setEditingCareerId] = useState<string | null>(null);
-  const [selectedApplication, setSelectedApplication] = useState<CareerApplication | null>(null);
+  const [previewPdfUrl, setPreviewPdfUrl] = useState<string | null>(null);
+  const [previewPdfTitle, setPreviewPdfTitle] = useState<string>('');
   const [searchQuery, setSearchQuery] = useState('');
 
   const [formData, setFormData] = useState({
@@ -97,6 +102,42 @@ export const ManageCareerModule: React.FC = () => {
       addCareer(finalData);
     }
     setIsModalOpen(false);
+  };
+
+  const resolveApplicationPdfUrl = async (app: CareerApplication): Promise<string | null> => {
+    const storedBlob = await getUploadedFileBlob('career-' + app.id);
+    if (storedBlob) {
+      return URL.createObjectURL(storedBlob);
+    }
+    if (app.resumeUrl && !app.resumeUrl.startsWith('#')) {
+      return app.resumeUrl;
+    }
+    return null;
+  };
+
+  const handlePreviewResume = async (app: CareerApplication) => {
+    const url = await resolveApplicationPdfUrl(app);
+    if (!url) {
+      toast.error('Berkas PDF tidak ditemukan di sesi penyimpanan browser ini.');
+      return;
+    }
+    setPreviewPdfTitle(`${app.fullName} — ${app.resumeName}`);
+    setPreviewPdfUrl(url);
+  };
+
+  const handleDownloadResume = async (app: CareerApplication) => {
+    const url = await resolveApplicationPdfUrl(app);
+    if (!url) {
+      toast.error('Berkas PDF tidak tersedia untuk diunduh.');
+      return;
+    }
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = app.resumeName || 'resume.pdf';
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    toast.success(`Mengunduh ${app.resumeName}`);
   };
 
   const filteredCareers = careers.filter(
@@ -285,9 +326,10 @@ export const ManageCareerModule: React.FC = () => {
                     <th className="py-3 px-4">Nama Pelamar</th>
                     <th className="py-3 px-4">Posisi</th>
                     <th className="py-3 px-4">Kontak</th>
-                    <th className="py-3 px-4">Resume / CV</th>
+                    <th className="py-3 px-4">Resume / CV (PDF)</th>
                     <th className="py-3 px-4">Waktu Lamar</th>
                     <th className="py-3 px-4">Status</th>
+                    <th className="py-3 px-4 text-right">Berkas</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100">
@@ -298,15 +340,56 @@ export const ManageCareerModule: React.FC = () => {
                       <td className="py-3.5 px-4 text-xs font-mono text-slate-600">
                         {app.email} • {app.phone}
                       </td>
-                      <td className="py-3.5 px-4 text-xs text-slate-600 flex items-center gap-1">
-                        <FileText className="h-4 w-4 text-[#75B36A]" />
-                        {app.resumeName}
+                      <td className="py-3.5 px-4 text-xs text-slate-700">
+                        <div className="flex items-center gap-1.5">
+                          <FileText className="h-4 w-4 text-[#8B1E24] shrink-0" />
+                          <div>
+                            <p className="font-semibold text-slate-800">{app.resumeName}</p>
+                            {app.resumeSize && (
+                              <p className="text-[11px] text-slate-400">{app.resumeSize}</p>
+                            )}
+                          </div>
+                        </div>
                       </td>
                       <td className="py-3.5 px-4 text-xs text-slate-500">{app.submittedAt}</td>
                       <td className="py-3.5 px-4">
-                        <Badge variant="warning" size="sm">
-                          {app.status}
-                        </Badge>
+                        <select
+                          value={app.status}
+                          onChange={(e) =>
+                            updateCareerApplicationStatus(
+                              app.id,
+                              e.target.value as CareerApplication['status']
+                            )
+                          }
+                          className="rounded-lg border border-slate-200 bg-white px-2 py-1 text-xs font-semibold text-slate-700 focus:border-[#7A152E] focus:outline-hidden"
+                        >
+                          <option value="Pending">Pending</option>
+                          <option value="Reviewed">Reviewed</option>
+                          <option value="Interviewed">Interviewed</option>
+                          <option value="Rejected">Rejected</option>
+                        </select>
+                      </td>
+                      <td className="py-3.5 px-4 text-right">
+                        <div className="flex items-center justify-end gap-1.5">
+                          <button
+                            type="button"
+                            onClick={() => void handlePreviewResume(app)}
+                            className="inline-flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-2.5 py-1 text-xs font-semibold text-slate-700 hover:border-[#8B1E24] hover:text-[#8B1E24] transition-colors cursor-pointer"
+                            title="Lihat pratinjau PDF"
+                          >
+                            <ExternalLink className="h-3 w-3" />
+                            <span>Lihat</span>
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => void handleDownloadResume(app)}
+                            className="inline-flex items-center gap-1 rounded-lg bg-[#8B1E24] px-2.5 py-1 text-xs font-semibold text-white hover:bg-[#72181D] transition-colors cursor-pointer"
+                            title="Unduh berkas CV PDF"
+                          >
+                            <Download className="h-3 w-3" />
+                            <span>Unduh</span>
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}
@@ -448,6 +531,31 @@ export const ManageCareerModule: React.FC = () => {
             </div>
           </div>
         </form>
+      </Modal>
+
+      {/* PDF Resume Preview Modal */}
+      <Modal
+        isOpen={!!previewPdfUrl}
+        onClose={() => setPreviewPdfUrl(null)}
+        title={`Pratinjau CV: ${previewPdfTitle}`}
+        maxWidth="4xl"
+      >
+        {previewPdfUrl && (
+          <div className="space-y-4">
+            <div className="h-[70vh] w-full overflow-hidden rounded-lg border border-slate-200 bg-slate-100">
+              <iframe
+                src={previewPdfUrl}
+                title={previewPdfTitle}
+                className="h-full w-full"
+              />
+            </div>
+            <div className="flex justify-end gap-2">
+              <Button variant="outline" size="sm" onClick={() => setPreviewPdfUrl(null)}>
+                Tutup
+              </Button>
+            </div>
+          </div>
+        )}
       </Modal>
     </div>
   );

@@ -1,7 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useCMSData } from '@/context/CMSDataContext';
 import { Maximize2, X, Calendar } from 'lucide-react';
 import { Badge } from '@/components/ui/Badge';
+import {
+  ArchitecturalReveal,
+  ARCHITECTURAL_EASE,
+} from '@/components/ui/MotionPrimitives';
 import type { GalleryItem } from '@/types';
 
 export const GallerySection: React.FC = () => {
@@ -10,6 +15,16 @@ export const GallerySection: React.FC = () => {
 
   const [activeCategory, setActiveCategory] = useState<string>('All');
   const [lightboxItem, setLightboxItem] = useState<GalleryItem | null>(null);
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setLightboxItem(null);
+    };
+    if (lightboxItem) {
+      window.addEventListener('keydown', onKeyDown);
+    }
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [lightboxItem]);
 
   const categories = ['All', ...Array.from(new Set(visibleItems.map((g) => g.category)))];
 
@@ -22,115 +37,154 @@ export const GallerySection: React.FC = () => {
     <section id="gallery" className="py-20 sm:py-28 bg-[#F7F7F5] border-b border-[#E5E5E5] text-left">
       <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-[#E5E5E5]">
-          <div className="max-w-2xl space-y-2">
-            <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
-              Dokumentasi Visual Portofolio
-            </p>
-            <h2 className="text-3xl sm:text-4xl font-semibold text-[#141414] tracking-tight">
-              Dokumentasi Properti &amp; Fasilitas
-            </h2>
-            <p className="text-base text-[#52525B] leading-relaxed pt-1">
-              Arsip visual fasilitas perhotelan bintang 4, ruang ritel mall, serta agenda penting operasional PT Halla Mohana.
-            </p>
-          </div>
-
-          {/* Segmented Filter Control */}
-          <div className="inline-flex border border-[#E5E5E5] rounded-md p-1 bg-white shrink-0 flex-wrap gap-1">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setActiveCategory(cat)}
-                className={`px-3.5 py-1.5 text-xs font-semibold rounded transition-colors cursor-pointer ${
-                  activeCategory === cat
-                    ? 'bg-[#8B1E24] text-white'
-                    : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
-                }`}
-              >
-                {cat === 'All' ? 'Semua Album' : cat}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-          {filteredGallery.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => setLightboxItem(item)}
-              className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-lg border border-[#E5E5E5] bg-stone-100 shadow-2xs hover:border-[#8B1E24] transition-colors"
-            >
-              <img
-                src={item.thumbnail}
-                alt={item.title}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              />
-
-              {/* Gradient Overlay with Caption */}
-              <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/25 to-transparent p-5 flex flex-col justify-end">
-                <div className="space-y-1.5 transform transition-transform duration-300 group-hover:-translate-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="rounded bg-[#141414]/85 px-2 py-0.5 text-[10px] font-semibold text-white uppercase tracking-wider">
-                      {item.category}
-                    </span>
-                    <span className="text-[11px] text-stone-300">{item.date}</span>
-                  </div>
-                  <h4 className="text-sm font-semibold text-white leading-snug line-clamp-2">
-                    {item.title}
-                  </h4>
-                </div>
-              </div>
-
-              {/* Zoom Icon indicator */}
-              <div className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-md bg-black/40 text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                <Maximize2 className="h-4 w-4" />
-              </div>
+        <ArchitecturalReveal>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-6 border-b border-[#E5E5E5]">
+            <div className="max-w-2xl space-y-2">
+              <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
+                Dokumentasi Visual Portofolio
+              </p>
+              <h2 className="text-3xl sm:text-4xl font-semibold text-[#141414] tracking-tight">
+                Dokumentasi Properti &amp; Fasilitas
+              </h2>
+              <p className="text-base text-[#52525B] leading-relaxed pt-1">
+                Arsip visual fasilitas perhotelan bintang 4, ruang ritel mall, serta agenda penting operasional PT Halla Mohana.
+              </p>
             </div>
-          ))}
-        </div>
+
+            {/* Segmented Filter Control */}
+            <div className="inline-flex border border-[#E5E5E5] rounded-md p-1 bg-white shrink-0 flex-wrap gap-1">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setActiveCategory(cat)}
+                  className={`relative px-3.5 py-1.5 text-xs font-semibold rounded transition-colors cursor-pointer ${
+                    activeCategory === cat
+                      ? 'text-white'
+                      : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
+                  }`}
+                >
+                  {activeCategory === cat && (
+                    <motion.span
+                      layoutId="gallery-category-pill"
+                      transition={{ type: 'spring', stiffness: 360, damping: 30 }}
+                      className="absolute inset-0 rounded bg-[#8B1E24]"
+                    />
+                  )}
+                  <span className="relative z-10">{cat === 'All' ? 'Semua Album' : cat}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </ArchitecturalReveal>
+
+        {/* Gallery Grid with Smooth Filter Reflow */}
+        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <AnimatePresence mode="popLayout">
+            {filteredGallery.map((item, idx) => (
+              <motion.div
+                layout
+                key={item.id}
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.94 }}
+                transition={{
+                  duration: 0.4,
+                  delay: Math.min(idx * 0.03, 0.25),
+                  ease: ARCHITECTURAL_EASE,
+                }}
+                whileHover={{ y: -3 }}
+                onClick={() => setLightboxItem(item)}
+                className="group relative aspect-[4/3] cursor-pointer overflow-hidden rounded-lg border border-[#E5E5E5] bg-stone-100 shadow-2xs hover:border-[#8B1E24] transition-colors"
+              >
+                <img
+                  src={item.thumbnail}
+                  alt={item.title}
+                  loading="lazy"
+                  decoding="async"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+
+                {/* Gradient Overlay with Caption */}
+                <div className="absolute inset-0 bg-gradient-to-t from-stone-950/85 via-stone-950/25 to-transparent p-5 flex flex-col justify-end">
+                  <div className="space-y-1.5 transform transition-transform duration-300 group-hover:-translate-y-1">
+                    <div className="flex items-center gap-2">
+                      <span className="rounded bg-[#141414]/85 px-2 py-0.5 text-[10px] font-semibold text-white uppercase tracking-wider">
+                        {item.category}
+                      </span>
+                      <span className="text-[11px] text-stone-300">{item.date}</span>
+                    </div>
+                    <h4 className="text-sm font-semibold text-white leading-snug line-clamp-2">
+                      {item.title}
+                    </h4>
+                  </div>
+                </div>
+
+                {/* Zoom Icon indicator */}
+                <div className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-md bg-black/50 text-white opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Maximize2 className="h-4 w-4" />
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </motion.div>
       </div>
 
-      {/* Lightbox Modal */}
-      {lightboxItem && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/90 backdrop-blur-xs animate-in fade-in duration-200">
-          <div className="relative max-w-4xl w-full bg-[#141414] rounded-lg overflow-hidden border border-stone-800 shadow-2xl">
-            {/* Close button */}
-            <button
-              type="button"
-              onClick={() => setLightboxItem(null)}
-              className="absolute top-4 right-4 z-10 rounded-md bg-black/60 p-2 text-white hover:bg-[#8B1E24] transition-colors cursor-pointer"
-              aria-label="Tutup Lightbox"
+      {/* Lightbox Modal with AnimatePresence */}
+      <AnimatePresence>
+        {lightboxItem && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.22 }}
+            onClick={() => setLightboxItem(null)}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-stone-950/90"
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 8 }}
+              transition={{ duration: 0.28, ease: ARCHITECTURAL_EASE }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl w-full bg-[#141414] rounded-lg overflow-hidden border border-stone-800 shadow-2xl"
             >
-              <X className="h-5 w-5" />
-            </button>
+              {/* Close button */}
+              <button
+                type="button"
+                onClick={() => setLightboxItem(null)}
+                className="absolute top-4 right-4 z-10 rounded-md bg-black/65 p-2 text-white hover:bg-[#8B1E24] transition-colors cursor-pointer"
+                aria-label="Tutup Lightbox"
+              >
+                <X className="h-5 w-5" />
+              </button>
 
-            {/* Lightbox Photo */}
-            <div className="max-h-[70vh] bg-black flex items-center justify-center">
-              <img
-                src={lightboxItem.imageUrl || lightboxItem.thumbnail}
-                alt={lightboxItem.title}
-                className="max-h-full max-w-full object-contain"
-              />
-            </div>
-
-            {/* Lightbox Info */}
-            <div className="p-6 bg-[#141414] text-white space-y-2 text-left">
-              <div className="flex items-center gap-3 text-xs text-stone-400">
-                <Badge variant="primary" size="sm">
-                  {lightboxItem.category}
-                </Badge>
-                <span className="flex items-center gap-1 font-medium">
-                  <Calendar className="h-3.5 w-3.5 text-[#8B1E24]" />
-                  {lightboxItem.date}
-                </span>
+              {/* Lightbox Photo */}
+              <div className="max-h-[70vh] bg-black flex items-center justify-center">
+                <img
+                  src={lightboxItem.imageUrl || lightboxItem.thumbnail}
+                  alt={lightboxItem.title}
+                  className="max-h-[70vh] max-w-full object-contain"
+                />
               </div>
-              <h3 className="text-base font-semibold text-white">{lightboxItem.title}</h3>
-            </div>
-          </div>
-        </div>
-      )}
+
+              {/* Lightbox Info */}
+              <div className="p-6 bg-[#141414] text-white space-y-2 text-left">
+                <div className="flex items-center gap-3 text-xs text-stone-400">
+                  <Badge variant="primary" size="sm">
+                    {lightboxItem.category}
+                  </Badge>
+                  <span className="flex items-center gap-1 font-medium">
+                    <Calendar className="h-3.5 w-3.5 text-[#8B1E24]" />
+                    {lightboxItem.date}
+                  </span>
+                </div>
+                <h3 className="text-base font-semibold text-white">{lightboxItem.title}</h3>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

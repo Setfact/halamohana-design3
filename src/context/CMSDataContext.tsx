@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import { saveUploadedFileBlob, deleteUploadedFileBlob } from '@/lib/fileStorage';
 import type {
   GeneralConfig,
   UserProfile,
@@ -163,11 +164,11 @@ const initialBanners: BannerItem[] = [
     shortTitle: 'Kawasan Terpadu',
     ctaText: 'Explore Projects',
     ctaUrl: '/projects',
-    imageUrl: '/images/mall/px-facade-integrated.jpg',
+    imageUrl: '/images/New-Asset/Mall%20Photo/PX%20MALL.png',
     visibility: true,
     order: 1,
     created_time: '2025-01-10',
-    updated: '2026-09-28',
+    updated: '2026-11-25',
   },
   {
     id: 'bnr-2',
@@ -177,25 +178,25 @@ const initialBanners: BannerItem[] = [
     shortTitle: 'FOX Harris Hotel',
     ctaText: 'Explore Projects',
     ctaUrl: '/projects',
-    imageUrl: '/images/hotel/hero-fox-hotel-wide.jpg',
+    imageUrl: '/images/New-Asset/Hotel/Pool.png',
     visibility: true,
     order: 2,
     created_time: '2025-01-15',
-    updated: '2026-09-30',
+    updated: '2026-11-25',
   },
   {
     id: 'bnr-3',
     no: 3,
     title: 'Pekanbaru Xchange (PX)',
-    subtitle: 'Pusat perbelanjaan dan rekreasi modern terintegrasi dengan Cinema XXI, koridor alfresco dining, dan ruang komunitas.',
+    subtitle: 'Pusat perbelanjaan dan rekreasi modern terintegrasi dengan Cinema XXI, koridor kuliner, serta destinasi hiburan keluarga.',
     shortTitle: 'Pekanbaru Xchange',
     ctaText: 'Explore Projects',
     ctaUrl: '/projects',
-    imageUrl: '/images/mall/hero-px-mall.jpg',
+    imageUrl: '/images/New-Asset/Mall%20Photo/ATRIUM.png',
     visibility: true,
     order: 3,
     created_time: '2025-02-01',
-    updated: '2026-10-02',
+    updated: '2026-11-25',
   },
 ];
 
@@ -206,15 +207,14 @@ const initialProjects: ProjectItem[] = [
     title: 'FOX Harris Hotel Pekanbaru',
     category: 'Hospitality & Hotel',
     location: 'Jl. Riau No. 147, Senapelan, Pekanbaru, Riau 28154',
-    imageUrl: '/images/hotel/hero-fox-hotel-wide.jpg',
+    imageUrl: '/images/New-Asset/Hotel/Lobby.png',
     gallery: [
-      '/images/hotel/exterior-drone.jpg',
-      '/images/hotel/rooftop-skypool-evening.jpg',
-      '/images/hotel/room-suite-bedroom.jpg',
-      '/images/hotel/bar-lounge-interior.jpg',
-      '/images/hotel/restaurant-wtf-buffet.jpg',
-      '/images/hotel/meeting-roundtable-fox.jpg',
-      '/images/hotel/ballroom-grand-wedding.jpg',
+      '/images/New-Asset/Hotel/Lobby.png',
+      '/images/New-Asset/Hotel/Pool Lounge.jpg',
+      '/images/New-Asset/Hotel/Deluxe.png',
+      '/images/New-Asset/Hotel/Deluxe%20-%20Twin.png',
+      '/images/New-Asset/Hotel/Restaurant%202.png',
+      '/images/New-Asset/Hotel/WTF Restaurant.jpg',
     ],
     description: 'Hotel bintang empat berkonsep dinamis, segar, dan modern (sebelumnya beroperasi sebagai Tangram Hotel) yang dikelola bersama jaringan internasional The Ascott Limited / TAUZIA Hotels. Dirancang untuk pelancong bisnis maupun wisatawan urban, dilengkapi 225 kamar & suite modern (12 lantai), kolam renang indoor rooftop sky pool tertinggi di Pekanbaru, restoran Where’s The Food (WTF), gym & spa, serta Grand Ballroom dan 6 ruang pertemuan.',
     specs: [
@@ -224,7 +224,7 @@ const initialProjects: ProjectItem[] = [
       { label: 'Kontak Reservasi', value: '+62 761 741 5999' },
     ],
     create_time: '2025-01-20',
-    updated: '2026-09-15',
+    updated: '2026-11-25',
     visibility: true,
     featured: true,
   },
@@ -234,24 +234,24 @@ const initialProjects: ProjectItem[] = [
     title: 'Pekanbaru Xchange (PX)',
     category: 'Shopping Mall & Retail',
     location: 'Jl. Riau No. 147, Senapelan, Pekanbaru, Riau 28154',
-    imageUrl: '/images/mall/hero-px-mall.jpg',
+    imageUrl: '/images/New-Asset/Mall%20Photo/Wingstop.png',
     gallery: [
-      '/images/mall/hero-px-mall.jpg',
-      '/images/mall/cinema-xxi.jpg',
-      '/images/mall/atrium-corridor.jpg',
-      '/images/mall/alfresco-dining.jpg',
-      '/images/mall/retail-fashion.jpg',
-      '/images/mall/plaza-live-event.jpg',
+      '/images/New-Asset/Mall%20Photo/PX%20MALL.png',
+      '/images/New-Asset/Mall%20Photo/ATRIUM.png',
+      '/images/New-Asset/Mall%20Photo/XXI%201.png',
+      '/images/New-Asset/Mall%20Photo/Wingstop.png',
+      '/images/New-Asset/Mall%20Photo/J.co.png',
+      '/images/New-Asset/Mall%20Photo/Kaha%20Billiard.png',
     ],
-    description: 'Pusat perbelanjaan gaya hidup (lifestyle mall) dan destinasi hiburan modern (sebelumnya Sadira Plaza) yang terintegrasi langsung dalam satu kawasan (mixed-use complex) dengan FOX Harris Hotel Pekanbaru. Menghadirkan bioskop Cinema XXI, ritel fashion dan kuliner ternama, koridor Alfresco Dining di Ground Floor, serta plaza terbuka untuk panggung musik dan komunitas.',
+    description: 'Pusat perbelanjaan gaya hidup (lifestyle mall) dan destinasi hiburan modern (sebelumnya Sadira Plaza) yang terintegrasi langsung dalam satu kawasan (mixed-use complex) dengan FOX Harris Hotel Pekanbaru. Menghadirkan bioskop Cinema XXI, ritel rumah tangga MR.DIY, kuliner Wingstop & J.CO, hiburan keluarga Fruit City, Kiddyhope Gokart, Rozora Gymnastics, hingga Kaha Billiard.',
     specs: [
-      { label: 'Konsep Kawasan', value: 'Integrated Lifestyle, Entertainment & Alfresco Dining' },
-      { label: 'Anchor Tenants', value: 'Cinema XXI, Ritel Fashion, Kuliner & Kafe' },
+      { label: 'Konsep Kawasan', value: 'Integrated Lifestyle, Entertainment & Family Dining' },
+      { label: 'Anchor Tenants', value: 'Cinema XXI, MR.DIY, J.CO, Wingstop, Fruit City, Kaha Billiard' },
       { label: 'Konektivitas', value: 'Terhubung Langsung dengan FOX Harris Hotel Pekanbaru' },
       { label: 'Kontak Leasing & Info', value: '+62 761 741 5000' },
     ],
     create_time: '2025-01-22',
-    updated: '2026-09-18',
+    updated: '2026-11-25',
     visibility: true,
     featured: true,
   },
@@ -341,7 +341,7 @@ const initialNews: NewsItem[] = [
     url: 'instalasi-panel-surya-rooftop-dekarbonisasi',
     date: '2026-01-15',
     category: 'News',
-    imageUrl: '/images/hotel/exterior-drone.jpg',
+    imageUrl: '/images/New-Asset/Mall%20Photo/PX%20MALL.png',
     description: `
       <p><strong>Pekanbaru, Riau</strong> — PT Halla Mohana bersama PT Mahadana Dasha Utama (MahaDasha) dan PT Tiara Marga Trakindo (TMT Group) secara resmi mengoperasikan sistem pembangkit listrik tenaga surya (PLTS) atap di kawasan terpadu Jl. Riau No. 147 Pekanbaru. Inisiatif ini merupakan bagian dari peta jalan keberlanjutan korporat untuk mereduksi emisi karbon hingga 25% dan mendukung operasional ramah lingkungan di FOX Harris Hotel dan Pekanbaru Xchange (PX).</p>
       <p>Pemasangan modul fotovoltaik berkapasitas tinggi di rooftop bangunan hotel dan mall diharapkan dapat menghasilkan energi bersih hingga 320.000 kWh per tahun, sekaligus mengoptimalkan efisiensi energi kawasan secara terukur.</p>
@@ -359,9 +359,9 @@ const initialNews: NewsItem[] = [
     url: 'pekanbaru-xchange-pusat-gaya-hidup-terdepan',
     date: '2026-09-15',
     category: 'Press Release',
-    imageUrl: '/images/mall/plaza-live-event.jpg',
+    imageUrl: '/images/New-Asset/Mall%20Photo/ROZORA%202.png',
     description: `
-      <p><strong>Pekanbaru, Riau</strong> — PT Halla Mohana secara konsisten melanjutkan penguatan konsep Pekanbaru Xchange (PX) sebagai episentrum rekreasi, belanja, dan pertunjukan kreatif di Pekanbaru. Dengan penambahan ragam tenant kuliner alfresco serta agenda hiburan berkala, PX menjadi destinasi pilihan utama keluarga dan kalangan muda profesional.</p>
+      <p><strong>Pekanbaru, Riau</strong> — PT Halla Mohana secara konsisten melanjutkan penguatan konsep Pekanbaru Xchange (PX) sebagai episentrum rekreasi, belanja, dan aktivitas keluarga di Pekanbaru. Dengan hadirnya tenant hiburan & olahraga seperti Rozora Gymnastics Club, Kiddyhope Gokart, Fruit City, serta ragam kuliner modern, PX menjadi destinasi pilihan utama masyarakat.</p>
       <p>Direktur Properti PT Halla Mohana menyatakan bahwa integrasi langsung dengan FOX Harris Hotel memberikan keunggulan sinergis yang signifikan bagi pengunjung luar kota maupun masyarakat setempat.</p>
     `,
     create_time: '2026-09-15 10:00',
@@ -376,10 +376,10 @@ const initialNews: NewsItem[] = [
     url: 'fox-harris-hotel-raih-penghargaan-hospitality',
     date: '2026-08-20',
     category: 'News',
-    imageUrl: '/images/hotel/pool-infinity.jpg',
+    imageUrl: '/images/New-Asset/Hotel/Pool.png',
     description: `
       <p><strong>Jakarta</strong> — Berkat komitmen konsisten terhadap pelayanan prima, kebersihan, dan inovasi pengalaman tamu, FOX Harris Hotel Pekanbaru yang dikelola PT Halla Mohana berhasil meraih predikat Best City Business Hotel dalam ajang Tourism & Hospitality Awards tahun ini.</p>
-      <p>Kehadiran rooftop infinity pool yang ikonis dan pelayanan ramah khas Nusantara dinilai menjadi diferensiasi kuat di pasar perhotelan Sumatra.</p>
+      <p>Kehadiran indoor rooftop infinity sky pool yang ikonis dengan pemandangan lanskap kota Pekanbaru dan pelayanan ramah khas Nusantara dinilai menjadi diferensiasi kuat di pasar perhotelan Sumatra.</p>
     `,
     create_time: '2026-08-20 14:00',
     updated: '2026-08-20 14:00',
@@ -393,7 +393,7 @@ const initialNews: NewsItem[] = [
     url: 'sinergi-mahadasha-jaringan-perhotelan-layanan-unggul',
     date: '2025-11-12',
     category: 'Press Release',
-    imageUrl: '/images/hotel/hero-corporate-wide.jpg',
+    imageUrl: '/images/New-Asset/Hotel/Lobby.png',
     description: `
       <p><strong>Jakarta</strong> — PT Mahadana Dasha Utama (MahaDasha) melalui anak usahanya PT Halla Mohana terus memperkuat kemitraan strategis dengan operator perhotelan global The Ascott Limited untuk mempertahankan standar pelayanan bintang 4 terbaik di FOX Harris Hotel Pekanbaru.</p>
       <p>Langkah ini mencakup peningkatan fasilitas kamar, adopsi teknologi reservasi cerdas, dan pelatihan berkelanjutan bagi seluruh staf pelayanan.</p>
@@ -406,13 +406,13 @@ const initialNews: NewsItem[] = [
   {
     id: 'news-5',
     no: 5,
-    title: 'Revitalisasi Area Alfresco Dining Pekanbaru Xchange Hadirkan Pengalaman Kuliner Terbuka',
+    title: 'Revitalisasi Area Kuliner & F&B Pekanbaru Xchange Hadirkan Pengalaman Bersantap Modern',
     url: 'revitalisasi-alfresco-dining-px-kuliner-terbuka',
     date: '2025-06-18',
     category: 'News',
-    imageUrl: '/images/mall/alfresco-dining.jpg',
+    imageUrl: '/images/New-Asset/Mall%20Photo/Wingstop.png',
     description: `
-      <p><strong>Pekanbaru</strong> — Merespons antusiasme pengunjung terhadap konsep kuliner semi-terbuka, PT Halla Mohana merampungkan peremajaan koridor Alfresco Dining di Ground Floor Pekanbaru Xchange. Hadirnya brand kafe nasional dan tata pencahayaan arsitektural modern menjadikan area ini titik kumpul favorit komunitas.</p>
+      <p><strong>Pekanbaru</strong> — Merespons antusiasme pengunjung terhadap konsep kuliner modern, PT Halla Mohana merampungkan penguatan zona F&B di Ground Floor Pekanbaru Xchange. Hadirnya brand ternama seperti Wingstop dan J.CO Donuts & Coffee menjadikan area ini titik kumpul favorit profesional dan keluarga.</p>
     `,
     create_time: '2025-06-18 15:30',
     updated: '2025-06-18 15:30',
@@ -426,7 +426,7 @@ const initialNews: NewsItem[] = [
     url: 'halla-mohana-pertumbuhan-positif-2024',
     date: '2024-12-10',
     category: 'Press Release',
-    imageUrl: '/images/hotel/lobby-grand.jpg',
+    imageUrl: '/images/New-Asset/Hotel/Deluxe%20-%202.png',
     description: `
       <p><strong>Jakarta</strong> — PT Halla Mohana mencatatkan kinerja operasional yang solid sepanjang tahun 2024. Rata-rata tingkat keterisian kamar (occupancy rate) FOX Harris Hotel Pekanbaru menembus angka di atas rata-rata industri regional, ditopang oleh tingginya aktivitas kegiatan MICE korporat dan pemerintahan.</p>
     `,
@@ -438,13 +438,13 @@ const initialNews: NewsItem[] = [
   {
     id: 'news-7',
     no: 7,
-    title: 'Pekanbaru Xchange Hadirkan Rangkaian Acara Kreatif Bersama Komunitas Seni Riau',
+    title: 'Pekanbaru Xchange Hadirkan Zona Rekreasi Keluarga & Hiburan Terlengkap di Riau',
     url: 'px-hadirkan-acara-kreatif-komunitas-riau',
     date: '2024-04-25',
     category: 'News',
-    imageUrl: '/images/mall/cinema-xxi.jpg',
+    imageUrl: '/images/New-Asset/Mall%20Photo/Kiddyhope%202.png',
     description: `
-      <p><strong>Pekanbaru</strong> — Sebagai wujud dukungan terhadap pelaku ekonomi kreatif di Riau, Pekanbaru Xchange berkolaborasi dengan komunitas seni lokal menyelenggarakan pameran karya visual dan pertunjukan musik akustik di atrium mall.</p>
+      <p><strong>Pekanbaru</strong> — Sebagai wujud komitmen menghadirkan destinasi hiburan terpadu untuk seluruh anggota keluarga, Pekanbaru Xchange menghadirkan arena gokart indoor Kiddyhope, pusat gimnastik Rozora, dan area bermain Fruit City.</p>
     `,
     create_time: '2024-04-25 16:00',
     updated: '2024-04-25 16:00',
@@ -458,7 +458,7 @@ const initialNews: NewsItem[] = [
     url: 'satu-dekade-halla-mohana-dedikasi-ruang-urban',
     date: '2023-10-18',
     category: 'Press Release',
-    imageUrl: '/images/hotel/exterior-facade.jpg',
+    imageUrl: '/images/New-Asset/Mall%20Photo/ATRIUM.png',
     description: `
       <p><strong>Jakarta / Pekanbaru</strong> — Memperingati perjalanan 10 tahun sejak didirikan pada tahun 2013, PT Halla Mohana menegaskan kembali komitmennya dalam mengembangkan properti komersial berkualitas tinggi di bawah naungan PT Mahadana Dasha Utama dan TMT Group.</p>
     `,
@@ -470,13 +470,13 @@ const initialNews: NewsItem[] = [
   {
     id: 'news-9',
     no: 9,
-    title: 'Peremajaan Fasilitas Grand Ballroom FOX Harris Hotel Dukung Kebutuhan MICE Regional',
+    title: 'Peremajaan Fasilitas Restoran & Layanan MICE FOX Harris Hotel Pekanbaru',
     url: 'peremajaan-grand-ballroom-fox-harris-mice',
     date: '2023-05-14',
     category: 'News',
-    imageUrl: '/images/hotel/ballroom-orange-fox.jpg',
+    imageUrl: '/images/New-Asset/Hotel/Restaurant%201.png',
     description: `
-      <p><strong>Pekanbaru</strong> — PT Halla Mohana menyelesaikan peningkatan fasilitas sistem tata suara, pencahayaan LED cerdas, serta interior Grand Ballroom FOX Harris Hotel Pekanbaru guna mengakomodasi perhelatan konferensi nasional dan pesta pernikahan berskala besar.</p>
+      <p><strong>Pekanbaru</strong> — PT Halla Mohana menyelesaikan peningkatan fasilitas Where’s The Food (WTF) Restaurant serta interior Grand Ballroom FOX Harris Hotel Pekanbaru guna mengakomodasi perhelatan konferensi nasional dan jamuan bisnis berskala besar.</p>
     `,
     create_time: '2023-05-14 13:00',
     updated: '2023-05-14 13:00',
@@ -490,7 +490,7 @@ const initialNews: NewsItem[] = [
     url: 'implementasi-k3-terpadu-seluruh-aset',
     date: '2022-09-08',
     category: 'News',
-    imageUrl: '/images/hotel/gym-fitness.jpg',
+    imageUrl: '/images/New-Asset/Mall%20Photo/FRUIT%20CITY%202.png',
     description: `
       <p><strong>Pekanbaru</strong> — Sebagai bagian dari pilar Compassion dan Excellence dalam nilai inti korporat, PT Halla Mohana menerapkan sistem manajemen keselamatan kerja dan proteksi gedung terintegrasi di FOX Harris Hotel Pekanbaru dan Pekanbaru Xchange.</p>
     `,
@@ -505,111 +505,161 @@ const initialGallery: GalleryItem[] = [
   {
     id: 'gal-1',
     no: 1,
-    thumbnail: '/images/hotel/pool-infinity.jpg',
-    imageUrl: '/images/hotel/pool-infinity.jpg',
+    thumbnail: '/images/New-Asset/Hotel/Pool.png',
+    imageUrl: '/images/New-Asset/Hotel/Pool.png',
     title: 'Indoor Rooftop Sky Pool Tertinggi di Pekanbaru (FOX Hotel)',
     category: 'FOX Harris Hotel',
-    date: '2026-09-01',
+    date: '2026-11-01',
     visibility: true,
   },
   {
     id: 'gal-2',
     no: 2,
-    thumbnail: '/images/hotel/room-suite-bedroom.jpg',
-    imageUrl: '/images/hotel/room-suite-bedroom.jpg',
-    title: 'Executive Suite Room Interior & Modern Comfort',
+    thumbnail: '/images/New-Asset/Hotel/Lobby.png',
+    imageUrl: '/images/New-Asset/Hotel/Lobby.png',
+    title: 'Front Desk & Area Lobi Arsitektural FOX Harris Hotel',
     category: 'FOX Harris Hotel',
-    date: '2026-08-15',
+    date: '2026-10-28',
     visibility: true,
   },
   {
     id: 'gal-3',
     no: 3,
-    thumbnail: '/images/hotel/restaurant-wtf-main.jpg',
-    imageUrl: '/images/hotel/restaurant-wtf-main.jpg',
-    title: 'Where’s The Food (WTF) Restaurant Main Dining Room',
+    thumbnail: '/images/New-Asset/Hotel/bar.png',
+    imageUrl: '/images/New-Asset/Hotel/bar.png',
+    title: 'Lobby Bar & Executive Lounge dengan Pencahayaan Hangat',
     category: 'FOX Harris Hotel',
-    date: '2026-07-20',
+    date: '2026-10-20',
     visibility: true,
   },
   {
     id: 'gal-4',
     no: 4,
-    thumbnail: '/images/hotel/ballroom-orange-fox.jpg',
-    imageUrl: '/images/hotel/ballroom-orange-fox.jpg',
-    title: 'FOX Grand Ballroom & Prestigious MICE Venue',
+    thumbnail: '/images/New-Asset/Hotel/Deluxe%203.png',
+    imageUrl: '/images/New-Asset/Hotel/Deluxe%203.png',
+    title: 'Interior Kamar Deluxe King Modern Berstandar Bintang 4',
     category: 'FOX Harris Hotel',
-    date: '2026-06-30',
+    date: '2026-10-15',
     visibility: true,
   },
   {
     id: 'gal-5',
     no: 5,
-    thumbnail: '/images/hotel/exterior-facade.jpg',
-    imageUrl: '/images/hotel/exterior-facade.jpg',
-    title: 'Menara Modern 14 Lantai FOX Harris Hotel Pekanbaru',
+    thumbnail: '/images/New-Asset/Hotel/Deluxe%20Twin%20-%202.png',
+    imageUrl: '/images/New-Asset/Hotel/Deluxe%20Twin%20-%202.png',
+    title: 'Kamar Deluxe Twin Nyaman untuk Pelancong Bisnis',
     category: 'FOX Harris Hotel',
-    date: '2026-05-18',
+    date: '2026-10-12',
     visibility: true,
   },
   {
     id: 'gal-6',
     no: 6,
-    thumbnail: '/images/mall/hero-px-mall.jpg',
-    imageUrl: '/images/mall/hero-px-mall.jpg',
-    title: 'Fasad Ikonik Geometris & Plaza Pekanbaru Xchange (PX)',
-    category: 'Pekanbaru Xchange',
-    date: '2026-08-01',
+    thumbnail: '/images/New-Asset/Hotel/Restaurant%202.png',
+    imageUrl: '/images/New-Asset/Hotel/Restaurant%202.png',
+    title: 'Where’s The Food (WTF) Restaurant & Area Sarapan Buffet',
+    category: 'FOX Harris Hotel',
+    date: '2026-10-08',
     visibility: true,
   },
   {
     id: 'gal-7',
     no: 7,
-    thumbnail: '/images/mall/cinema-xxi.jpg',
-    imageUrl: '/images/mall/cinema-xxi.jpg',
-    title: 'Cinema XXI Pekanbaru Xchange Premier Entertainment',
-    category: 'Pekanbaru Xchange',
-    date: '2026-07-15',
+    thumbnail: '/images/New-Asset/Hotel/Restaurant%203.png',
+    imageUrl: '/images/New-Asset/Hotel/Restaurant%203.png',
+    title: 'Semi-Outdoor Terrace Dining FOX Harris Hotel Pekanbaru',
+    category: 'FOX Harris Hotel',
+    date: '2026-10-05',
     visibility: true,
   },
   {
     id: 'gal-8',
     no: 8,
-    thumbnail: '/images/mall/atrium-corridor.jpg',
-    imageUrl: '/images/mall/atrium-corridor.jpg',
-    title: 'Main Atrium & Retail Shopping Promenade PX Mall',
-    category: 'Pekanbaru Xchange',
-    date: '2026-06-25',
+    thumbnail: '/images/New-Asset/Mall%20Photo/PX%20MALL.png',
+    imageUrl: '/images/New-Asset/Mall%20Photo/PX%20MALL.png',
+    title: 'Kawasan Terpadu Jl. Riau No. 147 Pekanbaru (FOX Hotel & PX Mall)',
+    category: 'Kawasan Terpadu',
+    date: '2026-11-10',
     visibility: true,
   },
   {
     id: 'gal-9',
     no: 9,
-    thumbnail: '/images/mall/alfresco-dining.jpg',
-    imageUrl: '/images/mall/alfresco-dining.jpg',
-    title: 'Alfresco Dining Promenade Ground Floor PX Mall',
+    thumbnail: '/images/New-Asset/Mall%20Photo/XXI%202.png',
+    imageUrl: '/images/New-Asset/Mall%20Photo/XXI%202.png',
+    title: 'Box Office & Lounge Premier Cinema XXI Pekanbaru Xchange',
     category: 'Pekanbaru Xchange',
-    date: '2026-06-10',
+    date: '2026-11-05',
     visibility: true,
   },
   {
     id: 'gal-10',
     no: 10,
-    thumbnail: '/images/mall/plaza-live-event.jpg',
-    imageUrl: '/images/mall/plaza-live-event.jpg',
-    title: 'Outdoor Community Event & Music Stage at PX Plaza',
+    thumbnail: '/images/New-Asset/Mall%20Photo/XXI%203.png',
+    imageUrl: '/images/New-Asset/Mall%20Photo/XXI%203.png',
+    title: 'Studio & Concession Refreshments Cinema XXI Lantai 3',
     category: 'Pekanbaru Xchange',
-    date: '2026-05-20',
+    date: '2026-10-25',
     visibility: true,
   },
   {
     id: 'gal-11',
     no: 11,
-    thumbnail: '/images/mall/px-facade-integrated.jpg',
-    imageUrl: '/images/mall/px-facade-integrated.jpg',
-    title: 'Kawasan Terpadu Jl. Riau No. 147 Pekanbaru (Hotel + Mall)',
-    category: 'Kawasan Terpadu',
-    date: '2026-05-01',
+    thumbnail: '/images/New-Asset/Mall%20Photo/J.CO%20-%202.png',
+    imageUrl: '/images/New-Asset/Mall%20Photo/J.CO%20-%202.png',
+    title: 'Teras Kuliner & Kafe Modern Ground Floor PX Mall',
+    category: 'Pekanbaru Xchange',
+    date: '2026-10-18',
+    visibility: true,
+  },
+  {
+    id: 'gal-12',
+    no: 12,
+    thumbnail: '/images/New-Asset/Mall%20Photo/MR%20DIY.png',
+    imageUrl: '/images/New-Asset/Mall%20Photo/MR%20DIY.png',
+    title: 'Tenan Ritel Kebutuhan Keluarga MR.DIY Lantai UG',
+    category: 'Pekanbaru Xchange',
+    date: '2026-10-14',
+    visibility: true,
+  },
+  {
+    id: 'gal-13',
+    no: 13,
+    thumbnail: '/images/New-Asset/Mall%20Photo/FRUIT%20CITY.png',
+    imageUrl: '/images/New-Asset/Mall%20Photo/FRUIT%20CITY.png',
+    title: 'Destinasi Hiburan & Wahana Keluarga Fruit City PX Mall',
+    category: 'Pekanbaru Xchange',
+    date: '2026-10-10',
+    visibility: true,
+  },
+  {
+    id: 'gal-14',
+    no: 14,
+    thumbnail: '/images/New-Asset/Mall%20Photo/Kiddyhope.png',
+    imageUrl: '/images/New-Asset/Mall%20Photo/Kiddyhope.png',
+    title: 'Arena Gokart Indoor Kiddyhope Entertainment Pekanbaru Xchange',
+    category: 'Pekanbaru Xchange',
+    date: '2026-10-04',
+    visibility: true,
+  },
+  {
+    id: 'gal-15',
+    no: 15,
+    thumbnail: '/images/New-Asset/Mall%20Photo/ROZORA%201.png',
+    imageUrl: '/images/New-Asset/Mall%20Photo/ROZORA%201.png',
+    title: 'Rozora Gymnastics Club & Pusat Aktivitas Anak',
+    category: 'Pekanbaru Xchange',
+    date: '2026-09-29',
+    visibility: true,
+  },
+  {
+    id: 'gal-16',
+    no: 16,
+    thumbnail: '/images/New-Asset/Mall%20Photo/Kaha%20Billiard.png',
+    imageUrl: '/images/New-Asset/Mall%20Photo/Kaha%20Billiard.png',
+    title: 'Arena Olahraga & Rekreasi Kaha Billiard Pekanbaru Xchange',
+    category: 'Pekanbaru Xchange',
+    date: '2026-09-22',
     visibility: true,
   },
 ];
@@ -716,7 +766,7 @@ const initialMediaFiles: MediaFile[] = [
     name: 'logo.png',
     url: '/images/logo/logo.png',
     directory: '/images/logo',
-    size: '22 KB',
+    size: '420 KB',
     dimensions: '252x252',
     uploadedBy: 'Calvin Administrator',
     uploadedAt: '2026-10-08',
@@ -724,137 +774,137 @@ const initialMediaFiles: MediaFile[] = [
   {
     id: 'med-2',
     type: 'image',
-    name: 'footerlogo.jpg',
-    url: '/images/logo/footerlogo.jpg',
+    name: 'logo-dark-bg.png',
+    url: '/images/logo/logo-dark-bg.png',
     directory: '/images/logo',
-    size: '2.2 KB',
-    dimensions: '68x60',
+    size: '362 KB',
+    dimensions: '252x252',
     uploadedBy: 'Calvin Administrator',
     uploadedAt: '2026-10-08',
   },
   {
     id: 'med-3',
     type: 'image',
-    name: 'hero-fox-hotel-wide.jpg',
-    url: '/images/hotel/hero-fox-hotel-wide.jpg',
-    directory: '/images/hotel',
-    size: '209 KB',
-    dimensions: '1920x1080',
+    name: 'PX MALL.png',
+    url: '/images/New-Asset/Mall%20Photo/PX%20MALL.png',
+    directory: '/images/New-Asset/Mall Photo',
+    size: '2.5 MB',
+    dimensions: '1448x1086',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
+    uploadedAt: '2026-11-25',
     inCarousel: true,
   },
   {
     id: 'med-4',
     type: 'image',
-    name: 'pool-infinity.jpg',
-    url: '/images/hotel/pool-infinity.jpg',
-    directory: '/images/hotel',
-    size: '215 KB',
-    dimensions: '1920x1280',
+    name: 'Pool.png',
+    url: '/images/New-Asset/Hotel/Pool.png',
+    directory: '/images/New-Asset/Hotel',
+    size: '2.0 MB',
+    dimensions: '1536x1024',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
+    uploadedAt: '2026-11-25',
+    inCarousel: true,
   },
   {
     id: 'med-5',
     type: 'image',
-    name: 'exterior-facade.jpg',
-    url: '/images/hotel/exterior-facade.jpg',
-    directory: '/images/hotel',
-    size: '584 KB',
-    dimensions: '1920x1280',
+    name: 'ATRIUM.png',
+    url: '/images/New-Asset/Mall%20Photo/ATRIUM.png',
+    directory: '/images/New-Asset/Mall Photo',
+    size: '2.1 MB',
+    dimensions: '1448x1086',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
+    uploadedAt: '2026-11-25',
+    inCarousel: true,
   },
   {
     id: 'med-6',
     type: 'image',
-    name: 'room-suite-bedroom.jpg',
-    url: '/images/hotel/room-suite-bedroom.jpg',
-    directory: '/images/hotel',
-    size: '208 KB',
-    dimensions: '1600x1067',
+    name: 'Lobby.png',
+    url: '/images/New-Asset/Hotel/Lobby.png',
+    directory: '/images/New-Asset/Hotel',
+    size: '2.2 MB',
+    dimensions: '1536x1024',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
+    uploadedAt: '2026-11-25',
   },
   {
     id: 'med-7',
     type: 'image',
-    name: 'restaurant-wtf-main.jpg',
-    url: '/images/hotel/restaurant-wtf-main.jpg',
-    directory: '/images/hotel',
-    size: '264 KB',
-    dimensions: '1600x1067',
+    name: 'bar.png',
+    url: '/images/New-Asset/Hotel/bar.png',
+    directory: '/images/New-Asset/Hotel',
+    size: '2.2 MB',
+    dimensions: '1448x1086',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
+    uploadedAt: '2026-11-25',
   },
   {
     id: 'med-8',
     type: 'image',
-    name: 'ballroom-orange-fox.jpg',
-    url: '/images/hotel/ballroom-orange-fox.jpg',
-    directory: '/images/hotel',
-    size: '181 KB',
-    dimensions: '1600x1067',
+    name: 'Deluxe.png',
+    url: '/images/New-Asset/Hotel/Deluxe.png',
+    directory: '/images/New-Asset/Hotel',
+    size: '2.1 MB',
+    dimensions: '1448x1086',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
+    uploadedAt: '2026-11-25',
   },
   {
     id: 'med-9',
     type: 'image',
-    name: 'hero-px-mall.jpg',
-    url: '/images/mall/hero-px-mall.jpg',
-    directory: '/images/mall',
-    size: '322 KB',
-    dimensions: '1920x1080',
+    name: 'Restaurant 1.png',
+    url: '/images/New-Asset/Hotel/Restaurant%201.png',
+    directory: '/images/New-Asset/Hotel',
+    size: '2.7 MB',
+    dimensions: '1448x1086',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
-    inCarousel: true,
+    uploadedAt: '2026-11-25',
   },
   {
     id: 'med-10',
     type: 'image',
-    name: 'cinema-xxi.jpg',
-    url: '/images/mall/cinema-xxi.jpg',
-    directory: '/images/mall',
-    size: '348 KB',
-    dimensions: '1920x1436',
+    name: 'XXI 1.png',
+    url: '/images/New-Asset/Mall%20Photo/XXI%201.png',
+    directory: '/images/New-Asset/Mall Photo',
+    size: '2.1 MB',
+    dimensions: '1448x1086',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
+    uploadedAt: '2026-11-25',
   },
   {
     id: 'med-11',
     type: 'image',
-    name: 'atrium-corridor.jpg',
-    url: '/images/mall/atrium-corridor.jpg',
-    directory: '/images/mall',
-    size: '192 KB',
-    dimensions: '1280x894',
+    name: 'Wingstop.png',
+    url: '/images/New-Asset/Mall%20Photo/Wingstop.png',
+    directory: '/images/New-Asset/Mall Photo',
+    size: '2.8 MB',
+    dimensions: '1448x1086',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
+    uploadedAt: '2026-11-25',
   },
   {
     id: 'med-12',
     type: 'image',
-    name: 'alfresco-dining.jpg',
-    url: '/images/mall/alfresco-dining.jpg',
-    directory: '/images/mall',
-    size: '227 KB',
-    dimensions: '1280x960',
+    name: 'J.co.png',
+    url: '/images/New-Asset/Mall%20Photo/J.co.png',
+    directory: '/images/New-Asset/Mall Photo',
+    size: '2.6 MB',
+    dimensions: '1448x1086',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
+    uploadedAt: '2026-11-25',
   },
   {
     id: 'med-13',
     type: 'image',
-    name: 'px-facade-integrated.jpg',
-    url: '/images/mall/px-facade-integrated.jpg',
-    directory: '/images/mall',
-    size: '456 KB',
-    dimensions: '1920x1080',
+    name: 'Kaha Billiard.png',
+    url: '/images/New-Asset/Mall%20Photo/Kaha%20Billiard.png',
+    directory: '/images/New-Asset/Mall Photo',
+    size: '3.0 MB',
+    dimensions: '1448x1086',
     uploadedBy: 'Calvin Administrator',
-    uploadedAt: '2026-11-15',
-    inCarousel: true,
+    uploadedAt: '2026-11-25',
   },
   {
     id: 'med-14',
@@ -862,7 +912,7 @@ const initialMediaFiles: MediaFile[] = [
     name: 'PT_Halla_Mohana_Corporate_Profile_2026.pdf',
     url: '#',
     directory: '/documents',
-    size: '4.8 MB',
+    size: '4.2 MB',
     uploadedBy: 'Calvin Administrator',
     uploadedAt: '2026-09-15',
   },
@@ -872,7 +922,7 @@ const initialMediaFiles: MediaFile[] = [
     name: 'Annual_Sustainability_Report_2025.pdf',
     url: '#',
     directory: '/documents',
-    size: '8.2 MB',
+    size: '3.4 MB',
     uploadedBy: 'Calvin Administrator',
     uploadedAt: '2026-08-10',
   },
@@ -947,10 +997,14 @@ interface CMSDataContextType {
   toggleCareerVisibility: (id: string) => void;
   // Career Applications
   careerApplications: CareerApplication[];
-  submitCareerApplication: (app: Omit<CareerApplication, 'id' | 'submittedAt' | 'status'>) => void;
+  submitCareerApplication: (
+    app: Omit<CareerApplication, 'id' | 'submittedAt' | 'status'>,
+    resumeFile?: File
+  ) => Promise<void>;
+  updateCareerApplicationStatus: (id: string, status: CareerApplication['status']) => void;
   // Media files
   mediaFiles: MediaFile[];
-  addMediaFile: (file: Omit<MediaFile, 'id' | 'uploadedAt' | 'uploadedBy'>) => void;
+  addMediaFile: (file: Omit<MediaFile, 'id' | 'uploadedAt' | 'uploadedBy'>, rawFile?: File) => Promise<void>;
   deleteMediaFile: (id: string) => void;
   // Utility reset
   resetAllDataToDefault: () => void;
@@ -958,7 +1012,7 @@ interface CMSDataContextType {
 
 const CMSDataContext = createContext<CMSDataContextType | null>(null);
 
-const STORAGE_KEY_PREFIX = 'hm_cms_v11_';
+const STORAGE_KEY_PREFIX = 'hm_cms_v12_';
 
 function getStoredItem<T>(key: string, defaultValue: T): T {
   try {
@@ -974,7 +1028,7 @@ function setStoredItem<T>(key: string, value: T): void {
   try {
     localStorage.setItem(STORAGE_KEY_PREFIX + key, JSON.stringify(value));
   } catch (e) {
-    console.error('Failed to set localStorage for', key, e);
+    console.warn('localStorage quota exceeded or unavailable for', key, e);
   }
 }
 
@@ -1030,13 +1084,13 @@ export const CMSDataProvider: React.FC<{ children: React.ReactNode }> = ({ child
         if (p.id === 'prj-2' && (p.imageUrl.includes('unsplash') || p.imageUrl.includes('567449303078') || !p.imageUrl)) {
           return {
             ...p,
-            imageUrl: '/images/mall/hero-px-mall.jpg',
+            imageUrl: '/images/New-Asset/Mall%20Photo/Wingstop.png',
           };
         }
         if (p.id === 'prj-1' && (p.imageUrl.includes('unsplash') || !p.imageUrl)) {
           return {
             ...p,
-            imageUrl: '/images/hotel/hero-fox-hotel-wide.jpg',
+            imageUrl: '/images/New-Asset/Hotel/Deluxe.png',
           };
         }
         return p;
@@ -1508,22 +1562,49 @@ export const CMSDataProvider: React.FC<{ children: React.ReactNode }> = ({ child
     );
   };
 
-  const submitCareerApplication = (appData: Omit<CareerApplication, 'id' | 'submittedAt' | 'status'>) => {
+  const submitCareerApplication = async (
+    appData: Omit<CareerApplication, 'id' | 'submittedAt' | 'status'>,
+    resumeFile?: File
+  ) => {
+    const appId = 'app-' + Date.now();
+    let finalResumeUrl = appData.resumeUrl;
+    if (resumeFile) {
+      await saveUploadedFileBlob('career-' + appId, resumeFile);
+      finalResumeUrl = URL.createObjectURL(resumeFile);
+    }
     const newApp: CareerApplication = {
       ...appData,
-      id: 'app-' + Date.now(),
+      id: appId,
+      resumeUrl: finalResumeUrl,
       submittedAt: new Date().toISOString().replace('T', ' ').substring(0, 16),
       status: 'Pending',
     };
     setCareerApplications((prev) => [newApp, ...prev]);
-    console.log(`[Auto-Send Email] Sent application for ${newApp.careerTitle} to: ${generalConfig.auto_send_email.send_career_application_to}`);
+    addActivityLog('CAREER_APPLICATION', `Pelamar baru (${newApp.fullName}) untuk posisi ${newApp.careerTitle}`);
+  };
+
+  const updateCareerApplicationStatus = (id: string, status: CareerApplication['status']) => {
+    setCareerApplications((prev) =>
+      prev.map((app) => (app.id === id ? { ...app, status } : app))
+    );
+    addActivityLog('UPDATE_APPLICATION_STATUS', `Status lamaran #${id} diubah menjadi ${status}`);
   };
 
   // Media Library
-  const addMediaFile = (fileData: Omit<MediaFile, 'id' | 'uploadedAt' | 'uploadedBy'>) => {
+  const addMediaFile = async (
+    fileData: Omit<MediaFile, 'id' | 'uploadedAt' | 'uploadedBy'>,
+    rawFile?: File
+  ) => {
+    const fileId = 'med-' + Date.now();
+    let finalUrl = fileData.url;
+    if (rawFile) {
+      await saveUploadedFileBlob('media-' + fileId, rawFile);
+      finalUrl = URL.createObjectURL(rawFile);
+    }
     const newFile: MediaFile = {
       ...fileData,
-      id: 'med-' + Date.now(),
+      id: fileId,
+      url: finalUrl,
       uploadedAt: new Date().toISOString().split('T')[0],
       uploadedBy: currentUser.name,
     };
@@ -1532,6 +1613,7 @@ export const CMSDataProvider: React.FC<{ children: React.ReactNode }> = ({ child
   };
 
   const deleteMediaFile = (id: string) => {
+    void deleteUploadedFileBlob('media-' + id);
     setMediaFiles((prev) => prev.filter((m) => m.id !== id));
     addActivityLog('DELETE_MEDIA', 'Deleted media file: #' + id);
   };
@@ -1615,6 +1697,7 @@ export const CMSDataProvider: React.FC<{ children: React.ReactNode }> = ({ child
         toggleCareerVisibility,
         careerApplications,
         submitCareerApplication,
+        updateCareerApplicationStatus,
         mediaFiles,
         addMediaFile,
         deleteMediaFile,

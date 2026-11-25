@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useCMSData } from '@/context/CMSDataContext';
 import { Button } from '@/components/ui/Button';
 import { Modal } from '@/components/ui/Modal';
-import { Badge } from '@/components/ui/Badge';
+import { validatePdfFile, validateImageFile } from '@/lib/fileValidation';
+import { getUploadedFileBlob } from '@/lib/fileStorage';
 import {
   Image as ImageIcon,
   FileText,
@@ -14,11 +15,15 @@ import {
   Check,
   Search,
   ExternalLink,
+  AlertCircle,
+  CheckCircle2,
 } from 'lucide-react';
+import { toast } from 'sonner';
 import type { MediaFile } from '@/types';
 
 export const MediaLibraryModule: React.FC = () => {
   const { mediaFiles, addMediaFile, deleteMediaFile, addBanner } = useCMSData();
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const [activeTab, setActiveTab] = useState<'images' | 'documents'>('images');
   const [selectedDirectory, setSelectedDirectory] = useState<string>('all');
@@ -27,13 +32,15 @@ export const MediaLibraryModule: React.FC = () => {
 
   // Upload modal state
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
+  const [selectedUploadFile, setSelectedUploadFile] = useState<File | null>(null);
+  const [uploadError, setUploadError] = useState('');
   const [uploadFormData, setUploadFormData] = useState({
     name: '',
     url: '',
-    directory: '/images/general',
+    directory: '/images/New-Asset/Hotel',
     type: 'image' as 'image' | 'document',
     size: '420 KB',
-    dimensions: '1920x1080',
+    dimensions: '1448x1086',
   });
 
   const images = mediaFiles.filter((m) => m.type === 'image');
@@ -74,18 +81,87 @@ export const MediaLibraryModule: React.FC = () => {
     alert(`Gambar "${image.name}" berhasil dihubungkan ke Hero Carousel Slider!`);
   };
 
-  const handleUploadSubmit = (e: React.FormEvent) => {
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploadError('');
+
+    if (uploadFormData.type === 'document') {
+      const validation = await validatePdfFile(file);
+      if (!validation.valid) {
+        setSelectedUploadFile(null);
+        setUploadError(validation.error || 'Hanya file PDF maksimal 5 MB yang diperbolehkan.');
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+      const objectUrl = URL.createObjectURL(file);
+      setSelectedUploadFile(file);
+      setUploadFormData((prev) => ({
+        ...prev,
+        name: file.name,
+        url: objectUrl,
+        size: validation.formattedSize || prev.size,
+      }));
+    } else {
+      const validation = validateImageFile(file);
+      if (!validation.valid) {
+        setSelectedUploadFile(null);
+        setUploadError(validation.error || 'Gambar tidak valid (maksimal 5 MB).');
+        if (fileInputRef.current) fileInputRef.current.value = '';
+        return;
+      }
+      const objectUrl = URL.createObjectURL(file);
+      setSelectedUploadFile(file);
+      setUploadFormData((prev) => ({
+        ...prev,
+        name: file.name,
+        url: objectUrl,
+        size: validation.formattedSize || prev.size,
+      }));
+    }
+  };
+
+  const handleUploadSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    addMediaFile(uploadFormData);
+
+    if (uploadFormData.type === 'document' && !selectedUploadFile && !uploadFormData.url) {
+      setUploadError('Harap pilih dokumen PDF (maksimal 5 MB) terlebih dahulu.');
+      return;
+    }
+
+    await addMediaFile(uploadFormData, selectedUploadFile || undefined);
+    toast.success(`"${uploadFormData.name}" berhasil disimpan ke Media Library.`);
     setIsUploadModalOpen(false);
+    setSelectedUploadFile(null);
+    setUploadError('');
     setUploadFormData({
       name: '',
       url: '',
-      directory: activeTab === 'images' ? '/images/general' : '/documents',
+      directory: activeTab === 'images' ? '/images/New-Asset/Hotel' : '/documents',
       type: activeTab === 'images' ? 'image' : 'document',
       size: '420 KB',
-      dimensions: '1920x1080',
+      dimensions: '1448x1086',
     });
+  };
+
+  const handleDownloadDocument = async (doc: MediaFile) => {
+    const blob = await getUploadedFileBlob('media-' + doc.id);
+    if (blob) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = doc.name;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      toast.success(`Mengunduh ${doc.name}`);
+      return;
+    }
+    if (doc.url && doc.url !== '#') {
+      window.open(doc.url, '_blank');
+      return;
+    }
+    toast.info(`Dokumen contoh (${doc.name}) merupakan data seed bawaan.`);
   };
 
   return (
@@ -107,11 +183,16 @@ export const MediaLibraryModule: React.FC = () => {
           size="sm"
           icon={<Upload className="h-4 w-4" />}
           onClick={() => {
-            setUploadFormData((prev) => ({
-              ...prev,
+            setSelectedUploadFile(null);
+            setUploadError('');
+            setUploadFormData({
+              name: '',
+              url: '',
               type: activeTab === 'images' ? 'image' : 'document',
-              directory: activeTab === 'images' ? '/images/general' : '/documents',
-            }));
+              directory: activeTab === 'images' ? '/images/New-Asset/Hotel' : '/documents',
+              size: activeTab === 'images' ? '420 KB' : '0 KB',
+              dimensions: '1448x1086',
+            });
             setIsUploadModalOpen(true);
           }}
         >
@@ -322,7 +403,7 @@ export const MediaLibraryModule: React.FC = () => {
                           variant="ghost"
                           size="sm"
                           icon={<ExternalLink className="h-3.5 w-3.5 text-[#7A152E]" />}
-                          onClick={() => alert(`Mengunduh dokumen ${doc.name}`)}
+                          onClick={() => void handleDownloadDocument(doc)}
                         >
                           Unduh
                         </Button>
@@ -352,9 +433,47 @@ export const MediaLibraryModule: React.FC = () => {
       <Modal
         isOpen={isUploadModalOpen}
         onClose={() => setIsUploadModalOpen(false)}
-        title={activeTab === 'images' ? 'Upload Gambar Baru' : 'Upload Dokumen Baru'}
+        title={uploadFormData.type === 'document' ? 'Upload Dokumen Resmi (Khusus PDF, Maks. 5 MB)' : 'Upload Gambar Baru'}
       >
         <form onSubmit={handleUploadSubmit} className="space-y-4">
+          {/* File Upload Picker */}
+          <div>
+            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+              {uploadFormData.type === 'document'
+                ? 'Pilih File PDF (Maks. 5 MB) *'
+                : 'Unggah File Gambar Lokal (PNG/JPG/WEBP, Maks. 5 MB)'}
+            </label>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept={uploadFormData.type === 'document' ? '.pdf,application/pdf' : 'image/png,image/jpeg,image/webp'}
+              onChange={handleFileSelect}
+              className="hidden"
+            />
+            <div
+              onClick={() => fileInputRef.current?.click()}
+              className="flex items-center justify-between gap-3 rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-3 cursor-pointer hover:border-[#8B1E24] transition-colors"
+            >
+              <div className="flex items-center gap-2.5 min-w-0">
+                <Upload className="h-4 w-4 text-[#8B1E24] shrink-0" />
+                <span className="text-xs font-semibold text-slate-700 truncate">
+                  {selectedUploadFile
+                    ? `${selectedUploadFile.name} (${uploadFormData.size})`
+                    : uploadFormData.type === 'document'
+                      ? 'Klik untuk pilih berkas .PDF (maks. 5 MB)'
+                      : 'Klik untuk pilih gambar lokal atau isi URL di bawah'}
+                </span>
+              </div>
+              {selectedUploadFile && <CheckCircle2 className="h-4 w-4 text-emerald-600 shrink-0" />}
+            </div>
+            {uploadError && (
+              <p className="mt-1.5 flex items-center gap-1.5 text-xs font-medium text-rose-600">
+                <AlertCircle className="h-3.5 w-3.5 shrink-0" />
+                <span>{uploadError}</span>
+              </p>
+            )}
+          </div>
+
           <div>
             <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
               Nama File
@@ -362,26 +481,28 @@ export const MediaLibraryModule: React.FC = () => {
             <input
               type="text"
               required
-              placeholder="Contoh: ballroom-fox-hotel.jpg"
+              placeholder={uploadFormData.type === 'document' ? 'Contoh: Laporan_GCG_2026.pdf' : 'Contoh: ballroom-fox-hotel.png'}
               value={uploadFormData.name}
               onChange={(e) => setUploadFormData({ ...uploadFormData, name: e.target.value })}
               className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:border-[#7A152E] focus:outline-hidden"
             />
           </div>
 
-          <div>
-            <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-              URL Sumber Aset (Direct Image / CDN URL)
-            </label>
-            <input
-              type="url"
-              required
-              placeholder="https://images.unsplash.com/photo-..."
-              value={uploadFormData.url}
-              onChange={(e) => setUploadFormData({ ...uploadFormData, url: e.target.value })}
-              className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:border-[#7A152E] focus:outline-hidden"
-            />
-          </div>
+          {uploadFormData.type === 'image' && (
+            <div>
+              <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
+                Path / URL Sumber Aset
+              </label>
+              <input
+                type="text"
+                required={!selectedUploadFile}
+                placeholder="/images/New-Asset/Hotel/Lobby.png"
+                value={uploadFormData.url}
+                onChange={(e) => setUploadFormData({ ...uploadFormData, url: e.target.value })}
+                className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:border-[#7A152E] focus:outline-hidden"
+              />
+            </div>
+          )}
 
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -395,9 +516,8 @@ export const MediaLibraryModule: React.FC = () => {
               >
                 {activeTab === 'images' ? (
                   <>
-                    <option value="/images/banners">/images/banners</option>
-                    <option value="/images/projects">/images/projects</option>
-                    <option value="/images/gallery">/images/gallery</option>
+                    <option value="/images/New-Asset/Hotel">/images/New-Asset/Hotel</option>
+                    <option value="/images/New-Asset/Mall Photo">/images/New-Asset/Mall Photo</option>
                     <option value="/images/logo">/images/logo</option>
                     <option value="/images/general">/images/general</option>
                   </>
@@ -413,13 +533,14 @@ export const MediaLibraryModule: React.FC = () => {
 
             <div>
               <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">
-                Estimasi Ukuran
+                Ukuran File
               </label>
               <input
                 type="text"
+                readOnly={!!selectedUploadFile}
                 value={uploadFormData.size}
                 onChange={(e) => setUploadFormData({ ...uploadFormData, size: e.target.value })}
-                className="w-full rounded-xl border border-slate-300 px-3.5 py-2 text-sm focus:border-[#7A152E] focus:outline-hidden"
+                className="w-full rounded-xl border border-slate-300 bg-slate-50 px-3.5 py-2 text-sm focus:border-[#7A152E] focus:outline-hidden"
               />
             </div>
           </div>

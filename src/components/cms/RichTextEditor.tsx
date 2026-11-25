@@ -468,8 +468,8 @@ export const RichTextEditor: React.FC<RichTextEditorProps> = ({
               <div>
                 <label className="block text-xs font-semibold text-slate-700">URL Gambar</label>
                 <input
-                  type="url"
-                  placeholder="https://images.unsplash.com/..."
+                  type="text"
+                  placeholder="/images/New-Asset/Hotel/Lobby.png"
                   value={imageUrl}
                   onChange={(e) => setImageUrl(e.target.value)}
                   className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2 text-sm focus:border-[#7A152E] focus:outline-hidden"

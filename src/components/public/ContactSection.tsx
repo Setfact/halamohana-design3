@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useCMSData } from '@/context/CMSDataContext';
+import {
+  ArchitecturalReveal,
+  ARCHITECTURAL_EASE,
+} from '@/components/ui/MotionPrimitives';
 import {
   Building2,
   Phone,
@@ -106,50 +111,74 @@ export const ContactSection: React.FC = () => {
       <section className="py-20 sm:py-28 border-b border-[#E5E5E5] bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-10">
           {/* Section Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#E5E5E5]">
-            <div className="max-w-2xl space-y-2">
-              <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
-                Alamat Representatif Resmi
-              </p>
-              <h2 className="text-3xl sm:text-4xl font-semibold text-[#141414] tracking-tight">
-                Lokasi Kantor &amp; Peta Interaktif
-              </h2>
-              <p className="text-base text-[#52525B] leading-relaxed pt-1">
-                Kunjungi kantor pusat kami di Jakarta atau kantor operasional properti terintegrasi di Pekanbaru. Pilih tab di bawah untuk melihat rute dan titik koordinat Google Maps.
-              </p>
-            </div>
+          <ArchitecturalReveal>
+            <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-[#E5E5E5]">
+              <div className="max-w-2xl space-y-2">
+                <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
+                  Alamat Representatif Resmi
+                </p>
+                <h2 className="text-3xl sm:text-4xl font-semibold text-[#141414] tracking-tight">
+                  Lokasi Kantor &amp; Peta Interaktif
+                </h2>
+                <p className="text-base text-[#52525B] leading-relaxed pt-1">
+                  Kunjungi kantor pusat kami di Jakarta atau kantor operasional properti terintegrasi di Pekanbaru. Pilih tab di bawah untuk melihat rute dan titik koordinat Google Maps.
+                </p>
+              </div>
 
-            {/* Office Tab Switcher */}
-            <div className="inline-flex border border-[#E5E5E5] rounded-md p-1 bg-white shrink-0">
-              <button
-                type="button"
-                onClick={() => setActiveOfficeId('jakarta')}
-                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded transition-colors cursor-pointer ${
-                  activeOfficeId === 'jakarta'
-                    ? 'bg-[#8B1E24] text-white'
-                    : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
-                }`}
-              >
-                <Building2 className="h-3.5 w-3.5" />
-                <span>Kantor Pusat (Jakarta)</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveOfficeId('pekanbaru')}
-                className={`flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded transition-colors cursor-pointer ${
-                  activeOfficeId === 'pekanbaru'
-                    ? 'bg-[#8B1E24] text-white'
-                    : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
-                }`}
-              >
-                <Compass className="h-3.5 w-3.5" />
-                <span>Kantor Properti (Pekanbaru)</span>
-              </button>
+              {/* Office Tab Switcher */}
+              <div className="inline-flex border border-[#E5E5E5] rounded-md p-1 bg-white shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setActiveOfficeId('jakarta')}
+                  className={`relative flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded transition-colors cursor-pointer ${
+                    activeOfficeId === 'jakarta'
+                      ? 'text-white'
+                      : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
+                  }`}
+                >
+                  {activeOfficeId === 'jakarta' && (
+                    <motion.span
+                      layoutId="contact-office-pill"
+                      transition={{ type: 'spring', stiffness: 360, damping: 30 }}
+                      className="absolute inset-0 rounded bg-[#8B1E24]"
+                    />
+                  )}
+                  <Building2 className="relative z-10 h-3.5 w-3.5" />
+                  <span className="relative z-10">Kantor Pusat (Jakarta)</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveOfficeId('pekanbaru')}
+                  className={`relative flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded transition-colors cursor-pointer ${
+                    activeOfficeId === 'pekanbaru'
+                      ? 'text-white'
+                      : 'text-stone-600 hover:text-stone-900 hover:bg-stone-50'
+                  }`}
+                >
+                  {activeOfficeId === 'pekanbaru' && (
+                    <motion.span
+                      layoutId="contact-office-pill"
+                      transition={{ type: 'spring', stiffness: 360, damping: 30 }}
+                      className="absolute inset-0 rounded bg-[#8B1E24]"
+                    />
+                  )}
+                  <Compass className="relative z-10 h-3.5 w-3.5" />
+                  <span className="relative z-10">Kantor Properti (Pekanbaru)</span>
+                </button>
+              </div>
             </div>
-          </div>
+          </ArchitecturalReveal>
 
           {/* Map & Office Detail Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentOffice.id}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.28, ease: ARCHITECTURAL_EASE }}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch"
+            >
             {/* Left: Office Information Card (5 cols) */}
             <div className="lg:col-span-5 flex flex-col justify-between rounded-lg border border-[#E5E5E5] bg-[#F7F7F5] p-7 sm:p-8 space-y-6">
               <div className="space-y-5">
@@ -275,26 +304,30 @@ export const ContactSection: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
 
       {/* 2. Direct Inquiry Form & Department Directory */}
       <section className="py-20 sm:py-28 bg-[#F7F7F5] border-b border-[#E5E5E5]">
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-12">
-          <div className="max-w-2xl space-y-2">
-            <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
-              Korespondensi &amp; Kemitraan
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-semibold text-[#141414] tracking-tight">
-              Kirimkan Pesan &amp; Formulir Kemitraan
-            </h2>
-            <p className="text-base text-[#52525B] leading-relaxed pt-1">
-              Hubungi tim pengelola untuk peluang penyewaan tenant ritel di Pekanbaru Xchange, paket ballroom &amp; meeting di FOX Hotel Pekanbaru, atau kemitraan bisnis strategis.
-            </p>
-          </div>
+          <ArchitecturalReveal>
+            <div className="max-w-2xl space-y-2">
+              <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
+                Korespondensi &amp; Kemitraan
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-semibold text-[#141414] tracking-tight">
+                Kirimkan Pesan &amp; Formulir Kemitraan
+              </h2>
+              <p className="text-base text-[#52525B] leading-relaxed pt-1">
+                Hubungi tim pengelola untuk peluang penyewaan tenant ritel di Pekanbaru Xchange, paket ballroom &amp; meeting di FOX Hotel Pekanbaru, atau kemitraan bisnis strategis.
+              </p>
+            </div>
+          </ArchitecturalReveal>
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <ArchitecturalReveal delay={0.1}>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
             {/* Left: Department Contacts & Commitment (5 cols) */}
             <div className="lg:col-span-5 space-y-4">
               <div className="rounded-lg border border-[#E5E5E5] bg-white p-6 sm:p-7 space-y-4">
@@ -505,7 +538,8 @@ export const ContactSection: React.FC = () => {
                 </form>
               </div>
             </div>
-          </div>
+            </div>
+          </ArchitecturalReveal>
         </div>
       </section>
     </div>

@@ -51,7 +51,7 @@ export const UserAdminModule: React.FC = () => {
     email: '',
     roleId: roles[0]?.id || '',
     status: 'active' as 'active' | 'inactive',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    avatar: 'https://ui-avatars.com/api/?name=Staff+HM&background=8B1E24&color=fff&bold=true&size=150',
   });
 
   // Role CRUD modal state
@@ -87,7 +87,7 @@ export const UserAdminModule: React.FC = () => {
       email: '',
       roleId: roles[0]?.id || '',
       status: 'active',
-      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+      avatar: 'https://ui-avatars.com/api/?name=Staff+HM&background=8B1E24&color=fff&bold=true&size=150',
     });
     setIsUserModalOpen(true);
   };

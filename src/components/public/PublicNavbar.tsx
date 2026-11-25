@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useCMSData } from '@/context/CMSDataContext';
 import { Menu, X, ArrowRight } from 'lucide-react';
+import { ARCHITECTURAL_EASE } from '@/components/ui/MotionPrimitives';
 
 interface PublicNavbarProps {
   currentPath?: string;
@@ -93,7 +95,11 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({
               >
                 {page.title}
                 {isActive && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#8B1E24]" />
+                  <motion.span
+                    layoutId="navbar-active-indicator"
+                    transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#8B1E24]"
+                  />
                 )}
               </a>
             );
@@ -126,13 +132,24 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({
       </div>
 
       {/* Mobile Off-canvas Drawer */}
-      {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <div
-            className="fixed inset-0 bg-stone-950/60 backdrop-blur-xs"
-            onClick={() => setMobileMenuOpen(false)}
-          />
-          <div className="fixed top-0 right-0 bottom-0 w-80 bg-white p-6 shadow-2xl flex flex-col justify-between z-10 animate-in slide-in-from-right duration-200">
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <div className="fixed inset-0 z-50 lg:hidden">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.25 }}
+              className="fixed inset-0 bg-stone-950/60"
+              onClick={() => setMobileMenuOpen(false)}
+            />
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ duration: 0.32, ease: ARCHITECTURAL_EASE }}
+              className="fixed top-0 right-0 bottom-0 w-80 bg-white p-6 shadow-2xl flex flex-col justify-between z-10"
+            >
             <div>
               <div className="flex items-center justify-between pb-5 border-b border-stone-100">
                 <a
@@ -199,12 +216,13 @@ export const PublicNavbar: React.FC<PublicNavbarProps> = ({
                 <ArrowRight className="h-4 w-4" />
               </a>
               <p className="text-[11px] text-center text-stone-400">
-                Gedung TMT 1, Jakarta & Jl. Riau, Pekanbaru
+                Gedung TMT 1, Jakarta &amp; Jl. Riau, Pekanbaru
               </p>
             </div>
+            </motion.div>
           </div>
-        </div>
-      )}
+        )}
+      </AnimatePresence>
     </header>
   );
 };

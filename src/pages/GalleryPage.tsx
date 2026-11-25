@@ -18,7 +18,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate }) => {
           { label: 'Beranda', href: '/' },
           { label: 'Dokumentasi & Galeri' },
         ]}
-        imageUrl="/images/hotel/exterior-facade.jpg"
+        imageUrl="/images/New-Asset/Mall%20Photo/XXI%202.png"
         onNavigate={onNavigate}
       />
 

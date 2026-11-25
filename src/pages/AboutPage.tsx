@@ -1,22 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
+  ArchitecturalReveal,
+  ArchitecturalStagger,
+  ArchitecturalStaggerItem,
+  ImageFrameReveal,
+  ARCHITECTURAL_EASE,
+} from '@/components/ui/MotionPrimitives';
+import {
   Building2,
-  Compass,
-  CheckCircle2,
   ArrowRight,
-  ShieldCheck,
   ChevronRight,
   ChevronDown,
-  ChevronUp,
-  Layers,
-  TrendingUp,
-  Award,
-  Heart,
-  Zap,
-  Eye,
-  Scale,
-  FileCheck
 } from 'lucide-react';
 
 interface AboutPageProps {
@@ -154,17 +149,25 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
     <div className="bg-white min-h-screen text-[#141414]">
       {/* 1. Hero Banner Korporat (Arsitektural, Berwibawa, Tanpa Badge Kapsul) */}
       <div className="relative bg-[#0F1117] text-white py-16 sm:py-24 border-b border-stone-800 overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src="/images/hotel/hero-corporate-wide.jpg"
+        <div className="absolute inset-0 overflow-hidden">
+          <motion.img
+            src="/images/New-Asset/Hotel/Restaurant%201.png"
             alt="PT Halla Mohana Corporate Architecture"
-            className="w-full h-full object-cover object-center opacity-30"
+            initial={{ scale: 1.07, opacity: 0.14 }}
+            animate={{ scale: 1, opacity: 0.28 }}
+            transition={{ duration: 1.1, ease: ARCHITECTURAL_EASE }}
+            className="w-full h-full object-cover object-center"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0F1117]/95 via-[#161217]/90 to-[#2A0E13]/85" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0F1117] via-transparent to-transparent" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 space-y-4 text-left">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: ARCHITECTURAL_EASE }}
+          className="relative z-10 mx-auto max-w-7xl px-4 sm:px-8 space-y-4 text-left"
+        >
           {/* Breadcrumb Trail */}
           <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs text-stone-400 font-medium">
             <a
@@ -197,7 +200,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
           <p className="text-xs text-stone-400 pt-1">
             Didirikan tahun 2013 • Anak Perusahaan MahaDasha (TMT Group) • Kawasan Terpadu Jl. Riau No. 147 Pekanbaru
           </p>
-        </div>
+        </motion.div>
       </div>
 
       {/* Sticky Sub-Navbar (Garis Pemisah Hairline, Tanpa Pill Badges) */}
@@ -214,13 +217,20 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   key={nav.id}
                   href={`#${nav.id}`}
                   onClick={(e) => scrollToSection(e, nav.id)}
-                  className={`pb-3 -mb-[1px] border-b-2 font-semibold transition-all cursor-pointer ${
+                  className={`relative pb-3 font-semibold transition-colors cursor-pointer ${
                     isActive
-                      ? 'border-[#8B1E24] text-[#8B1E24]'
-                      : 'border-transparent text-[#52525B] hover:text-[#141414]'
+                      ? 'text-[#8B1E24]'
+                      : 'text-[#52525B] hover:text-[#141414]'
                   }`}
                 >
                   {nav.label}
+                  {isActive && (
+                    <motion.span
+                      layoutId="about-subnav-indicator"
+                      transition={{ type: 'spring', stiffness: 360, damping: 30 }}
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#8B1E24]"
+                    />
+                  )}
                 </a>
               );
             })}
@@ -237,21 +247,23 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         <div className="mx-auto max-w-7xl px-4 sm:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
             {/* Kolom Kiri: 7 Kolom pada LG (Foto Terpadu Arsitektural Bersih) */}
-            <div className="lg:col-span-7 text-left">
-              <div className="rounded-lg overflow-hidden border border-[#E5E5E5] bg-stone-100">
+            <ImageFrameReveal className="lg:col-span-7 text-left">
+              <div className="rounded-lg overflow-hidden border border-[#E5E5E5] bg-stone-100 group">
                 <img
-                  src="/images/hotel/overview-facade-landscape.jpg"
+                  src="/images/New-Asset/Mall%20Photo/PX%20MALL.png"
                   alt="Kawasan Terpadu FOX Harris Hotel Pekanbaru & Pekanbaru Xchange"
-                  className="w-full aspect-[16/10] object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-full aspect-[16/10] object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 />
               </div>
               <p className="text-xs text-[#52525B] mt-2.5 leading-relaxed">
                 Kawasan komersial terpadu seluas 1,5 hektar di koridor Jalan Riau No. 147, Senapelan, Pekanbaru.
               </p>
-            </div>
+            </ImageFrameReveal>
 
             {/* Kolom Kanan: 5 Kolom pada LG (Satu Judul Utama Bersih & Narasi Resmi) */}
-            <div className="lg:col-span-5 text-left space-y-4">
+            <ArchitecturalReveal className="lg:col-span-5 text-left space-y-4" delay={0.1}>
               <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
                 Corporate Overview
               </p>
@@ -282,7 +294,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
-            </div>
+            </ArchitecturalReveal>
           </div>
         </div>
       </section>
@@ -294,45 +306,48 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         style={{ scrollMarginTop: '140px' }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-10 text-left">
-          <div className="max-w-2xl space-y-1">
-            <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
-              Arah Strategis & Keberlanjutan
-            </p>
-            <h2 className="text-2xl md:text-3xl font-semibold text-[#141414] tracking-tight">
-              Vision & Mission
-            </h2>
-            <p className="text-base text-[#52525B] leading-relaxed pt-1">
-              Arah panduan strategis dan komitmen keberlanjutan PT Halla Mohana dalam menciptakan nilai tambah bagi pemegang saham, pelanggan, dan masyarakat.
-            </p>
-          </div>
+          <ArchitecturalReveal>
+            <div className="max-w-2xl space-y-1">
+              <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
+                Arah Strategis & Keberlanjutan
+              </p>
+              <h2 className="text-2xl md:text-3xl font-semibold text-[#141414] tracking-tight">
+                Vision & Mission
+              </h2>
+              <p className="text-base text-[#52525B] leading-relaxed pt-1">
+                Arah panduan strategis dan komitmen keberlanjutan PT Halla Mohana dalam menciptakan nilai tambah bagi pemegang saham, pelanggan, dan masyarakat.
+              </p>
+            </div>
+          </ArchitecturalReveal>
 
           {/* Visi Card Berlatar Gelap Elegan */}
-          <div className="rounded-lg bg-[#141414] p-8 sm:p-10 text-white border-l-4 border-l-[#8B1E24] text-left shadow-xs">
-            <p className="text-xs tracking-widest uppercase text-stone-400 font-medium">
-              Visi Perusahaan
-            </p>
-            <h3 className="text-xl sm:text-2xl font-semibold text-white mt-2 leading-relaxed tracking-tight max-w-3xl">
-              "Menghadirkan produk dan layanan inovatif di bisnis perhotelan untuk menciptakan imbal hasil positif bagi pemegang saham."
-            </h3>
-          </div>
+          <ArchitecturalReveal delay={0.08}>
+            <div className="rounded-lg bg-[#141414] p-8 sm:p-10 text-white border-l-4 border-l-[#8B1E24] text-left shadow-xs">
+              <p className="text-xs tracking-widest uppercase text-stone-400 font-medium">
+                Visi Perusahaan
+              </p>
+              <h3 className="text-xl sm:text-2xl font-semibold text-white mt-2 leading-relaxed tracking-tight max-w-3xl">
+                "Menghadirkan produk dan layanan inovatif di bisnis perhotelan untuk menciptakan imbal hasil positif bagi pemegang saham."
+              </h3>
+            </div>
+          </ArchitecturalReveal>
 
           {/* Misi 2x2 Grid Kartu Putih Bersih */}
           <div className="space-y-3">
             <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
               Misi Perusahaan
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+            <ArchitecturalStagger className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6" staggerDelay={0.08}>
               {officialMissions.map((missionText, idx) => (
-                <div
-                  key={idx}
-                  className="rounded-lg border border-[#E5E5E5] bg-white p-6 border-l-2 border-l-[#8B1E24] text-left shadow-xs"
-                >
-                  <p className="text-sm sm:text-base text-[#141414] leading-relaxed font-normal">
-                    {missionText}
-                  </p>
-                </div>
+                <ArchitecturalStaggerItem key={idx}>
+                  <div className="h-full rounded-lg border border-[#E5E5E5] bg-white p-6 border-l-2 border-l-[#8B1E24] text-left shadow-xs hover:border-[#8B1E24] transition-colors">
+                    <p className="text-sm sm:text-base text-[#141414] leading-relaxed font-normal">
+                      {missionText}
+                    </p>
+                  </div>
+                </ArchitecturalStaggerItem>
               ))}
-            </div>
+            </ArchitecturalStagger>
           </div>
         </div>
       </section>
@@ -344,96 +359,132 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
         style={{ scrollMarginTop: '140px' }}
       >
         <div className="mx-auto max-w-7xl px-4 sm:px-8 space-y-10 text-left">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-2 border-b border-[#E5E5E5]">
-            <div className="max-w-2xl space-y-1">
-              <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
-                Budaya & Standar Kepemimpinan
-              </p>
-              <h2 className="text-2xl md:text-3xl font-semibold text-[#141414] tracking-tight">
-                Core Values & Leadership Traits
-              </h2>
-              <p className="text-base text-[#52525B] leading-relaxed pt-1">
-                Fondasi karakter kerja dan kepemimpinan yang menjadi pedoman insan Halla Mohana, diselaraskan dengan standar grup Tiara Marga Trakindo (TMT Group).
-              </p>
-            </div>
+          <ArchitecturalReveal>
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 pb-2 border-b border-[#E5E5E5]">
+              <div className="max-w-2xl space-y-1">
+                <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
+                  Budaya & Standar Kepemimpinan
+                </p>
+                <h2 className="text-2xl md:text-3xl font-semibold text-[#141414] tracking-tight">
+                  Core Values & Leadership Traits
+                </h2>
+                <p className="text-base text-[#52525B] leading-relaxed pt-1">
+                  Fondasi karakter kerja dan kepemimpinan yang menjadi pedoman insan Halla Mohana, diselaraskan dengan standar grup Tiara Marga Trakindo (TMT Group).
+                </p>
+              </div>
 
-            {/* Segmented Switcher Minimalis */}
-            <div className="inline-flex border border-[#E5E5E5] rounded-md p-1 bg-[#F7F7F5] shrink-0">
-              <button
-                type="button"
-                onClick={() => setActiveCultureTab('values')}
-                className={`px-4 py-2 text-xs font-semibold rounded transition-colors cursor-pointer ${
-                  activeCultureTab === 'values'
-                    ? 'bg-white text-[#141414] shadow-xs'
-                    : 'text-[#52525B] hover:text-[#141414]'
-                }`}
-              >
-                Core Values (4)
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveCultureTab('traits')}
-                className={`px-4 py-2 text-xs font-semibold rounded transition-colors cursor-pointer ${
-                  activeCultureTab === 'traits'
-                    ? 'bg-white text-[#141414] shadow-xs'
-                    : 'text-[#52525B] hover:text-[#141414]'
-                }`}
-              >
-                Leadership Traits (4)
-              </button>
-            </div>
-          </div>
-
-          {/* Kartu Budaya Bersih Tanpa Ikon Klise */}
-          {activeCultureTab === 'values' ? (
-            <div className="space-y-3">
-              <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
-                Empat Nilai Inti Perusahaan
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                {coreValues.map((v) => (
-                  <div
-                    key={v.title}
-                    className="rounded-lg border border-[#E5E5E5] bg-white p-6 text-left shadow-xs hover:border-[#8B1E24] transition-colors space-y-2"
-                  >
-                    <p className="text-[11px] tracking-widest uppercase text-[#8B1E24] font-semibold">
-                      {v.tag}
-                    </p>
-                    <h3 className="text-base font-semibold text-[#141414]">
-                      {v.title}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-normal pt-1">
-                      {v.desc}
-                    </p>
-                  </div>
-                ))}
+              {/* Segmented Switcher Minimalis dengan Smooth Sliding Indicator */}
+              <div className="inline-flex border border-[#E5E5E5] rounded-md p-1 bg-[#F7F7F5] shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setActiveCultureTab('values')}
+                  className={`relative px-4 py-2 text-xs font-semibold rounded transition-colors cursor-pointer ${
+                    activeCultureTab === 'values'
+                      ? 'text-[#141414]'
+                      : 'text-[#52525B] hover:text-[#141414]'
+                  }`}
+                >
+                  {activeCultureTab === 'values' && (
+                    <motion.span
+                      layoutId="culture-tab-indicator"
+                      transition={{ type: 'spring', stiffness: 360, damping: 30 }}
+                      className="absolute inset-0 rounded bg-white shadow-xs"
+                    />
+                  )}
+                  <span className="relative z-10">Core Values (4)</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveCultureTab('traits')}
+                  className={`relative px-4 py-2 text-xs font-semibold rounded transition-colors cursor-pointer ${
+                    activeCultureTab === 'traits'
+                      ? 'text-[#141414]'
+                      : 'text-[#52525B] hover:text-[#141414]'
+                  }`}
+                >
+                  {activeCultureTab === 'traits' && (
+                    <motion.span
+                      layoutId="culture-tab-indicator"
+                      transition={{ type: 'spring', stiffness: 360, damping: 30 }}
+                      className="absolute inset-0 rounded bg-white shadow-xs"
+                    />
+                  )}
+                  <span className="relative z-10">Leadership Traits (4)</span>
+                </button>
               </div>
             </div>
-          ) : (
-            <div className="space-y-3">
-              <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
-                Empat Karakter Kepemimpinan Unggul
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-                {leadershipTraits.map((t) => (
-                  <div
-                    key={t.trait}
-                    className="rounded-lg border border-[#E5E5E5] bg-white p-6 text-left shadow-xs hover:border-[#8B1E24] transition-colors space-y-2"
-                  >
-                    <p className="text-[11px] tracking-widest uppercase text-[#8B1E24] font-semibold">
-                      {t.tag}
-                    </p>
-                    <h3 className="text-base font-semibold text-[#141414]">
-                      {t.trait}
-                    </h3>
-                    <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-normal pt-1">
-                      {t.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          </ArchitecturalReveal>
+
+          {/* Kartu Budaya Bersih dengan AnimatePresence Crossfade */}
+          <AnimatePresence mode="wait">
+            {activeCultureTab === 'values' ? (
+              <motion.div
+                key="values-grid"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.28, ease: ARCHITECTURAL_EASE }}
+                className="space-y-3"
+              >
+                <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
+                  Empat Nilai Inti Perusahaan
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                  {coreValues.map((v) => (
+                    <motion.div
+                      key={v.title}
+                      whileHover={{ y: -3 }}
+                      transition={{ duration: 0.25, ease: ARCHITECTURAL_EASE }}
+                      className="rounded-lg border border-[#E5E5E5] bg-white p-6 text-left shadow-xs hover:border-[#8B1E24] transition-colors space-y-2"
+                    >
+                      <p className="text-[11px] tracking-widest uppercase text-[#8B1E24] font-semibold">
+                        {v.tag}
+                      </p>
+                      <h3 className="text-base font-semibold text-[#141414]">
+                        {v.title}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-normal pt-1">
+                        {v.desc}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="traits-grid"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.28, ease: ARCHITECTURAL_EASE }}
+                className="space-y-3"
+              >
+                <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium">
+                  Empat Karakter Kepemimpinan Unggul
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                  {leadershipTraits.map((t) => (
+                    <motion.div
+                      key={t.trait}
+                      whileHover={{ y: -3 }}
+                      transition={{ duration: 0.25, ease: ARCHITECTURAL_EASE }}
+                      className="rounded-lg border border-[#E5E5E5] bg-white p-6 text-left shadow-xs hover:border-[#8B1E24] transition-colors space-y-2"
+                    >
+                      <p className="text-[11px] tracking-widest uppercase text-[#8B1E24] font-semibold">
+                        {t.tag}
+                      </p>
+                      <h3 className="text-base font-semibold text-[#141414]">
+                        {t.trait}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-[#52525B] leading-relaxed font-normal pt-1">
+                        {t.desc}
+                      </p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </section>
 
@@ -813,8 +864,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                                 <div className="space-y-3">
                                   <div className="h-36 w-full overflow-hidden rounded-lg border border-[#E5E5E5] bg-stone-100">
                                     <img
-                                      src="/images/hotel/rooftop-skypool-evening.jpg"
+                                      src="/images/New-Asset/Hotel/Deluxe%20-%202.png"
                                       alt="FOX Harris Hotel Pekanbaru"
+                                      loading="lazy"
+                                      decoding="async"
                                       className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
                                     />
                                   </div>
@@ -853,8 +906,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                                 <div className="space-y-3">
                                   <div className="h-36 w-full overflow-hidden rounded-lg border border-[#E5E5E5] bg-stone-100">
                                     <img
-                                      src="/images/mall/hero-px-mall.jpg"
+                                      src="/images/New-Asset/Mall%20Photo/J.co.png"
                                       alt="Pekanbaru Xchange"
+                                      loading="lazy"
+                                      decoding="async"
                                       className="h-full w-full object-cover object-center transition-transform duration-500 hover:scale-105"
                                     />
                                   </div>
@@ -941,14 +996,16 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
             </div>
 
             {/* Kolom Kanan: 7 Kolom pada LG (4 Pilar GCG) */}
-            <div className="lg:col-span-7 space-y-3">
+            <ArchitecturalReveal className="lg:col-span-7 space-y-3" delay={0.1}>
               <p className="text-xs tracking-widest uppercase text-neutral-500 font-medium mb-3">
                 Empat Pilar Pokok Tata Kelola Perusahaan
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {governancePrinciples.map((item) => (
-                  <div
+                  <motion.div
                     key={item.title}
+                    whileHover={{ y: -3 }}
+                    transition={{ duration: 0.25, ease: ARCHITECTURAL_EASE }}
                     className="rounded-lg border border-[#E5E5E5] bg-white p-5 border-l-2 border-l-[#8B1E24] text-left shadow-xs space-y-1.5"
                   >
                     <h3 className="text-sm font-semibold text-[#141414]">
@@ -957,10 +1014,10 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate }) => {
                     <p className="text-xs text-[#52525B] leading-relaxed">
                       {item.desc}
                     </p>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
-            </div>
+            </ArchitecturalReveal>
           </div>
         </div>
       </section>
